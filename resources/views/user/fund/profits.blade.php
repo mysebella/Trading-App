@@ -9,7 +9,7 @@
     <section class="w-full overflow-hidden rounded-lg text-white/80">
         <div class="w-full mt-6 rounded-lg overflow-hidden bg-black">
             <div class="p-6 text-white/70 border-b border-white/25">
-                <p>Profits [ Total Profits : RM @money($totalProfit) ]</p>
+                <p>Profits [ Total Profits : @money($totalProfit) ]</p>
             </div>
 
             <div class="p-4 lg:p-6 overflow-x-scroll">
@@ -32,7 +32,7 @@
                                         <td class="table-border">{{ $profit->created_at }}</td>
                                         <td class="table-border">{{ $profit->code }}</td>
                                         <td class="table-border">Package {{ $profit->package->name }}</td>
-                                        <td class="table-border">{{ $profit->profit }}</td>
+                                        <td class="table-border">@money($profit->profit)</td>
                                     </tr>
                                 @endforeach
                             @else

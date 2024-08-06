@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Tools\Code;
+use App\Http\Controllers\Tools\Notification;
 use App\Models\Bank;
 use App\Models\Investment;
 use App\Models\Package;
@@ -67,6 +68,10 @@ class InvestmentController extends Controller
             'package_id' => $request->input('package_id'),
             'amount' => $request->input('amount'),
         ]);
+
+        $package = Package::select('name')->find($investment->package_id);
+
+        Notification::create('investment', "Add investment package $package", "You invest in package $package");
 
         return redirect()->route('investment.invoice', ['code' => $investment->code]);
     }

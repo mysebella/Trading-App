@@ -40,11 +40,11 @@
                                                 class="{{ $trading->type == 'buy' ? 'win' : 'lose' }} uppercase">{{ $trading->type }}</span>
                                             <br />{{ $trading->package }}
                                         </td>
-                                        <td class="table-border">RM @money($trading->amount)</td>
+                                        <td class="table-border">@money($trading->amount)</td>
                                         <td class="table-border">
                                             <button class="bg-blue-500 px-2 py-1 rounded">Detail</button>
                                         </td>
-                                        <td class="table-border"> @money($trading->open) USD</td>
+                                        <td class="table-border">@money($trading->open)</td>
                                         <td class="table-border">
                                             @if ($trading->status == 'pending')
                                                 <button class="bg-orange px-2 py-1 rounded">Pending</button>

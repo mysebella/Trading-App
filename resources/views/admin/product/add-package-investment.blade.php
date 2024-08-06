@@ -82,8 +82,8 @@
                                 @foreach ($packages as $package)
                                     <tr class="table-border">
                                         <td class="table-border">{{ $package->name }}</td>
-                                        <td class="table-border">RM {{ $package->min }}</td>
-                                        <td class="table-border">RM {{ $package->max }}</td>
+                                        <td class="table-border">@money($package->min)</td>
+                                        <td class="table-border">@money($package->max)</td>
                                         <td class="table-border">
                                             {{ $package->profit }}% / {{ $package->estimasiProfit }}
                                         </td>

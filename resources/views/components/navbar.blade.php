@@ -10,12 +10,12 @@
      <div class="flex gap-4 lg:gap-6 items-center">
          @if ($user->status != 1)
              <div class="text-white flex gap-2 items-center rounded bg-[#3E3E3E] p-1 px-2">
-                 RM {{ $user->profile[0]->balanceFree }}
+                 @money($user->profile[0]->balanceFree)
                  <span class="rounded bg-red-500 px-2 text-white">Free</span>
              </div>
          @else
              <div class="text-white flex gap-2 items-center rounded bg-[#3E3E3E] p-1 px-2">
-                 RM {{ $user->profile[0]->balance }}
+                 @money($user->profile[0]->balance)
                  <span class="rounded bg-green px-2 text-black">Real</span>
              </div>
          @endif

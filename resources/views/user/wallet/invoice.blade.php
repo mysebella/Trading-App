@@ -54,15 +54,15 @@
                     <tbody>
                         <td class="table-border">1</td>
                         <td class="table-border">Add Balance</td>
-                        <td class="table-border">RM {{ $balance->amount }}</td>
-                        <td class="table-border">RM {{ $balance->amount }}</td>
+                        <td class="table-border"> @money($balance->amount) </td>
+                        <td class="table-border"> @money($balance->amount) </td>
                     </tbody>
                 </table>
             </div>
 
             <div class="my-6 text-xl text-end">
                 <span class="py-2 border-t border-white/35">
-                    <span>Total Transfer :</span> RM {{ $balance->amount }}
+                    <span>Total Transfer :</span> @money($balance->amount)
                 </span>
             </div>
 

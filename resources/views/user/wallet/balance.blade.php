@@ -9,7 +9,7 @@
     <section class="w-full overflow-hidden rounded-lg text-white/80">
         <div class="w-full mt-6 rounded-lg overflow-hidden bg-black">
             <div class="p-6 text-white/70 border-b border-white/25">
-                <p>Balance [ RM {{ $user->profile[0]->balance }} ]</p>
+                <p>Balance [ @money($user->profile[0]->balance) ]</p>
             </div>
 
             <div class="p-4 lg:p-6 overflow-x-scroll">
@@ -32,7 +32,7 @@
                                     <tr class="table-border">
                                         <td class="table-border">{{ $balance->code }}</td>
                                         <td class="table-border">{{ $balance->created_at }}</td>
-                                        <td class="table-border">RM @money($balance->amount)</td>
+                                        <td class="table-border">@money($balance->amount)</td>
                                         <td class="table-border">{{ $balance->note ? $balance->note : '-' }}</td>
                                         <td class="table-border">
                                             @if ($balance->status == 'active')

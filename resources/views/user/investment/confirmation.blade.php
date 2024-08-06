@@ -97,7 +97,7 @@
                                         <tr class="table-border">
                                             <td class="table-border">{{ $history->created_at }}</td>
                                             <td class="table-border">Add Package {{ $history->package->name }}</td>
-                                            <td class="table-border">RM {{ $history->amount }}</td>
+                                            <td class="table-border">@money($history->amount)</td>
                                             <td class="table-border">{{ $history->paymentTo }}</td>
                                             <td class="table-border">{{ $history->note }}</td>
                                         </tr>

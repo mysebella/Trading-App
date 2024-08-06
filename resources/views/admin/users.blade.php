@@ -37,10 +37,10 @@
                                 <td class="table-border">588NY6NR2YZ2</td>
                                 <td class="table-border">30 SECOND</td>
                                 <td class="table-border">BTC/USD</td>
-                                <td class="table-border">RM 2,500.00</td>
+                                <td class="table-border">$2,500.00</td>
                                 <td class="table-border">2024-05-23 11:16:01</td>
                                 <td class="table-border"><button class="bg-green rounded px-3 py-1">win</button></td>
-                                <td class="table-border">RM 4,500.00 180%</td>
+                                <td class="table-border">$4,500.00 180%</td>
                                 <td class="table-border">47,712.31 USD</td>
                                 <td class="table-border win"><i class="bi bi-arrow-up-circle-fill"></i> 47,712.31 USD</td>
                             </tr>
@@ -49,10 +49,10 @@
                                 <td class="table-border">588NY6NR2YZ2</td>
                                 <td class="table-border">30 SECOND</td>
                                 <td class="table-border">BTC/USD</td>
-                                <td class="table-border">RM 2,500.00</td>
+                                <td class="table-border">$2,500.00</td>
                                 <td class="table-border">2024-05-23 11:16:01</td>
                                 <td class="table-border"><button class="bg-red-500 rounded px-3 py-1">Lose</button></td>
-                                <td class="table-border">RM 4,500.00 180%</td>
+                                <td class="table-border">$4,500.00 180%</td>
                                 <td class="table-border">47,712.31 USD</td>
                                 <td class="table-border lose"><i class="bi bi-arrow-down-circle-fill"></i> 47,712.31 USD
                                 </td>

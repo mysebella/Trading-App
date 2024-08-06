@@ -25,7 +25,7 @@
                                 'label' => 'Amount Buy',
                                 'name' => 'amount',
                                 'readonly' => true,
-                                'value' => "RM $balance->amount",
+                                'value' => "USD $balance->amount",
                             ])
 
                             <div>
@@ -81,12 +81,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @if (count($histories) != 0)
+                                @if (count($histories) != 0)
                                     @foreach ($histories as $history)
                                         <tr class="table-border">
                                             <td class="table-border">{{ $history->created_at }}</td>
-                                            <td class="table-border">Add Package {{ $history->package->name }}</td>
-                                            <td class="table-border">RM {{ $history->amount }}</td>
+                                            <td class="table-border">{{ $history->code }}</td>
+                                            <td class="table-border">@money($history->amount)</td>
                                             <td class="table-border">{{ $history->paymentTo }}</td>
                                             <td class="table-border">{{ $history->note }}</td>
                                         </tr>
@@ -95,7 +95,7 @@
                                     <tr class="table-border">
                                         <td class="p-4">No data available in table</td>
                                     </tr>
-                                @endif --}}
+                                @endif
                             </tbody>
                         </table>
                     </div>

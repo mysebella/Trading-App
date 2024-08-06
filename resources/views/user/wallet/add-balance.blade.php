@@ -16,7 +16,7 @@
                     @csrf
                     <div class="mb-4">
                         @include('components.input-icon', [
-                            'icon' => 'RM',
+                            'icon' => 'USD',
                             'label' => 'Amount Buy',
                             'name' => 'amount',
                         ])
@@ -25,7 +25,7 @@
                 </form>
                 <div class="bg-blue-500 text-sm mt-4 p-4 rounded-lg text-white">
                     <p><i class="bi bi-info-circle-fill"></i> Notice:</p>
-                    <p>Min RM 10.00, Max RM 150,000.00, Fee 0%.</p>
+                    <p>Min USD 10.00, Max USD 150,000.00, Fee 0%.</p>
                 </div>
             </div>
         </div>
@@ -33,7 +33,7 @@
         <div class="w-full lg:w-[70%] rounded-lg overflow-hidden bg-black text-white/80">
             <div class="w-full rounded-lg overflow-hidden bg-black">
                 <div class="p-6 text-white/70 border-b border-white/25">
-                    <p>Profits [ Total Profits : RM 22,500.00 ]</p>
+                    <p>Balance [ Total Balance : @money($user->profile[0]->balance) ]</p>
                 </div>
 
                 <div class="p-4 lg:p-6 overflow-x-scroll">

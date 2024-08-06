@@ -25,14 +25,14 @@
                         @include('components.input', [
                             'label' => 'Amount Investment',
                             'name' => 'amount',
-                            'value' => 'RM ' . $package->amount . '.00',
+                            'value' => 'USD ' . $package->amount . '.00',
                         ])
 
                         @include('components.input', [
                             'label' => 'Profit',
                             'name' => 'profit',
                             'value' =>
-                                "$package->profit% ($package->estimasiProfit) RM " .
+                                "$package->profit% ($package->estimasiProfit) USD " .
                                 ($package->profit / 100) * $package->amount .
                                 '.00',
                         ])
@@ -42,7 +42,7 @@
                             'name' => 'contract',
                             'value' =>
                                 $package->contract .
-                                " $package->estimasiProfit (RM " .
+                                " $package->estimasiProfit (USD " .
                                 $package->contract * ($package->profit / 100) * $package->amount .
                                 '.00)',
                         ])
@@ -93,7 +93,7 @@
                                         <tr class="table-border">
                                             <td class="table-border">{{ $history->created_at }}</td>
                                             <td class="table-border">{{ $history->package->name }}</td>
-                                            <td class="table-border">RM {{ $history->amount }}</td>
+                                            <td class="table-border">@money($history->amount)</td>
                                             <td class="table-border">{{ $history->status }}</td>
                                             <td class="table-border">
                                                 <a href=""

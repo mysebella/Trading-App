@@ -14,8 +14,8 @@
                     <p class="font-semibold text-blue-400 text-xl text-center">{{ $package->name }}</p>
 
                     <ul class="list-disc p-10 text-sm">
-                        <li>Min. Amount RM @money($package->min)</li>
-                        <li>Max. Amount RM @money($package->max)</li>
+                        <li>Min. Amount @money($package->min)</li>
+                        <li>Max. Amount @money($package->max)</li>
                         <li>Profit {{ $package->profit }}% ({{ $package->estimasiProfit }})</li>
                         <li>Contract {{ $package->contract }} Day</li>
                     </ul>
@@ -23,7 +23,7 @@
                     <input type="number" class="hidden" name="package" value="{{ $package->id }}">
 
                     @include('components.input-icon', [
-                        'icon' => 'RM',
+                        'icon' => 'USD',
                         'name' => 'amount',
                         'type' => 'tel',
                         'required' => true,
@@ -59,7 +59,7 @@
                                     <tr class="table-border p-10">
                                         <td class="table-border">{{ $history->created_at }}</td>
                                         <td class="table-border">Package {{ $history->package->name }}</td>
-                                        <td class="table-border">RM {{ $history->amount }}</td>
+                                        <td class="table-border">@money($history->amount)</td>
                                         <td class="table-border">
                                             @if ($history->proccess == 'success')
                                                 <a class="py-1 px-3 rounded bg-green">

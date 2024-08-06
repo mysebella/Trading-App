@@ -53,16 +53,16 @@
                     </thead>
                     <tbody>
                         <td class="table-border">1</td>
-                        <td class="table-border">Add Investment (Package {{ $investment->package->name }})</td>
-                        <td class="table-border">RM {{ $investment->amount }}</td>
-                        <td class="table-border">RM {{ $investment->amount }}</td>
+                        <td class="table-border">Add Investment ( Package {{ $investment->package->name }} )</td>
+                        <td class="table-border">@money($investment->amount)</td>
+                        <td class="table-border">@money($investment->amount)</td>
                     </tbody>
                 </table>
             </div>
 
             <div class="my-6 text-xl text-end">
                 <span class="py-2 border-t border-white/35">
-                    <span>Total Transfer :</span> RM {{ $investment->amount }}
+                    <span>Total Transfer :</span> @money($investment->amount)
                 </span>
             </div>
 
@@ -101,7 +101,7 @@
                             'value' =>
                                 $user->profile[0]->balance == '0.00'
                                     ? 'No Balance'
-                                    : 'RM ' . $user->profile[0]->balance,
+                                    : 'USD ' . $user->profile[0]->balance,
                         ])
                         <a href="{{ route('investment.confirmation', ['id' => $investment->id, 'balance' => '']) }}"
                             class="p-2 bg-orange rounded text-white font-semibold">Pay now</a>
