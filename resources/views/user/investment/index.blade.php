@@ -81,9 +81,9 @@
                                         </td>
                                         <td class="table-border">
                                             @if ($history->isPaid == 1)
-                                                <button class="py-1 px-3 rounded bg-green">Paid</button>
+                                                <button class="py-1 px-3 rounded bg-green">PAID</button>
                                             @else
-                                                <button class="py-1 px-3 rounded bg-red-500">NoPaid</button>
+                                                <button class="py-1 px-3 rounded bg-red-500">UNPAID</button>
                                             @endif
                                         </td>
                                     </tr>

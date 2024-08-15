@@ -35,10 +35,12 @@
                                         <td class="table-border">@money($balance->amount)</td>
                                         <td class="table-border">{{ $balance->note ? $balance->note : '-' }}</td>
                                         <td class="table-border">
-                                            @if ($balance->status == 'active')
-                                                <button class="px-2 rounded py-1 bg-green">Done</button>
+                                            @if ($balance->status == 'success')
+                                                <button
+                                                    class="px-2 rounded py-1 bg-green first-letter:uppercase">{{ $balance->status }}</button>
                                             @else
-                                                <button class="px-2 rounded py-1 bg-red-500">Pending</button>
+                                                <button
+                                                    class="px-2 rounded py-1 bg-red-500 first-letter:uppercase">{{ $balance->status }}</button>
                                             @endif
                                         </td>
                                     </tr>

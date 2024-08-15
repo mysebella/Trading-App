@@ -8,7 +8,7 @@ export default {
         extend: {
             colors: {
                 orange: "#ff9900",
-                green: "#00c292",
+                green: "#16a34a",
                 black: "#252525",
                 background: "#2f2f2f",
             },

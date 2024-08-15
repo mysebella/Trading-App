@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Tools\Notification;
 use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class KncController extends Controller
      */
     public function index()
     {
-        return view('user.knc', ['page' => 'knc']);
+        return view('user.knc', ['page' => 'knc.index']);
     }
 
     /**
@@ -64,10 +65,12 @@ class KncController extends Controller
                     ]
                 );
 
-                // Optionally, you might want to update the user's status to reflect verification
-                $user->update(['status' => 1]);
+                $user->status = 'pending';
+                $user->save();
 
-                return back()->with('success', 'Verification successful');
+                Notification::create('Account Actived', 'Account Success Activated');
+
+                return back()->with('success', 'Verification Proccess');
             }
             // If files are not uploaded
             return back()->with('error', 'Verification Error, Files not found');

@@ -10,7 +10,7 @@
     <section class="my-6 w-full lg:w-2/4">
         <div class="flex">
             <input class="text-white/50 w-full border border-white/30 rounded-l p-3 bg-black"
-                value="{{ env('APP_URL') }}?reff={{ $user->username }}">
+                value="{{ env('APP_URL') }}/refferal?reff={{ $user->username }}">
             <button class="bg-orange w-52 lg:w-44 text-white rounded-r">Copy Reff URL</button>
         </div>
 
@@ -52,7 +52,7 @@
                         </div>
                     </div>
                     <div class="flex text-orange items-center justify-between mt-4">
-                        <p class="text-xl font-semibold">0 Member</p>
+                        <p class="text-xl font-semibold">{{ $totalRefferal }} Member</p>
                         <a href="">Detail</a>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
                         </div>
                     </div>
                     <div class="flex text-orange items-center justify-between mt-4">
-                        <p class="text-xl font-semibold">RM 0.0</p>
+                        <p class="text-xl font-semibold">USD 0.0</p>
                         <a href="">Detail</a>
                     </div>
                 </div>
@@ -105,7 +105,7 @@
                         </div>
                     </div>
                     <div class="flex text-orange items-center justify-between mt-4">
-                        <p class="text-xl font-semibold">RM 0.0</p>
+                        <p class="text-xl font-semibold">@money($profits)</p>
                         <a href="">Detail</a>
                     </div>
                 </div>
@@ -134,7 +134,7 @@
                         </div>
                     </div>
                     <div class="flex text-orange items-center justify-between mt-4">
-                        <p class="text-xl font-semibold">RM {{ $user->profile[0]->balance }}</p>
+                        <p class="text-xl font-semibold">@money($user->profile[0]->balance)</p>
                         <a href="">Detail</a>
                     </div>
                 </div>
@@ -155,7 +155,7 @@
             <div class="p-6 text-white">
                 <p>Welcome to HSB FOREX TRADE Member Panel</p>
                 <p class="my-4">Your Refferal Link:</p>
-                <p class="text-2xl font-semibold">{{ env('APP_URL') }}?reff={{ $user->username }}</p>
+                <p class="text-2xl font-semibold">{{ env('APP_URL') }}/refferal?reff={{ $user->username }}</p>
             </div>
         </div>
     </section>
@@ -163,106 +163,88 @@
 
     <!-- notification -->
     <section class="w-full flex flex-col my-6 lg:flex-row gap-6">
-        <div class="w-full lg:w-2/4 rounded-lg overflow-hidden bg-black">
-            <div class="p-6 text-white border-b border-white/25">
-                <p>Latest News</p>
-            </div>
-            <div class="text-white">
-                <ul>
-                    <li class="flex items-center gap-6 hover:bg-white hover:text-black p-6">
-                        <div class="w-10 h-10 bg-yellow-500 flex justify-center items-center rounded-lg">
-                            <svg class="text-white" stroke="currentColor" fill="currentColor" stroke-width="0"
-                                viewBox="0 0 576 512" height="16px" width="16px" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M552 64H112c-20.858 0-38.643 13.377-45.248 32H24c-13.255 0-24 10.745-24 24v272c0 30.928 25.072 56 56 56h496c13.255 0 24-10.745 24-24V88c0-13.255-10.745-24-24-24zM48 392V144h16v248c0 4.411-3.589 8-8 8s-8-3.589-8-8zm480 8H111.422c.374-2.614.578-5.283.578-8V112h416v288zM172 280h136c6.627 0 12-5.373 12-12v-96c0-6.627-5.373-12-12-12H172c-6.627 0-12 5.373-12 12v96c0 6.627 5.373 12 12 12zm28-80h80v40h-80v-40zm-40 140v-24c0-6.627 5.373-12 12-12h136c6.627 0 12 5.373 12 12v24c0 6.627-5.373 12-12 12H172c-6.627 0-12-5.373-12-12zm192 0v-24c0-6.627 5.373-12 12-12h104c6.627 0 12 5.373 12 12v24c0 6.627-5.373 12-12 12H364c-6.627 0-12-5.373-12-12zm0-144v-24c0-6.627 5.373-12 12-12h104c6.627 0 12 5.373 12 12v24c0 6.627-5.373 12-12 12H364c-6.627 0-12-5.373-12-12zm0 72v-24c0-6.627 5.373-12 12-12h104c6.627 0 12 5.373 12 12v24c0 6.627-5.373 12-12 12H364c-6.627 0-12-5.373-12-12z">
-                                </path>
-                            </svg>
-                        </div>
-                        <div>
-                            <p>Technical Analysis at DailyFX</p>
-                            <p>10-Aug-2022, 14:37:34</p>
-                        </div>
-                    </li>
-                    <li class="flex items-center gap-6 hover:bg-white hover:text-black p-6">
-                        <div class="w-10 h-10 bg-yellow-500 flex justify-center items-center rounded-lg">
-                            <svg class="text-white" stroke="currentColor" fill="currentColor" stroke-width="0"
-                                viewBox="0 0 576 512" height="16px" width="16px" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M552 64H112c-20.858 0-38.643 13.377-45.248 32H24c-13.255 0-24 10.745-24 24v272c0 30.928 25.072 56 56 56h496c13.255 0 24-10.745 24-24V88c0-13.255-10.745-24-24-24zM48 392V144h16v248c0 4.411-3.589 8-8 8s-8-3.589-8-8zm480 8H111.422c.374-2.614.578-5.283.578-8V112h416v288zM172 280h136c6.627 0 12-5.373 12-12v-96c0-6.627-5.373-12-12-12H172c-6.627 0-12 5.373-12 12v96c0 6.627 5.373 12 12 12zm28-80h80v40h-80v-40zm-40 140v-24c0-6.627 5.373-12 12-12h136c6.627 0 12 5.373 12 12v24c0 6.627-5.373 12-12 12H172c-6.627 0-12-5.373-12-12zm192 0v-24c0-6.627 5.373-12 12-12h104c6.627 0 12 5.373 12 12v24c0 6.627-5.373 12-12 12H364c-6.627 0-12-5.373-12-12zm0-144v-24c0-6.627 5.373-12 12-12h104c6.627 0 12 5.373 12 12v24c0 6.627-5.373 12-12 12H364c-6.627 0-12-5.373-12-12zm0 72v-24c0-6.627 5.373-12 12-12h104c6.627 0 12 5.373 12 12v24c0 6.627-5.373 12-12 12H364c-6.627 0-12-5.373-12-12z">
-                                </path>
-                            </svg>
-                        </div>
-                        <div>
-                            <p>Technical Analysis at DailyFX</p>
-                            <p>10-Aug-2022, 14:37:34</p>
-                        </div>
-                    </li>
-                    <li class="flex items-center gap-6 hover:bg-white hover:text-black p-6">
-                        <div class="w-10 h-10 bg-yellow-500 flex justify-center items-center rounded-lg">
-                            <svg class="text-white" stroke="currentColor" fill="currentColor" stroke-width="0"
-                                viewBox="0 0 576 512" height="16px" width="16px" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M552 64H112c-20.858 0-38.643 13.377-45.248 32H24c-13.255 0-24 10.745-24 24v272c0 30.928 25.072 56 56 56h496c13.255 0 24-10.745 24-24V88c0-13.255-10.745-24-24-24zM48 392V144h16v248c0 4.411-3.589 8-8 8s-8-3.589-8-8zm480 8H111.422c.374-2.614.578-5.283.578-8V112h416v288zM172 280h136c6.627 0 12-5.373 12-12v-96c0-6.627-5.373-12-12-12H172c-6.627 0-12 5.373-12 12v96c0 6.627 5.373 12 12 12zm28-80h80v40h-80v-40zm-40 140v-24c0-6.627 5.373-12 12-12h136c6.627 0 12 5.373 12 12v24c0 6.627-5.373 12-12 12H172c-6.627 0-12-5.373-12-12zm192 0v-24c0-6.627 5.373-12 12-12h104c6.627 0 12 5.373 12 12v24c0 6.627-5.373 12-12 12H364c-6.627 0-12-5.373-12-12zm0-144v-24c0-6.627 5.373-12 12-12h104c6.627 0 12 5.373 12 12v24c0 6.627-5.373 12-12 12H364c-6.627 0-12-5.373-12-12zm0 72v-24c0-6.627 5.373-12 12-12h104c6.627 0 12 5.373 12 12v24c0 6.627-5.373 12-12 12H364c-6.627 0-12-5.373-12-12z">
-                                </path>
-                            </svg>
-                        </div>
-                        <div>
-                            <p>Technical Analysis at DailyFX</p>
-                            <p>10-Aug-2022, 14:37:34</p>
-                        </div>
-                    </li>
-                </ul>
+        <div class="w-full lg:w-2/4">
+            <div class=" bg-black rounded-lg overflow-hidden">
+                <div class="p-6 text-white border-b border-white/25">
+                    <p>Latest News</p>
+                </div>
+                <div class="text-white">
+                    <ul>
+                        <li class="flex items-center gap-6 hover:bg-white hover:text-black p-6">
+                            <div class="w-10 h-10 bg-yellow-500 flex justify-center items-center rounded-lg">
+                                <svg class="text-white" stroke="currentColor" fill="currentColor" stroke-width="0"
+                                    viewBox="0 0 576 512" height="16px" width="16px"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M552 64H112c-20.858 0-38.643 13.377-45.248 32H24c-13.255 0-24 10.745-24 24v272c0 30.928 25.072 56 56 56h496c13.255 0 24-10.745 24-24V88c0-13.255-10.745-24-24-24zM48 392V144h16v248c0 4.411-3.589 8-8 8s-8-3.589-8-8zm480 8H111.422c.374-2.614.578-5.283.578-8V112h416v288zM172 280h136c6.627 0 12-5.373 12-12v-96c0-6.627-5.373-12-12-12H172c-6.627 0-12 5.373-12 12v96c0 6.627 5.373 12 12 12zm28-80h80v40h-80v-40zm-40 140v-24c0-6.627 5.373-12 12-12h136c6.627 0 12 5.373 12 12v24c0 6.627-5.373 12-12 12H172c-6.627 0-12-5.373-12-12zm192 0v-24c0-6.627 5.373-12 12-12h104c6.627 0 12 5.373 12 12v24c0 6.627-5.373 12-12 12H364c-6.627 0-12-5.373-12-12zm0-144v-24c0-6.627 5.373-12 12-12h104c6.627 0 12 5.373 12 12v24c0 6.627-5.373 12-12 12H364c-6.627 0-12-5.373-12-12zm0 72v-24c0-6.627 5.373-12 12-12h104c6.627 0 12 5.373 12 12v24c0 6.627-5.373 12-12 12H364c-6.627 0-12-5.373-12-12z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p>Technical Analysis at DailyFX</p>
+                                <p>10-Aug-2022, 14:37:34</p>
+                            </div>
+                        </li>
+                        <li class="flex items-center gap-6 hover:bg-white hover:text-black p-6">
+                            <div class="w-10 h-10 bg-yellow-500 flex justify-center items-center rounded-lg">
+                                <svg class="text-white" stroke="currentColor" fill="currentColor" stroke-width="0"
+                                    viewBox="0 0 576 512" height="16px" width="16px"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M552 64H112c-20.858 0-38.643 13.377-45.248 32H24c-13.255 0-24 10.745-24 24v272c0 30.928 25.072 56 56 56h496c13.255 0 24-10.745 24-24V88c0-13.255-10.745-24-24-24zM48 392V144h16v248c0 4.411-3.589 8-8 8s-8-3.589-8-8zm480 8H111.422c.374-2.614.578-5.283.578-8V112h416v288zM172 280h136c6.627 0 12-5.373 12-12v-96c0-6.627-5.373-12-12-12H172c-6.627 0-12 5.373-12 12v96c0 6.627 5.373 12 12 12zm28-80h80v40h-80v-40zm-40 140v-24c0-6.627 5.373-12 12-12h136c6.627 0 12 5.373 12 12v24c0 6.627-5.373 12-12 12H172c-6.627 0-12-5.373-12-12zm192 0v-24c0-6.627 5.373-12 12-12h104c6.627 0 12 5.373 12 12v24c0 6.627-5.373 12-12 12H364c-6.627 0-12-5.373-12-12zm0-144v-24c0-6.627 5.373-12 12-12h104c6.627 0 12 5.373 12 12v24c0 6.627-5.373 12-12 12H364c-6.627 0-12-5.373-12-12zm0 72v-24c0-6.627 5.373-12 12-12h104c6.627 0 12 5.373 12 12v24c0 6.627-5.373 12-12 12H364c-6.627 0-12-5.373-12-12z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p>Technical Analysis at DailyFX</p>
+                                <p>10-Aug-2022, 14:37:34</p>
+                            </div>
+                        </li>
+                        <li class="flex items-center gap-6 hover:bg-white hover:text-black p-6">
+                            <div class="w-10 h-10 bg-yellow-500 flex justify-center items-center rounded-lg">
+                                <svg class="text-white" stroke="currentColor" fill="currentColor" stroke-width="0"
+                                    viewBox="0 0 576 512" height="16px" width="16px"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M552 64H112c-20.858 0-38.643 13.377-45.248 32H24c-13.255 0-24 10.745-24 24v272c0 30.928 25.072 56 56 56h496c13.255 0 24-10.745 24-24V88c0-13.255-10.745-24-24-24zM48 392V144h16v248c0 4.411-3.589 8-8 8s-8-3.589-8-8zm480 8H111.422c.374-2.614.578-5.283.578-8V112h416v288zM172 280h136c6.627 0 12-5.373 12-12v-96c0-6.627-5.373-12-12-12H172c-6.627 0-12 5.373-12 12v96c0 6.627 5.373 12 12 12zm28-80h80v40h-80v-40zm-40 140v-24c0-6.627 5.373-12 12-12h136c6.627 0 12 5.373 12 12v24c0 6.627-5.373 12-12 12H172c-6.627 0-12-5.373-12-12zm192 0v-24c0-6.627 5.373-12 12-12h104c6.627 0 12 5.373 12 12v24c0 6.627-5.373 12-12 12H364c-6.627 0-12-5.373-12-12zm0-144v-24c0-6.627 5.373-12 12-12h104c6.627 0 12 5.373 12 12v24c0 6.627-5.373 12-12 12H364c-6.627 0-12-5.373-12-12zm0 72v-24c0-6.627 5.373-12 12-12h104c6.627 0 12 5.373 12 12v24c0 6.627-5.373 12-12 12H364c-6.627 0-12-5.373-12-12z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p>Technical Analysis at DailyFX</p>
+                                <p>10-Aug-2022, 14:37:34</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-        <div class="w-full lg:w-2/4 rounded-lg overflow-hidden bg-black">
-            <div class="p-6 text-white border-b border-white/25">
-                <p>Latest Notification</p>
-            </div>
-            <div class="text-white">
-                <ul>
-                    <li class="flex items-center gap-6 hover:bg-white hover:text-black p-6">
-                        <div class="w-10 h-10 bg-blue-500 flex justify-center items-center rounded-lg">
-                            <svg class="text-white" stroke="currentColor" fill="currentColor" stroke-width="0"
-                                viewBox="0 0 64 512" height="16px" width="16px" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64V320c0 17.7 14.3 32 32 32s32-14.3 32-32V64zM32 480a40 40 0 1 0 0-80 40 40 0 1 0 0 80z">
-                                </path>
-                            </svg>
-                        </div>
-                        <div>
-                            <p>Buy RM Balance</p>
-                            <p>10-Aug-2022, 14:37:34</p>
-                        </div>
-                    </li>
-                    <li class="flex items-center gap-6 hover:bg-white hover:text-black p-6">
-                        <div class="w-10 h-10 bg-blue-500 flex justify-center items-center rounded-lg">
-                            <svg class="text-white" stroke="currentColor" fill="currentColor" stroke-width="0"
-                                viewBox="0 0 64 512" height="16px" width="16px" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64V320c0 17.7 14.3 32 32 32s32-14.3 32-32V64zM32 480a40 40 0 1 0 0-80 40 40 0 1 0 0 80z">
-                                </path>
-                            </svg>
-                        </div>
-                        <div>
-                            <p>Add Stake N9NFKKY8F6JP</p>
-                            <p>10-Aug-2022, 14:37:34</p>
-                        </div>
-                    </li>
-                    <li class="flex items-center gap-6 hover:bg-white hover:text-black p-6">
-                        <div class="w-10 h-10 bg-blue-500 flex justify-center items-center rounded-lg">
-                            <svg class="text-white" stroke="currentColor" fill="currentColor" stroke-width="0"
-                                viewBox="0 0 64 512" height="16px" width="16px" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64V320c0 17.7 14.3 32 32 32s32-14.3 32-32V64zM32 480a40 40 0 1 0 0-80 40 40 0 1 0 0 80z">
-                                </path>
-                            </svg>
-                        </div>
-                        <div>
-                            <p>Add Stake 3GP8I2MBR88R</p>
-                            <p>10-Aug-2022, 14:37:34</p>
-                        </div>
-                    </li>
-                </ul>
+
+        <div class="w-full lg:w-2/4 overflow-hidden ">
+            <div class="bg-black rounded-lg ">
+                <div class="p-6 text-white border-b border-white/25">
+                    <p>Latest Notification</p>
+                </div>
+                <div class="text-white">
+                    <ul>
+                        @foreach ($notifications as $notification)
+                            <li class="flex text-white/70 items-center gap-6 hover:bg-white hover:text-black p-6">
+                                <div class="w-10 h-10 bg-blue-500 flex justify-center items-center rounded-lg">
+                                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 64 512"
+                                        height="16px" width="16px" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64V320c0 17.7 14.3 32 32 32s32-14.3 32-32V64zM32 480a40 40 0 1 0 0-80 40 40 0 1 0 0 80z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-md">{{ $notification->header }}</p>
+                                    <p>{{ $notification->created_at }}</p>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
         </div>
     </section>

@@ -38,18 +38,11 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Profile::create(['user_id' => $admin->id]);
-        Profile::create(['user_id' => $user->id]);
+        Profile::create(['user_id' => $user->id, 'balance' => 10000]);
 
         collect([['name' => 'Basic', 'min' => 100, 'max' => 999, 'profit' => 1, 'estimasiProfit' => 'Daily', 'contract' => 2,]])
             ->map(function ($package) {
                 Package::create($package);
             });
-
-        Bank::create([
-            'name' => 'HSB Global Trade',
-            'bank' => 'Bank Rakyat Indonesia',
-            'noRekening' => '1234567890',
-            'image' => '1722698599-bank-Bank Rakyat Indonesia.jpg'
-        ]);
     }
 }

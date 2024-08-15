@@ -54,7 +54,7 @@ class TradeController extends Controller
             ]);
 
             // simpan log
-            Notification::create('trade', "Add Stake $trade->code", "you $request->type at $trade->created_at");
+            Notification::create("Add Stake $trade->code", "you $request->type at $trade->created_at");
 
             return back()->with('success', $request->type . ' Success');
         } else {

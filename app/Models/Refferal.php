@@ -10,4 +10,9 @@ class Refferal extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function inviteds()
+    {
+        return $this->belongsTo(User::class, 'invited');
+    }
 }

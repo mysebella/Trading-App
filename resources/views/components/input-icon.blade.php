@@ -9,6 +9,6 @@
         {!! $icon !!}
     </div>
     <input type="{{ !isset($type) ? 'text' : $type }}" id="{{ $name }}" name="{{ $name }}"
-        {{ isset($required) ? 'required' : '' }} value="{{ @$value }}"
+        {{ isset($required) ? 'required' : '' }} value="{{ @$value }}" {{ isset($readonly) ? 'readonly' : '' }}
         class="text-white/50 w-full mt-2 h-[50px] outline-none rounded-r-lg p-3 bg-black mb-2">
 </div>

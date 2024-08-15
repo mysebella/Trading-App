@@ -20,7 +20,7 @@
                         <a href="{{ route('auth.signup') }}" class="switcher-text">Register</a>
                     </li>
                     <li>
-                        <a href="forgotpass.php.html" class="switcher-text">Forgot Password</a>
+                        <a href="{{ route('auth.forget') }}" class="switcher-text">Forgot Password</a>
                     </li>
                 </ul>
             </div>
@@ -78,6 +78,16 @@
 @endsection
 
 @section('javascript')
+    @if (Session::has('success'))
+        <script>
+            const successMessage = @json(Session::get('success'));
+            Swal.fire({
+                text: successMessage,
+                icon: "success"
+            });
+        </script>
+    @endif
+
     @if (Session::has('error'))
         <script>
             const errorMessage = @json(Session::get('error'));

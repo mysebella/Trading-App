@@ -21,42 +21,60 @@
                             <tr class="table-border">
                                 <td class="table-border">Date</td>
                                 <td class="table-border">No</td>
-                                <td class="table-border">Package</td>
-                                <td class="table-border">Market</td>
+                                <td class="table-border">User</td>
+                                <td class="table-border">Bukti Pembayaran</td>
+                                <td class="table-border">Payment To</td>
                                 <td class="table-border">Amount</td>
-                                <td class="table-border">Date End</td>
-                                <td class="table-border">Status</td>
-                                <td class="table-border">Win/Lost</td>
-                                <td class="table-border">Rate Trade</td>
-                                <td class="table-border">Rate End</td>
+                                <td class="table-border">Note</td>
+                                <td class="table-border">Status Paid</td>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="table-border">
-                                <td class="table-border">2024-05-23 11:15:31</td>
-                                <td class="table-border">588NY6NR2YZ2</td>
-                                <td class="table-border">30 SECOND</td>
-                                <td class="table-border">BTC/USD</td>
-                                <td class="table-border">USD 2,500.00</td>
-                                <td class="table-border">2024-05-23 11:16:01</td>
-                                <td class="table-border"><button class="bg-green rounded px-3 py-1">win</button></td>
-                                <td class="table-border">USD 4,500.00 180%</td>
-                                <td class="table-border">47,712.31 USD</td>
-                                <td class="table-border win"><i class="bi bi-arrow-up-circle-fill"></i> 47,712.31 USD</td>
-                            </tr>
-                            <tr class="table-border">
-                                <td class="table-border">2024-05-23 11:15:31</td>
-                                <td class="table-border">588NY6NR2YZ2</td>
-                                <td class="table-border">30 SECOND</td>
-                                <td class="table-border">BTC/USD</td>
-                                <td class="table-border">USD 2,500.00</td>
-                                <td class="table-border">2024-05-23 11:16:01</td>
-                                <td class="table-border"><button class="bg-red-500 rounded px-3 py-1">Lose</button></td>
-                                <td class="table-border">USD 4,500.00 180%</td>
-                                <td class="table-border">47,712.31 USD</td>
-                                <td class="table-border lose"><i class="bi bi-arrow-down-circle-fill"></i> 47,712.31 USD
-                                </td>
-                            </tr>
+                            @foreach ($balances as $balance)
+                                <tr class="table-border">
+                                    <td class="table-border">{{ $balance->created_at }}</td>
+                                    <td class="table-border">{{ $balance->code }}</td>
+                                    <td class="table-border">{{ $balance->user->username }}</td>
+                                    <td class="flex justify-center items-center h-20">
+                                        @if (!$balance->proof)
+                                            <p class="font-semibold text-lg">404</p>
+                                        @else
+                                            <img src="{{ asset('') }}storage/proof-balance/{{ $balance->proof }}"
+                                                width="55" />
+                                        @endif
+                                    </td>
+                                    <td class="table-border">{{ $balance->paymentTo }}</td>
+                                    <td class="table-border">@money($balance->amount)</td>
+                                    <td class="table-border">{{ $balance->note }}</td>
+                                    <td class="table-border">
+                                        @if ($balance->isPaid == 1)
+                                            <button class="bg-green rounded px-3 py-1">PAID</button>
+                                        @else
+                                            <button class="bg-red-500 rounded px-3 py-1">UNPAID</button>
+                                        @endif
+                                    </td>
+                                    <td class="table-border">
+                                        @if ($balance->status == 'active')
+                                            <div class="flex justify-center">
+                                                <button
+                                                    class="bg-green font-semibold h-10 rounded w-20 flex justify-center items-center">
+                                                    <i class="fa-solid fa-circle-check text-lg text-white"></i>
+                                                </button>
+                                            </div>
+                                        @else
+                                            <form class="flex justify-center" method="POST"
+                                                action="{{ route('dashboard.balances.requests.approve', ['id' => $balance->id, 'userId' => $balance->user->id]) }}">
+                                                @csrf
+                                                @method('PUT')
+                                                <button
+                                                    class="bg-green font-semibold h-10 px-3 rounded flex justify-center items-center">
+                                                    Approve
+                                                </button>
+                                            </form>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

@@ -8,28 +8,34 @@ use App\Models\Package;
 use App\Models\PackageInvestment;
 use App\Models\User;
 use Illuminate\Http\Request;
+use PHPUnit\Event\Code\Throwable;
 
 class PackageInvestmentController extends Controller
 {
     public function index()
     {
-        return view('admin.product.add-package-investment', ['page' => 'product', 'packages' => Package::get()]);
+        return view('admin.product.add-package-investment', ['page' => 'investment', 'packages' => Package::get()]);
     }
 
     public function requestInvestment()
     {
-        $invesment = Investment::with(['package', 'user'])->get();
+        $invesment = Investment::with(['package', 'user'])->where('status', 'noactive')->get();
 
         return view('admin.product.request-investment', [
-            'page' => 'product',
+            'page' => 'investment',
             'investment' => $invesment
         ]);
     }
 
-    public function accInvestment($id)
+    public function approveInvestment($id)
     {
         // get investment
         $invesment = Investment::where('id', $id)->first();
+
+        // check apakah user sudah membayar atau belum
+        if ($invesment->isPaid == 0) {
+            return back()->with('error', 'User hasn’t paid yet');
+        }
 
         // get package
         $package = Package::where('id', $invesment->package_id)->first();
@@ -63,8 +69,6 @@ class PackageInvestmentController extends Controller
         $invesment->expiresAt = now()->addDays($expiresDay);
         // update status investment menjadi aktif
         $invesment->status = 'active';
-        // update procces yang dari pending ke success
-        $invesment->proccess = 'success';
         // dan simpan
         $invesment->save();
 
@@ -75,5 +79,15 @@ class PackageInvestmentController extends Controller
     {
         Package::create($request->all());
         return back()->with('success', 'Create Package Investment Success');
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        try {
+            $package = Package::where('id', $id)->delete();
+            return back()->with('success', 'Delete Success');
+        } catch (\Throwable $e) {
+            return back()->with('error', 'Delete data failed');
+        }
     }
 }

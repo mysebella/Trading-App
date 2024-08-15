@@ -4,8 +4,13 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Tools\Code;
+use App\Http\Controllers\Tools\Notification;
 use App\Models\Balance;
 use App\Models\Bank;
+use App\Models\Profile;
+use App\Models\Transfer;
+use App\Models\User;
+use App\Models\Withdraw;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 
@@ -19,7 +24,8 @@ class WalletController extends Controller
 
     public function addBalance()
     {
-        return view('user.wallet.add-balance', ['page' => 'wallet']);
+        $histories = Balance::getByUser();
+        return view('user.wallet.add-balance', ['page' => 'wallet', 'histories' => $histories]);
     }
 
     public function addBalanceStore(Request $request)
@@ -35,8 +41,15 @@ class WalletController extends Controller
 
     public function invoice($id)
     {
-        $balance = Balance::find($id);
+        $balance = Balance::where('user_id', Cookie::get('id'))
+            ->where('id', $id)
+            ->first();
+
         $banks = Bank::get();
+
+        if (!$balance) {
+            return back();
+        }
 
         return view('user.wallet.invoice', [
             'page' => 'wallet',
@@ -85,11 +98,69 @@ class WalletController extends Controller
 
     public function transfer()
     {
-        return view('user.wallet.transfer', ['page' => 'wallet']);
+        $histories = Transfer::with('recipiente')->where('sender', Cookie::get('id'))->get();
+        return view('user.wallet.transfer', ['page' => 'wallet', 'histories' => $histories]);
+    }
+
+    public function transferStore(Request $request)
+    {
+        $user = User::with('profile')->where('id', Cookie::get('id'))->first();
+        if ($user->profile[0]->balance <= $request->amount) {
+            return back()->with('error', 'your balance not enough');
+        }
+
+        $checkUser = User::with('profile')->where('username', $request->recipient)->first();
+        if (!$checkUser) {
+            return back()->with('error', "User $request->recipient not found");
+        }
+
+        $transfer = Transfer::create([
+            'sender' =>  $user->id,
+            'recipient' => $checkUser->id,
+            'amount' => $request->amount,
+            'note' => $request->note
+        ]);
+
+        if ($transfer) {
+            Profile::where('user_id', $user->id)->update([
+                'balance' => $user->profile[0]->balance - $transfer->amount
+            ]);
+
+            Profile::where('user_id', $checkUser->id)->update([
+                'balance' => $checkUser->profile[0]->balance + $transfer->amount
+            ]);
+
+            Notification::create('Transfer Success', "your transfer USD $request->amount to $checkUser->name success");
+
+            return back()->with('success', 'Transfer success');
+        }
+
+        return back()->with('error', 'Transfer failed');
     }
 
     public function withdraw()
     {
-        return view('user.wallet.withdraw', ['page' => 'wallet']);
+        $withdraws = Withdraw::where('user_id', Cookie::get('id'))->orderBy('id', 'DESC')->get();
+        $banksUser = Bank::where('user_id', Cookie::get('id'))->get();
+
+        return view('user.wallet.withdraw', ['page' => 'wallet', 'withdraws' => $withdraws, 'banksUser' => $banksUser]);
+    }
+
+    public function withdrawStore(Request $request)
+    {
+        $request['user_id'] = Cookie::get('id');
+        $user = Profile::where('user_id', Cookie::get('id'))->first();
+
+        if ($user->balance <= $request->amount) {
+            return back()->with('error', 'Balance not Enough');
+        }
+
+        $user->balance = $user->balance - $request->amount;
+        $user->save();
+
+        Withdraw::create($request->all());
+        Notification::create('Withdraw Process', "your withdraw USD $request->amount processed");
+
+        return back()->with('success', "Request withdraw success, please wait to admin acc");
     }
 }

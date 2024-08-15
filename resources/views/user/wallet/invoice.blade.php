@@ -66,37 +66,40 @@
                 </span>
             </div>
 
-            <div class="w-full bg-black flex flex-col lg:flex-row gap-6  overflow-hidden text-white/80">
-                <div class="bg-black rounded-lg overflow-hidden w-[50%] border border-white/25">
-                    <div class="p-4  text-lg text-white/70 border-b border-white/25">
-                        <p>Payment Bank</p>
-                    </div>
-                    <div class="px-4">
-                        <ul>
-                            @foreach ($banks as $bank)
-                                <li class="py-4 px-6 gap-6 flex border-b border-white/25 last:border-0">
-                                    <div class="w-28 bg-center h-14 bg-cover"
-                                        style="background-image: url('{{ asset('') }}storage/bank/{{ $bank->image }}');">
-                                    </div>
-                                    <div class="w-[60%] flex justify-center">
-                                        <div>
-                                            <p>{{ $bank->bank }}</p>
-                                            <p>Acc : {{ $bank->noRekening }}</p>
+            @if ($balance->isPaid == 0)
+                <div class="w-full bg-black flex flex-col lg:flex-row gap-6  overflow-hidden text-white/80">
+                    <div class="bg-black rounded-lg overflow-hidden w-[50%] border border-white/25">
+                        <div class="p-4  text-lg text-white/70 border-b border-white/25">
+                            <p>Payment Bank</p>
+                        </div>
+                        <div class="px-4">
+                            <ul>
+                                @foreach ($banks as $bank)
+                                    <li class="py-4 px-6 gap-6 flex border-b border-white/25 last:border-0">
+                                        <div class="w-28 bg-center h-14 bg-cover"
+                                            style="background-image: url('{{ asset('') }}storage/bank/{{ $bank->image }}');">
                                         </div>
-                                    </div>
-                                </li>
-                            @endforeach
-                        </ul>
+                                        <div class="w-[60%] flex justify-center">
+                                            <div>
+                                                <p>{{ $bank->bank }}</p>
+                                                <p>Acc : {{ $bank->noRekening }}</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="my-6">Please make confirm manualy if you already payment and system not automaticaly
+                            confirm
+                            your
+                            payment.</p>
+                        <a href="{{ route('wallet.confirmation', ['id' => $balance->id]) }}"
+                            class="p-2 bg-orange rounded text-white font-semibold">Confirmation</a>
                     </div>
                 </div>
-                <div>
-                    <p class="my-6">Please make confirm manualy if you already payment and system not automaticaly confirm
-                        your
-                        payment.</p>
-                    <a href="{{ route('wallet.confirmation', ['id' => $balance->id]) }}"
-                        class="p-2 bg-orange rounded text-white font-semibold">Confirmation</a>
-                </div>
-            </div>
+            @endif
         </div>
     </section>
 @endsection

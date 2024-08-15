@@ -15,7 +15,7 @@
                 <ul class="fxt-switcher-wrap">
                     <li><a href="{{ route('auth.signin') }}" class="switcher-text">Login</a></li>
                     <li><a href="{{ route('auth.signup') }}" class="switcher-text active">Register</a></li>
-                    <li><a href="" class="switcher-text">Forgot Password</a></li>
+                    <li><a href="{{ route('auth.forget') }}" class="switcher-text">Forgot Password</a></li>
                 </ul>
             </div>
 
@@ -28,10 +28,12 @@
                         <div class="form-group">
                             <div class="fxt-transformY-50 fxt-transition-delay-2">
                                 <label class="control-label">Sponsor</label>
-                                <input class="form-control" name="invitedBy" type="text" disabled="disabled"
-                                    value="{{ @$_GET['reff'] }}">
+                                <input class="form-control" value="{{ @$sponsor }}" name="invitedBy" type="text"
+                                    readonly>
                             </div>
                         </div>
+
+                        <input type="hidden" name="inviting" value="{{ $inviting }}" />
 
                         <div class="form-group">
                             <div class="fxt-transformY-50 fxt-transition-delay-2">

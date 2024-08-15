@@ -62,7 +62,7 @@
                             </div>
 
                             <div class="flex items-center gap-2">
-                                <a href="{{ route('investment') }}" class="p-2 bg-red-500 rounded text-white">Back</a>
+                                <a href="{{ route('investment.index') }}" class="p-2 bg-red-500 rounded text-white">Back</a>
                                 <button class="p-2 bg-orange rounded text-white">Confirmation</button>
                             </div>
                         </div>

@@ -21,7 +21,7 @@ class SecurityController extends Controller
         $qrcode = $googlefa->getQRCodeInline(env('APP_NAME'), $user->email, $secretKey);
 
         return view('user.security', [
-            'page' => 'security',
+            'page' => 'security.index',
             'qrcode' => $qrcode,
             'secretkey' => $secretKey
         ]);

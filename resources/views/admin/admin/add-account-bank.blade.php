@@ -13,15 +13,17 @@
                 <p>Add Account Bank</p>
             </div>
             <div class="p-6">
-                <form action="{{ route('dashboard.admin.add-account-bank.post') }}" x-ref="containerAdd"
+                <form action="{{ route('dashboard.admin.bank-accounts.store') }}" x-ref="containerAdd"
                     enctype="multipart/form-data" method="POST">
                     @csrf
                     <div>
-                        <label class="text-white/70" for="image">Image</label>
-                        <div class="flex items-center">
-                            <input type="file" id="image" name="image"
-                                class="text-white/50 w-full mt-2 border border-white/30 outline-none rounded-lg bg-black mb-4 overflow-hidden file:p-3 file:bg-background file:border-none file:text-white/70 file:border-r file:border-white/30">
-                        </div>
+                        @if ($user->role == 'admin')
+                            <label class="text-white/70" for="image">Image</label>
+                            <div class="flex items-center">
+                                <input type="file" id="image" name="image"
+                                    class="text-white/50 w-full mt-2 border border-white/30 outline-none rounded-lg bg-black mb-4 overflow-hidden file:p-3 file:bg-background file:border-none file:text-white/70 file:border-r file:border-white/30">
+                            </div>
+                        @endif
 
                         @include('components.input', [
                             'label' => 'Name',
@@ -57,7 +59,9 @@
                         <table class="w-full table-border">
                             <thead>
                                 <tr class="table-border">
-                                    <td class="table-border">Image</td>
+                                    @if ($user->role == 'admin')
+                                        <td class="table-border">Image</td>
+                                    @endif
                                     <td class="table-border">Name</td>
                                     <td class="table-border">Bank</td>
                                     <td class="table-border">No Rekening</td>
@@ -68,17 +72,19 @@
 
                                 @foreach ($banks as $bank)
                                     <tr class="table-border">
-                                        <td class="table-border">
-                                            <div class="w-20 h-12 m-auto bg-background rounded-lg bg-cover"
-                                                style="background-image: url('{{ asset('') }}storage/bank/{{ $bank->image }}');">
-                                            </div>
-                                        </td>
+                                        @if ($user->role == 'admin')
+                                            <td class="table-border">
+                                                <div class="w-20 h-12 m-auto bg-background rounded-lg bg-cover bg-center"
+                                                    style="background-image: url('{{ asset('') }}storage/bank/{{ $bank->image }}');">
+                                                </div>
+                                            </td>
+                                        @endif
                                         <td class="table-border">{{ $bank->name }}</td>
                                         <td class="table-border">{{ $bank->bank }}</td>
                                         <td class="table-border">{{ $bank->noRekening }}</td>
                                         <td class="table-border flex justify-center">
                                             <form
-                                                action="{{ route('dashboard.admin.add-account-bank.delete', ['id' => $bank->id]) }}"
+                                                action="{{ route('dashboard.admin.bank-accounts.destroy', ['id' => $bank->id]) }}"
                                                 method="POST">
                                                 @csrf
                                                 @method('DELETE')

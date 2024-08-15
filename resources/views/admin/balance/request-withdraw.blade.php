@@ -20,43 +20,51 @@
                         <thead>
                             <tr class="table-border">
                                 <td class="table-border">Date</td>
-                                <td class="table-border">No</td>
-                                <td class="table-border">Package</td>
-                                <td class="table-border">Market</td>
                                 <td class="table-border">Amount</td>
-                                <td class="table-border">Date End</td>
+                                <td class="table-border">Withdraw to</td>
+                                <td class="table-border">Name</td>
+                                <td class="table-border">No Rekening</td>
+                                <td class="table-border">Note</td>
                                 <td class="table-border">Status</td>
-                                <td class="table-border">Win/Lost</td>
-                                <td class="table-border">Rate Trade</td>
-                                <td class="table-border">Rate End</td>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="table-border">
-                                <td class="table-border">2024-05-23 11:15:31</td>
-                                <td class="table-border">588NY6NR2YZ2</td>
-                                <td class="table-border">30 SECOND</td>
-                                <td class="table-border">BTC/USD</td>
-                                <td class="table-border">USD 2,500.00</td>
-                                <td class="table-border">2024-05-23 11:16:01</td>
-                                <td class="table-border"><button class="bg-green rounded px-3 py-1">win</button></td>
-                                <td class="table-border">USD 4,500.00 180%</td>
-                                <td class="table-border">47,712.31 USD</td>
-                                <td class="table-border win"><i class="bi bi-arrow-up-circle-fill"></i> 47,712.31 USD</td>
-                            </tr>
-                            <tr class="table-border">
-                                <td class="table-border">2024-05-23 11:15:31</td>
-                                <td class="table-border">588NY6NR2YZ2</td>
-                                <td class="table-border">30 SECOND</td>
-                                <td class="table-border">BTC/USD</td>
-                                <td class="table-border">USD 2,500.00</td>
-                                <td class="table-border">2024-05-23 11:16:01</td>
-                                <td class="table-border"><button class="bg-red-500 rounded px-3 py-1">Lose</button></td>
-                                <td class="table-border">USD 4,500.00 180%</td>
-                                <td class="table-border">47,712.31 USD</td>
-                                <td class="table-border lose"><i class="bi bi-arrow-down-circle-fill"></i> 47,712.31 USD
-                                </td>
-                            </tr>
+                            @foreach ($withdraws as $withdraw)
+                                <tr class="table-border">
+                                    <td class="table-border">{{ $withdraw->created_at }}</td>
+                                    <td class="table-border">@money($withdraw->amount)</td>
+                                    <td class="table-border">{{ $withdraw->bank->bank }}</td>
+                                    <td class="table-border">{{ $withdraw->bank->name }}</td>
+                                    <td class="table-border">{{ $withdraw->bank->noRekening }}</td>
+                                    <td class="table-border">{{ $withdraw->note }}</td>
+                                    <td class="table-border">
+                                        <button
+                                            class="{{ $withdraw->status == 'success' ? 'bg-green' : 'bg-red-500' }} first-letter:uppercase px-2 py-1 rounded">{{ $withdraw->status }}</button>
+                                    </td>
+                                    <td class="table-border">
+                                        <div class="flex justify-evenly">
+                                            <form class="flex justify-center" method="POST"
+                                                action="{{ route('dashboard.balances.withdrawals.update', ['id' => $withdraw->id, 'method' => 'success']) }}">
+                                                @csrf
+                                                @method('PUT')
+                                                <button
+                                                    class="bg-green font-semibold h-10 w-10 rounded flex justify-center items-center">
+                                                    <i class="fa-solid fa-circle-check text-lg text-white"></i>
+                                                </button>
+                                            </form>
+                                            <form class="flex justify-center" method="POST"
+                                                action="{{ route('dashboard.balances.withdrawals.update', ['id' => $withdraw->id, 'method' => 'reject']) }}">
+                                                @csrf
+                                                @method('PUT')
+                                                <button
+                                                    class="font-semibold h-10 rounded w-10 bg-red-500 flex justify-center items-center">
+                                                    <i class="fa-solid fa-x"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

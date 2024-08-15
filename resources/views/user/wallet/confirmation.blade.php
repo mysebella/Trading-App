@@ -7,56 +7,60 @@
     ])
 
     <section class="my-6 w-full flex flex-col lg:flex-row gap-6">
-        <div class="w-full lg:w-[30%] rounded-lg overflow-hidden bg-black"
+        <div class="w-full lg:w-[30%] rounded-lg overflow-hidden"
             x-bind:style="'max-height: ' + $ref.containerAdd.scrollHeight + 'px';">
-            <div class="p-6 text-white/70 border-b border-white/25">
-                <p>Confirmation</p>
-            </div>
-            <div class="p-6">
-                <form method="POST" action="{{ route('wallet.confirmation.put', ['id' => $balance->id]) }}"
-                    enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
+            <div class="bg-black rounded-lg">
+                <div class="p-6 text-white/70 border-b border-white/25">
+                    <p>Confirmation</p>
+                </div>
 
-                    <div x-ref="containerAdd">
+                <div class="p-6">
+                    <form method="POST" action="{{ route('wallet.confirmation.put', ['id' => $balance->id]) }}"
+                        enctype="multipart/form-data">
                         @csrf
-                        <div>
-                            @include('components.input', [
-                                'label' => 'Amount Buy',
-                                'name' => 'amount',
-                                'readonly' => true,
-                                'value' => "USD $balance->amount",
-                            ])
+                        @method('PUT')
 
+                        <div x-ref="containerAdd">
+                            @csrf
                             <div>
-                                <label class="text-white/70">Pay With</label>
-                                <select name="paymentTo"
-                                    class="text-white/50 w-full mt-2 border border-white/30 outline-none rounded-lg p-3 bg-black mb-4">
-                                    @foreach ($banks as $bank)
-                                        <option value="{{ $bank->bank }}">
-                                            {{ $bank->bank }} ACC:{{ $bank->noRekening }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                                @include('components.input', [
+                                    'label' => 'Amount Buy',
+                                    'name' => 'amount',
+                                    'readonly' => true,
+                                    'value' => "USD $balance->amount",
+                                ])
+
+                                <div>
+                                    <label class="text-white/70">Pay With</label>
+                                    <select name="paymentTo"
+                                        class="text-white/50 w-full mt-2 border border-white/30 outline-none rounded-lg p-3 bg-black mb-4">
+                                        @foreach ($banks as $bank)
+                                            <option value="{{ $bank->bank }}">
+                                                {{ $bank->bank }} ACC:{{ $bank->noRekening }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                @include('components.input', [
+                                    'label' => 'Note',
+                                    'name' => 'note',
+                                ])
+
+                                <div class="flex gap-2 mt-2 mb-5">
+                                    <p class="text-white/75">Upload</p>
+                                    <input type="file" name="proof" class="text-white/70" />
+                                </div>
                             </div>
 
-                            @include('components.input', [
-                                'label' => 'Note',
-                                'name' => 'note',
-                            ])
-
-                            <div class="flex gap-2 mt-2 mb-5">
-                                <p class="text-white/75">Upload</p>
-                                <input type="file" name="proof" class="text-white/70" />
+                            <div class="flex items-center gap-2">
+                                <a href="{{ route('wallet.add-balance') }}"
+                                    class="p-2 bg-red-500 rounded text-white">Back</a>
+                                <button class="p-2 bg-orange rounded text-white">Confirmation</button>
                             </div>
                         </div>
-
-                        <div class="flex items-center gap-2">
-                            <a href="{{ route('wallet.add-balance') }}" class="p-2 bg-red-500 rounded text-white">Back</a>
-                            <button class="p-2 bg-orange rounded text-white">Confirmation</button>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
 

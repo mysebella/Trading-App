@@ -54,7 +54,7 @@
                     </div>
 
                     <div class="flex items-center gap-2">
-                        <a href="{{ route('investment') }}" class="p-2 bg-red-500 rounded text-white">Back</a>
+                        <a href="{{ route('investment.index') }}" class="p-2 bg-red-500 rounded text-white">Back</a>
                         <form action="{{ route('investment.paid.post') }}" method="POST">
                             @csrf
                             <input type="text" class="hidden" name="amount" value="{{ $package->amount }}">

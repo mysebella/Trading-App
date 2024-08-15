@@ -35,22 +35,26 @@
                                 <tr class="table-border">
                                     <td class="table-border">{{ $invest->created_at }}</td>
                                     <td class="flex h-20 justify-center items-center">
-                                        <img src="{{ asset('') }}storage/proof-payment/{{ $invest->proof }}"
-                                            width="70" />
+                                        @if (!$invest->proof)
+                                            <p class="font-semibold text-lg">404</p>
+                                        @else
+                                            <img src="{{ asset('') }}storage/proof-payment/{{ $invest->proof }}"
+                                                width="70" />
+                                        @endif
                                     </td>
                                     <td class="table-border">588NY6NR2YZ2</td>
                                     <td class="table-border">{{ $invest->user->username }}</td>
                                     <td class="table-border">Package {{ $invest->package->name }}</td>
-                                    <td class="table-border">RM {{ $invest->amount }}</td>
+                                    <td class="table-border">@money($invest->amount)</td>
                                     <td class="table-border">
                                         @if ($invest->isPaid == 1)
-                                            <button class="bg-green rounded px-3 py-1">Paid</button>
+                                            <button class="bg-green rounded px-3 py-1">PAID</button>
                                         @else
-                                            <button class="bg-red-500 rounded px-3 py-1">NoPaid</button>
+                                            <button class="bg-red-500 rounded px-3 py-1">UNPAID</button>
                                         @endif
                                     </td>
                                     <td class="table-border">
-                                        {{ !$invest->expiresAt ? 'please Acc to see' : $invest->expiresAt }}
+                                        {{ !$invest->expiresAt ? 'Please ACC to see' : $invest->expiresAt }}
                                     </td>
                                     <td class="table-border">{{ $invest->note }}</td>
                                     <td class="table-border">
@@ -63,12 +67,12 @@
                                             </div>
                                         @else
                                             <form class="flex justify-center" method="POST"
-                                                action="{{ route('dashboard.product.request-investment.put', ['id' => $invest->package_id]) }}">
+                                                action="{{ route('dashboard.investments.requests.approve', ['id' => $invest->id]) }}">
                                                 @csrf
                                                 @method('PUT')
                                                 <button
-                                                    class="bg-orange font-semibold h-10 rounded w-20 flex justify-center items-center">
-                                                    Accept
+                                                    class="bg-green font-semibold h-10 rounded w-20 flex justify-center items-center">
+                                                    Approve
                                                 </button>
                                             </form>
                                         @endif

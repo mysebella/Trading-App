@@ -13,7 +13,7 @@
                 <p>Add Package Investment</p>
             </div>
             <div class="p-6">
-                <form method="POST" action="{{ route('dashboard.product.add-investment.post') }}" x-ref="containerAdd">
+                <form method="POST" action="{{ route('dashboard.investments.store') }}" x-ref="containerAdd">
                     @csrf
                     <div>
                         @include('components.input', [
@@ -89,13 +89,19 @@
                                         </td>
                                         <td class="table-border">{{ $package->contract }} {{ $package->estimasiProfit }}
                                         </td>
-                                        <td class="table-border flex justify-center">
-                                            <form>
-                                                <button
-                                                    class="bg-red-500 h-10 rounded w-10 flex justify-center items-center">
-                                                    <i class="bi bi-trash3 text-lg"></i>
-                                                </button>
-                                            </form>
+                                        <td class="table-border ">
+                                            <div class="flex justify-center">
+                                                <form
+                                                    action="{{ route('dashboard.investments.destroy', ['id' => $package->id]) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button
+                                                        class="bg-red-500 h-10 rounded w-10 flex justify-center items-center">
+                                                        <i class="bi bi-trash3 text-lg"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

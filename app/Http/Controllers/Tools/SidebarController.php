@@ -26,23 +26,27 @@ class SidebarController extends Controller
                     [
                         "name" => "Image",
                         "route" => 'setting.image'
+                    ],
+                    [
+                        "name" => "Account Bank",
+                        "route" => 'setting.bank'
                     ]
                 ]
             ],
             [
                 "icon" => '<i class="bi bi-shield-shaded"></i>',
                 "name" => "Security",
-                "route" => 'security'
+                "route" => 'security.index'
             ],
             [
                 "icon" => '<i class="bi bi-person-vcard-fill"></i>',
                 "name" => "KNC",
-                "route" => 'knc'
+                "route" => 'knc.index'
             ],
             [
                 "icon" => '<i class="bi bi-check2-circle"></i>',
                 "name" => "Investment",
-                "route" => 'investment'
+                "route" => 'investment.index'
             ],
             [
                 "icon" => '<i class="bi bi-graph-up"></i>',
@@ -51,7 +55,7 @@ class SidebarController extends Controller
                 "sub" => [
                     [
                         "name" => "Trade",
-                        "route" => 'trade'
+                        "route" => 'trade.index'
                     ],
                     [
                         "name" => "History",
@@ -107,8 +111,8 @@ class SidebarController extends Controller
                 "route" => 'network',
                 "sub" => [
                     [
-                        "name" => "Refferals",
-                        "route" => 'network.refferals'
+                        "name" => "Referrals",
+                        "route" => 'network.referrals'
                     ],
                     [
                         "name" => "Generation",
@@ -119,7 +123,7 @@ class SidebarController extends Controller
             [
                 "icon" => '<i class="fa fa-pencil-square-o"></i>',
                 "name" => "Register",
-                "route" => 'register'
+                "route" => 'register.index'
             ],
             [
                 "icon" => '<i class="bi bi-question-circle-fill"></i>',
@@ -138,11 +142,11 @@ class SidebarController extends Controller
                 "sub" => [
                     [
                         "name" => "Testimonial",
-                        "route" => 'testimonial.testimonial'
+                        "route" => 'testimonial.index'
                     ],
                     [
                         "name" => "Add Testimonial",
-                        "route" => 'testimonial.add-testimonial'
+                        "route" => 'testimonial.add'
                     ]
                 ]
             ],
@@ -158,7 +162,6 @@ class SidebarController extends Controller
             ],
         ];
     }
-
     public static function admin()
     {
         return [
@@ -170,48 +173,79 @@ class SidebarController extends Controller
             [
                 "icon" => '<i class="bi bi-people-fill"></i>',
                 "name" => "Users",
-                "route" => 'dashboard.users'
+                "route" => 'dashboard.users',
+                "sub" => [
+                    [
+                        "name" => "List User",
+                        "route" => 'dashboard.users'
+                    ],
+                    [
+                        "name" => "Request Verification",
+                        "route" => 'dashboard.users.request'
+                    ]
+                ]
+            ],
+            [
+                "icon" => '<i class="fa fa-comments"></i>',
+                "name" => "Testimonials",
+                "route" => 'testimonial',
+                "sub" => [
+                    [
+                        "name" => "Request Testimonials",
+                        "route" => 'dashboard.testimonials.index'
+                    ],
+                ]
             ],
             [
                 "icon" => '<i class="bi bi-bag-fill"></i>',
-                "name" => "Product",
-                "route" => 'product',
+                "name" => "Investments",
+                "route" => 'investment',
                 "sub" => [
                     [
-                        "name" => "Request Investment",
-                        "route" => 'dashboard.product.request-investment'
+                        "name" => "Create Investment",
+                        "route" => 'dashboard.investments.create'
                     ],
                     [
-                        "name" => "Investment Package",
-                        "route" => 'dashboard.product.add-investment'
+                        "name" => "Investment Requests",
+                        "route" => 'dashboard.investments.requests'
                     ]
                 ]
             ],
             [
                 "icon" => '<i class="bi bi-cash"></i>',
-                "name" => "Balance",
+                "name" => "Balances",
                 "route" => 'balance',
                 "sub" => [
                     [
                         "name" => "Request Balance",
-                        "route" => 'dashboard.balance.request-balance'
+                        "route" => 'dashboard.balances.requests'
                     ],
                     [
                         'name' => 'Request Withdraw',
-                        "route" => 'dashboard.balance.request-withdraw'
+                        "route" => 'dashboard.balances.withdrawals'
                     ]
                 ]
             ],
             [
                 "icon" => '<i class="bi bi-person-workspace"></i>',
-                "name" => "Admin",
+                "name" => "Bank Accounts",
                 "route" => 'admin',
                 "sub" => [
                     [
-                        "name" => "Account Bank",
-                        "route" => 'dashboard.admin.add-account-bank'
+                        "name" => "Manage Bank Accounts",
+                        "route" => 'dashboard.admin.bank-accounts'
                     ]
                 ]
+            ],
+            [
+                "icon" => '<i class="fa fa-download"></i>',
+                "name" => "Download",
+                "route" => 'download.index'
+            ],
+            [
+                "icon" => '<i class="fa fa-newspaper-o"></i>',
+                "name" => "News",
+                "route" => 'news.index'
             ],
             [
                 "icon" => '<i class="fa fa-power-off"></i>',

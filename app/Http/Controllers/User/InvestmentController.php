@@ -15,68 +15,98 @@ use Illuminate\Support\Facades\Cookie;
 
 class InvestmentController extends Controller
 {
+    /**
+     * Display the investment overview page.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
+        $userId = Cookie::get('id');
         $packages = Package::all();
-        $histories = Investment::where('user_id', Cookie::get('id'))->get();
+        $investmentHistories = Investment::where('user_id', $userId)->get();
 
         return view('user.investment.index', [
-            'page' => 'investment',
+            'page' => 'investment.index',
             'packages' => $packages,
-            'histories' => $histories
+            'histories' => $investmentHistories
         ]);
     }
 
+    /**
+     * Show the payment page for a package.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
+     */
     public function paid(Request $request)
     {
         $userId = Cookie::get('id');
-        $histories = Investment::with('package')->where('user_id', $userId)->get();
+        $investmentHistories = Investment::with('package')->where('user_id', $userId)->get();
         $user = User::with('profile')->find($userId);
+        $package = Package::findOrFail($request->query('package'));
 
-        if ($user->status == 0) {
-            return back()->with('error', 'Please activated your account to investment');
+        if ($_GET['amount'] <= $package->min) {
+            return back()->with('error', 'what you submitted does not meet the minimum purchase');
         }
 
-        $hasUnpaidPackage = $histories->contains(fn ($history) => !$history->isPaid);
-
-
-        if ($hasUnpaidPackage) {
-            return back()->with('error', 'You Have Package to Pay');
+        if ($_GET['amount'] >= $package->max) {
+            return back()->with('error', 'the amount you submitted exceeds the maximum purchase');
         }
 
-        $hasUnpaidActive = $histories->contains(fn ($history) => $history->status == 'active');
-
-        if ($hasUnpaidActive) {
-            return back()->with('error', 'You Have Package Active');
+        if ($user->status == 'noactived') {
+            return back()->with('error', 'Please activate your account to invest.');
         }
 
-        $package = Package::find($request->query('package'));
+        if ($investmentHistories->contains(fn($history) => !$history->isPaid)) {
+            return back()->with('error', 'You have a package to pay.');
+        }
+
+        if ($investmentHistories->contains(fn($history) => $history->status === 'active')) {
+            return back()->with('error', 'You have an active package.');
+        }
+
+
         $package->amount = $request->query('amount');
 
         return view('user.investment.paid', [
             'page' => 'investment',
             'package' => $package,
-            'histories' => $histories
+            'histories' => $investmentHistories
         ]);
     }
 
+    /**
+     * Handle the payment submission.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function paidPost(Request $request)
     {
+        $userId = Cookie::get('id');
+
         $investment = Investment::create([
             'code' => Code::generate(),
-            'user_id' => Cookie::get('id'),
+            'user_id' => $userId,
             'package_id' => $request->input('package_id'),
             'amount' => $request->input('amount'),
         ]);
 
-        $package = Package::select('name')->find($investment->package_id);
+        $packageName = Package::findOrFail($investment->package_id)->name;
 
-        Notification::create('investment', "Add investment package $package", "You invest in package $package");
+        Notification::create("Add investment package $packageName", "You invested in package $packageName");
 
         return redirect()->route('investment.invoice', ['code' => $investment->code]);
     }
 
-    public function invoice($code)
+    /**
+     * Show the invoice page for a specific investment.
+     *
+     * @param string $code
+     * @return \Illuminate\View\View
+     */
+    public function invoice(string $code)
     {
         $userId = Cookie::get('id');
         $investment = Investment::where('user_id', $userId)->where('code', $code)->firstOrFail();
@@ -89,69 +119,73 @@ class InvestmentController extends Controller
         ]);
     }
 
-    public function confirmation($id)
+    /**
+     * Show the confirmation page for a specific investment.
+     *
+     * @param int $id
+     * @return \Illuminate\View\View
+     */
+    public function confirmation(int $id)
     {
         $userId = Cookie::get('id');
         $investment = Investment::where('user_id', $userId)->where('id', $id)->firstOrFail();
-        $histories = Investment::with('package')->where('user_id', $userId)->get();
+        $investmentHistories = Investment::with('package')->where('user_id', $userId)->get();
         $banks = Bank::all();
 
         return view('user.investment.confirmation', [
             'page' => 'investment',
             'banks' => $banks,
-            'histories' => $histories,
+            'histories' => $investmentHistories,
             'investment' => $investment
         ]);
     }
 
-    public function confirmationPut(Request $request, $id)
+    /**
+     * Handle the confirmation of payment for an investment.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function confirmationPut(Request $request, int $id)
     {
+        $userId = Cookie::get('id');
+        $profile = Profile::where('user_id', $userId)->firstOrFail();
+        $investment = Investment::with('package')
+            ->where('id', $id)
+            ->firstOrFail();
 
-        $profile = Profile::where('user_id', Cookie::get('id'))->first();
-        $investment = Investment::where('id', $id)
-            ->where('user_id', Cookie::get('id'))
-            ->first();
-
-        if (!$investment) {
-            return back('')->with('error', 'Payment Failed');
-        }
-
-        // check user mengunakan apa dia bertransaksi
-        // jika mengunakan balance maka kurangi balance yang dia miliki
-        if ($request->paymentTo == "Balance Wallet") {
-            // kurangi saldo sama dengan yang dia beli
-            // jika saldo user nol makan kirimkan pesan bahwa saldo 0
-            if ($profile->balance == "0.0") {
-                return back()->with('error', 'Your Balance Not Enough');
+        if ($request->paymentTo === "Balance Wallet") {
+            if ($profile->balance <= $investment->amount) {
+                return back()->with('error', 'Your balance is not enough.');
             }
-            $balanceAfterBuy = $profile->balance - $investment->amount;
-            $profile->balance = $balanceAfterBuy;
+
+            $profile->balance -= $investment->amount;
             $profile->save();
 
-            // jika sudah di kurangi makan berikan update data kalo pembayaran sudah di laksanakan
-            $investment->note = $request->note;
-            $investment->isPaid = 1;
-            $investment->proof = "balance.jpg";
-            $investment->paymentTo = 'Balance Wallet';
-            $investment->save();
+            $investment->update([
+                'note' => $request->note,
+                'isPaid' => true,
+                'proof' => "balance.jpg",
+                'paymentTo' => 'Balance Wallet'
+            ]);
         } else {
-            // jika user tidak memakai balance maka user harus menupload gambar
             if ($request->hasFile('proof')) {
                 $file = $request->file('proof');
                 $filename = "proof-payment-invest-" . time() . '.' . $file->extension();
                 $file->storeAs('public/proof-payment/', $filename);
 
-                // jika berhasil upload maka update data investment
-                $investment->note = $request->note;
-                $investment->proof = $filename;
-                $investment->isPaid = 1;
-                $investment->paymentTo = $request->paymentTo;
-                $investment->save();
+                $investment->update([
+                    'note' => $request->note,
+                    'proof' => $filename,
+                    'isPaid' => true,
+                    'paymentTo' => $request->paymentTo
+                ]);
             } else {
-                return back('')->with('error', 'please upload proof of payment');
+                return back()->with('error', 'Please upload proof of payment.');
             }
         }
 
-        return redirect(route('investment'))->with('success', 'Package Investment Added');
+        return redirect()->route('investment.index')->with('success', 'Package investment added.');
     }
 }

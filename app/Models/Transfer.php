@@ -10,4 +10,14 @@ class Transfer extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function sender()
+    {
+        return $this->belongsTo(User::class, 'sender');
+    }
+
+    public function recipiente()
+    {
+        return $this->belongsTo(User::class, 'recipient');
+    }
 }

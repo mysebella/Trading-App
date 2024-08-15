@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('invitedBy')->nullable();
             $table->string('twoFactorCode')->nullable();
-            $table->boolean('status')->default(0);
+            $table->enum('status', ['actived', 'pending', 'noactived'])->default('noactived');
             $table->enum('role', ['user', 'admin'])->default('user');
             $table->rememberToken();
             $table->timestamps();

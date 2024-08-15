@@ -12,7 +12,7 @@
                 <p>Buy Balance</p>
             </div>
             <div class="p-6">
-                <form action="{{ route('wallet.add-balance.post') }}" method="POST">
+                <form action="{{ route('wallet.add-balance.store') }}" method="POST">
                     @csrf
                     <div class="mb-4">
                         @include('components.input-icon', [
@@ -50,36 +50,35 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="table-border">
-                                    <td class="table-border">2024-05-23 11:15:31</td>
-                                    <td class="table-border">RM 118,000.00</td>
-                                    <td class="font-semibold table-border">
-                                        <button class="bg-green py-1 px-3 rounded">
-                                            <i class="bi bi-cash"></i>
-                                            Payment
-                                        </button>
-                                    </td>
-                                    <td class="font-semibold table-border">
-                                        <button class="bg-green py-1 px-3 rounded">
-                                            Done
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr class="table-border">
-                                    <td class="table-border">2024-05-23 11:15:31</td>
-                                    <td class="table-border">RM 118,000.00</td>
-                                    <td class="font-semibold table-border">
-                                        <button class="bg-green py-1 px-3 rounded">
-                                            <i class="bi bi-cash"></i>
-                                            Payment
-                                        </button>
-                                    </td>
-                                    <td class="font-semibold table-border">
-                                        <button class="bg-green py-1 px-3 rounded">
-                                            Done
-                                        </button>
-                                    </td>
-                                </tr>
+                                @if (count($histories) != 0)
+                                    @foreach ($histories as $history)
+                                        <tr>
+                                            <td class="table-border">{{ $history->created_at }}</td>
+                                            <td class="table-border">@money($history->amount)</td>
+                                            <td class="table-border">
+                                                <a href="{{ route('wallet.invoice', ['id' => $history->id]) }}"
+                                                    class="{{ $history->isPaid == 1 ? 'bg-green' : 'bg-red-500' }} px-2 py-1 rounded">
+                                                    Payment
+                                                </a>
+                                            </td>
+                                            <td class="table-border">
+                                                @if ($history->status == 'pending' or $history->status == 'reject')
+                                                    <button class="bg-red-500 first-letter:uppercase px-2 py-1 rounded">
+                                                        {{ $history->status }}
+                                                    </button>
+                                                @else
+                                                    <button class="bg-green first-letter:uppercase px-2 py-1 rounded">
+                                                        {{ $history->status }}
+                                                    </button>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <tr class="table-border">
+                                        <td class="p-4">No data available in table</td>
+                                    </tr>
+                                @endif
                             </tbody>
                         </table>
                     </div>

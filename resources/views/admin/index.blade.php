@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     <div class="flex text-orange items-center justify-between mt-4">
-                        <p class="text-xl font-semibold">12 User</p>
+                        <p class="text-xl font-semibold">{{ count(App\Models\User::get()) }} User</p>
                         <a href="">Detail</a>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                         </div>
                     </div>
                     <div class="flex text-orange items-center justify-between mt-4">
-                        <p class="text-xl font-semibold">122 User</p>
+                        <p class="text-xl font-semibold">{{ count(App\Models\User::get()) }} User</p>
                         <a href="">Detail</a>
                     </div>
                 </div>
@@ -76,7 +76,7 @@
                         </div>
                     </div>
                     <div class="flex text-orange items-center justify-between mt-4">
-                        <p class="text-xl font-semibold">RM 100.00</p>
+                        <p class="text-xl font-semibold">@money(App\Models\Profile::sum('balance'))</p>
                         <a href="">Detail</a>
                     </div>
                 </div>
@@ -87,72 +87,197 @@
         </div>
     </section>
 
-    <section class="w-full overflow-hidden rounded-lg text-white/80">
+    <section class="w-full overflow-hidden rounded-lg text-white/80 mb-4">
         <div class="w-full rounded-lg overflow-hidden bg-black">
             <div class="p-6 text-white/70 border-b border-white/25">
-                <p>Latest Trade</p>
+                <p>Request Balances</p>
             </div>
 
             <div class="p-4 lg:p-6 overflow-x-scroll">
-                @include('components.print')
-
                 <div class="w-[900px] lg:w-auto">
                     <table class="w-full table-border">
                         <thead>
                             <tr class="table-border">
                                 <td class="table-border">Date</td>
                                 <td class="table-border">No</td>
-                                <td class="table-border">Package</td>
-                                <td class="table-border">Market</td>
+                                <td class="table-border">User</td>
+                                <td class="table-border">Bukti Pembayaran</td>
+                                <td class="table-border">Payment To</td>
                                 <td class="table-border">Amount</td>
-                                <td class="table-border">Date End</td>
-                                <td class="table-border">Status</td>
-                                <td class="table-border">Win/Lost</td>
-                                <td class="table-border">Rate Trade</td>
-                                <td class="table-border">Rate End</td>
+                                <td class="table-border">Note</td>
+                                <td class="table-border">Status Paid</td>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($balances as $balance)
+                                <tr class="table-border">
+                                    <td class="table-border">{{ $balance->created_at }}</td>
+                                    <td class="table-border">{{ $balance->code }}</td>
+                                    <td class="table-border">{{ $balance->user->username }}</td>
+                                    <td class="flex justify-center items-center h-20">
+                                        @if (!$balance->proof)
+                                            <p class="font-semibold text-lg">404</p>
+                                        @else
+                                            <img src="{{ asset('') }}storage/proof-balance/{{ $balance->proof }}"
+                                                width="55" />
+                                        @endif
+                                    </td>
+                                    <td class="table-border">{{ $balance->paymentTo }}</td>
+                                    <td class="table-border">@money($balance->amount)</td>
+                                    <td class="table-border">{{ $balance->note }}</td>
+                                    <td class="table-border">
+                                        @if ($balance->isPaid == 1)
+                                            <button class="bg-green rounded px-3 py-1">PAID</button>
+                                        @else
+                                            <button class="bg-red-500 rounded px-3 py-1">UNPAID</button>
+                                        @endif
+                                    </td>
+                                    <td class="table-border">
+                                        @if ($balance->status == 'active')
+                                            <div class="flex justify-center">
+                                                <button
+                                                    class="bg-green font-semibold h-10 rounded w-20 flex justify-center items-center">
+                                                    <i class="fa-solid fa-circle-check text-lg text-white"></i>
+                                                </button>
+                                            </div>
+                                        @else
+                                            <form class="flex justify-center" method="POST"
+                                                action="{{ route('dashboard.balances.requests.approve', ['id' => $balance->id, 'userId' => $balance->user->id]) }}">
+                                                @csrf
+                                                @method('PUT')
+                                                <button
+                                                    class="bg-green font-semibold h-10 px-3 rounded flex justify-center items-center">
+                                                    Approve
+                                                </button>
+                                            </form>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="w-full overflow-hidden rounded-lg text-white/80 mb-4">
+        <div class="w-full rounded-lg overflow-hidden bg-black">
+            <div class="p-6 text-white/70 border-b border-white/25">
+                <p>Request Withdrawal</p>
+            </div>
+
+            <div class="p-4 lg:p-6 overflow-x-scroll">
+                <div class="w-[900px] lg:w-auto">
+
+                    <table class="w-full table-border">
+                        <thead>
                             <tr class="table-border">
-                                <td class="table-border">2024-05-23 11:15:31</td>
-                                <td class="table-border">588NY6NR2YZ2</td>
-                                <td class="table-border">30 SECOND</td>
-                                <td class="table-border">BTC/USD</td>
-                                <td class="table-border">RM 2,500.00</td>
-                                <td class="table-border">2024-05-23 11:16:01</td>
-                                <td class="table-border"><button class="bg-green rounded px-3 py-1">win</button></td>
-                                <td class="table-border">RM 4,500.00 180%</td>
-                                <td class="table-border">47,712.31 USD</td>
-                                <td class="table-border win"><i class="bi bi-arrow-up-circle-fill"></i> 47,712.31 USD</td>
+                                <td class="table-border">Date</td>
+                                <td class="table-border">Amount</td>
+                                <td class="table-border">Withdraw to</td>
+                                <td class="table-border">Name</td>
+                                <td class="table-border">No Rekening</td>
+                                <td class="table-border">Note</td>
+                                <td class="table-border">Status</td>
                             </tr>
-                            <tr class="table-border">
-                                <td class="table-border">2024-05-23 11:15:31</td>
-                                <td class="table-border">588NY6NR2YZ2</td>
-                                <td class="table-border">30 SECOND</td>
-                                <td class="table-border">BTC/USD</td>
-                                <td class="table-border">RM 2,500.00</td>
-                                <td class="table-border">2024-05-23 11:16:01</td>
-                                <td class="table-border"><button class="bg-red-500 rounded px-3 py-1">Lose</button></td>
-                                <td class="table-border">RM 4,500.00 180%</td>
-                                <td class="table-border">47,712.31 USD</td>
-                                <td class="table-border lose"><i class="bi bi-arrow-down-circle-fill"></i> 47,712.31 USD
-                                </td>
-                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($withdraws as $withdraw)
+                                <tr class="table-border">
+                                    <td class="table-border">{{ $withdraw->created_at }}</td>
+                                    <td class="table-border">@money($withdraw->amount)</td>
+                                    <td class="table-border">{{ $withdraw->bank->bank }}</td>
+                                    <td class="table-border">{{ $withdraw->bank->name }}</td>
+                                    <td class="table-border">{{ $withdraw->bank->noRekening }}</td>
+                                    <td class="table-border">{{ $withdraw->note }}</td>
+                                    <td class="table-border">
+                                        <button
+                                            class="{{ $withdraw->status == 'success' ? 'bg-green' : 'bg-red-500' }} first-letter:uppercase px-2 py-1 rounded">{{ $withdraw->status }}</button>
+                                    </td>
+                                    <td class="table-border">
+                                        <div class="flex justify-evenly">
+                                            <form class="flex justify-center" method="POST"
+                                                action="{{ route('dashboard.balances.withdrawals.update', ['id' => $withdraw->id, 'method' => 'success']) }}">
+                                                @csrf
+                                                @method('PUT')
+                                                <button
+                                                    class="bg-green font-semibold h-10 w-10 rounded flex justify-center items-center">
+                                                    <i class="fa-solid fa-circle-check text-lg text-white"></i>
+                                                </button>
+                                            </form>
+                                            <form class="flex justify-center" method="POST"
+                                                action="{{ route('dashboard.balances.withdrawals.update', ['id' => $withdraw->id, 'method' => 'reject']) }}">
+                                                @csrf
+                                                @method('PUT')
+                                                <button
+                                                    class="font-semibold h-10 rounded w-10 bg-red-500 flex justify-center items-center">
+                                                    <i class="fa-solid fa-x"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
 
-                <div class="flex justify-between text-sm">
-                    <div class="flex gap-2 items-center mb-4">
-                        <p>Showing 1 to 10 of 13 entries</p>
-                    </div>
-                    <div class="flex items-center gap-4 my-7">
-                        <a href="" class="block">Previous</a>
-                        <ul>
-                            <li class="w-7 h-7 flex justify-center items-center  rounded bg-orange">1</li>
-                        </ul>
-                        <a href="" class="block">Next</a>
-                    </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="w-full overflow-hidden rounded-lg text-white/80 mb-4">
+        <div class="w-full rounded-lg overflow-hidden bg-black">
+            <div class="p-6 text-white/70 border-b border-white/25">
+                <p>Request Testimoni</p>
+            </div>
+
+            <div class="p-4 lg:p-6 overflow-x-scroll">
+                <div class="w-[900px] lg:w-auto">
+                    <table class="w-full table-border">
+                        <thead>
+                            <tr class="table-border">
+                                <td class="table-border">Photo</td>
+                                <td class="table-border">Title</td>
+                                <td class="table-border">Description</td>
+                                <td class="table-border">User</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (count($pendingTestimonials) != 0)
+                                @foreach ($pendingTestimonials as $pendingTestimonial)
+                                    <tr class="table-border">
+                                        <td class="table-border">
+                                            <img src="{{ asset('') }}storage/testimoni/{{ $pendingTestimonial->image }}"
+                                                width="55" class="m-auto" />
+                                        </td>
+                                        <td class="table-border">{{ $pendingTestimonial->title }}</td>
+                                        <td class="table-border">{{ $pendingTestimonial->description }}</td>
+                                        <td class="table-border">{{ $pendingTestimonial->user->username }}</td>
+                                        <td class="table-border">
+                                            <div class="flex gap-2 justify-center">
+                                                <form
+                                                    action="{{ route('dashboard.testimonials.update', ['id' => $pendingTestimonial->id, 'method' => 'success']) }}"
+                                                    method="post">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <button class="p-2 rounded bg-green">Approve</button>
+                                                </form>
+                                                <form
+                                                    action="{{ route('dashboard.testimonials.update', ['id' => $pendingTestimonial->id, 'method' => 'reject']) }}"
+                                                    method="post">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <button class="p-2 rounded bg-red-500">Reject</button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

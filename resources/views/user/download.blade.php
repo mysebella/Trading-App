@@ -19,29 +19,38 @@
                     <table class="w-full table-border">
                         <thead>
                             <tr class="table-border">
-                                <td class="table-border w-[20%]">Judul</td>
-                                <td class="table-border w-[50%]">Info</td>
+                                <td class="table-border">Title</td>
+                                <td class="table-border">Description</td>
                                 <td class="table-border">Hits</td>
                                 <td class="table-border">Download</td>
                                 <td class="table-border">File</td>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="table-border">
-                                <td class="table-border">78 Ebook Marketing</td>
-                                <td class="table-border">78 Ebook Marketing</td>
-                                <td class="table-border">1</td>
-                                <td class="table-border">
-                                    <button class="px-3 py-1 bg-red-500 rounded">
-                                        Belum Download
-                                    </button>
-                                </td>
-                                <td class="table-border">
-                                    <button class="px-3 py-1 bg-green rounded">
-                                        Download
-                                    </button>
-                                </td>
-                            </tr>
+                            @if (count($files) != 0)
+                                @foreach ($files as $item)
+                                    <tr class="table-border">
+                                        <td class="table-border">{{ $item->title }}</td>
+                                        <td class="table-border">{{ $item->description }}</td>
+                                        <td class="table-border">{{ $item->downloaded }}</td>
+                                        <td class="table-border">
+                                            <button
+                                                class="px-3 py-1 {{ $item->isDownloaded == 0 ? 'bg-red-500' : 'bg-green' }} rounded">
+                                                {{ $item->isDownloaded == 0 ? 'Belum Di Download' : 'Download' }}
+                                            </button>
+                                        </td>
+                                        <td class="table-border">
+                                            <button class="px-3 py-1 bg-green rounded">
+                                                Download
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <tr class="table-border">
+                                    <td class="p-4">No data available in table</td>
+                                </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>

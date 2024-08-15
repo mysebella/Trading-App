@@ -12,10 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('withdraws', function (Blueprint $table) {
-            $table->string('amount');
-            $table->string('fee');
-            $table->foreignId('received')->references('id')->on('users');
-            $table->string('news');
+            $table->id();
+            $table->foreignId('user_id')
+                ->references('id')
+                ->on('users');
+            $table->foreignId('withdrawTo')->references('id')->on('banks');
+            $table->decimal('amount')->default(0);
+            $table->decimal('fee')->default(0);
+            $table->string('note');
             $table->enum('status', ['success', 'pending', 'reject'])->default('pending');
             $table->timestamps();
         });

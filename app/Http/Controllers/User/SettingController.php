@@ -75,4 +75,6 @@ class SettingController extends Controller
 
         return back()->with('error', 'upload error');
     }
+
+    public function bank() {}
 }

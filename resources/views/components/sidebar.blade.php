@@ -1,4 +1,5 @@
-<nav class="bg-black w-[13%] h-dvh text-white lg:block hidden overflow-auto">
+<nav class="bg-black lg:w-[13%] h-dvh text-white duration-300 lg:block overflow-auto"
+    x-bind:class="open ? 'w-[700px]' : 'w-0'">
     <div class="flex flex-col p-4 items-center border-b border-background">
         <p class="text-orange font-xl text-center mb-1"><span class="font-semibold">Welcome</span> User</p>
         <div class="w-20 h-20 rounded-full flex justify-center items-center border border-background">

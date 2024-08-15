@@ -8,7 +8,7 @@
 
     <section class="w-full mt-6 overflow-hidden rounded-lg text-white/80">
         <div class="bg-black rounded-lg p-4">
-            <form action="{{ route('trade.post') }}" method="POST">
+            <form action="{{ route('trade.store') }}" method="POST">
                 @csrf
                 <select id="instrumentSelect" name="market"
                     class="bg-background outline-none p-3 mb-4 border border-white/30 w-full mt-2 rounded-lg h-[50px]">
@@ -32,6 +32,7 @@
                         @include('components.input-icon', [
                             'name' => 'amount',
                             'icon' => 'USD',
+                            'required' => true,
                         ])
                     </div>
 

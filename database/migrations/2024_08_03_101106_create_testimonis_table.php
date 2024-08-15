@@ -14,7 +14,10 @@ return new class extends Migration
         Schema::create('testimonis', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users');
-            $table->string('message');
+            $table->string('image');
+            $table->string('title');
+            $table->text('description');
+            $table->enum('status', ['success', 'pending', 'reject'])->default('pending');
             $table->timestamps();
         });
     }

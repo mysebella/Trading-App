@@ -10,4 +10,9 @@ class Bank extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function withdraw()
+    {
+        return $this->hasMany(Withdraw::class);
+    }
 }

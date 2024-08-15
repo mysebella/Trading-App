@@ -9,7 +9,7 @@
     <section class="my-6 w-full lg:w-2/4">
         <div class="flex">
             <input class="text-white/50 w-full border border-white/30 rounded-l p-3 bg-black"
-                value="http://hsbglobaltrade.com?reff=nakano_ichika">
+                value="{{ env('APP_URL') }}/refferal?reff={{ $user->username }}">
             <button class="bg-orange w-52 lg:w-44 text-white rounded-r">Copy Reff URL</button>
         </div>
     </section>

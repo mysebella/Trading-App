@@ -7,6 +7,7 @@
     <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
     <meta name="author" content="hsbforextr.pro" />
     <meta name="description" content="HSB FOREX TRADE" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
     <meta name="keywords" content="HSB FOREX TRADE" />
     <title>Login - HSB FOREX TRADE</title>
     <link href="{{ asset('') }}landing-page/images/banner/favicon_cca1b9442d3fee8271ec1d949c711916.png"

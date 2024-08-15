@@ -8,6 +8,6 @@
       </div>
       <div>
           <label>Search</label> &nbsp;
-          <input type="text" placeholder="" class="p-1 outline-none rounded" />
+          <input type="text" class="p-1 outline-none rounded" />
       </div>
   </div>
