@@ -78,7 +78,7 @@
                         </div>
                     </div>
                     <div class="flex text-orange items-center justify-between mt-4">
-                        <p class="text-xl font-semibold">USD 0.0</p>
+                        <p class="text-xl font-semibold">SGD 0.0</p>
                         <a href="">Detail</a>
                     </div>
                 </div>

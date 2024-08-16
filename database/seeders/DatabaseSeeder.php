@@ -20,29 +20,13 @@ class DatabaseSeeder extends Seeder
         $admin = User::create([
             'username' => 'admin',
             'name' => 'Admin',
-            'email' => 'admin@hsbglobal.com',
+            'email' => 'admin@gmail.com',
             'password' => Hash::make('hash123'),
             'country' => 'ID',
             'numberPhone' => '08773899012',
             'role' => 'admin'
         ]);
 
-        $user = User::create([
-            'username' => 'alinia.meysa',
-            'name' => 'Miko Meysa Bima',
-            'email' => 'alinia.meysa@gmail.com',
-            'password' => Hash::make('Bismillahaman1!'),
-            'country' => 'ID',
-            'numberPhone' => '087895013427',
-            'role' => 'user'
-        ]);
-
         Profile::create(['user_id' => $admin->id]);
-        Profile::create(['user_id' => $user->id, 'balance' => 10000]);
-
-        collect([['name' => 'Basic', 'min' => 100, 'max' => 999, 'profit' => 1, 'estimasiProfit' => 'Daily', 'contract' => 2,]])
-            ->map(function ($package) {
-                Package::create($package);
-            });
     }
 }

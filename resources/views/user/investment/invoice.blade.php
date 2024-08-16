@@ -22,15 +22,15 @@
             <div class="text-xs mt-6 flex items-center">
                 <div class="flex flex-col gap-1 w-1/4">
                     <p>Form</p>
-                    <p class="text-blue-500 font-medium">HSB FOREX TRADE</p>
-                    <p>Malaysia</p>
+                    <p class="text-blue-500 font-medium">Interactive Brokers Investment</p>
+                    <p>SG</p>
                     <p>Phone:</p>
-                    <p>Email: admin@hsbtrade.com</p>
+                    <p>Email: admin@interactivebrokersinvestment.com</p>
                 </div>
                 <div class="flex flex-col gap-1 w-1/4">
                     <p>To</p>
                     <p class="text-purple-400 font-medium">{{ $user->name }} ({{ $user->username }})</p>
-                    <p>Malaysia</p>
+                    <p>{{ $user->country }}</p>
                     <p>Phone: {{ $user->numberPhone }}</p>
                     <p>Email: {{ $user->email }}</p>
                 </div>

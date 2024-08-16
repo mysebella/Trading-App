@@ -45,7 +45,7 @@ class WalletController extends Controller
             ->where('id', $id)
             ->first();
 
-        $banks = Bank::get();
+        $banks = Bank::where('role', 'admin')->get();
 
         if (!$balance) {
             return back();
@@ -62,7 +62,7 @@ class WalletController extends Controller
     {
         $balance = Balance::find($id);
         $histories = Balance::where('user_id', Cookie::get('id'))->get();
-        $banks = Bank::get();
+        $banks = Bank::where('role', 'admin')->get();
 
         return view('user.wallet.confirmation', [
             'page' => 'wallet',

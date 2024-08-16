@@ -22,6 +22,7 @@
                                     'icon' => 'USD',
                                     'label' => 'Amount Withdraw',
                                     'name' => 'amount',
+                                    'required' => true,
                                     'type' => 'tel',
                                 ])
                             </div>
@@ -58,6 +59,7 @@
                                 @include('components.input', [
                                     'label' => 'Note',
                                     'name' => 'note',
+                                    'required' => true,
                                 ])
                             </div>
 

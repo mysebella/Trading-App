@@ -10,7 +10,7 @@
         <div class="fxt-content">
             <div class="fxt-header" style="margin-top: -30px">
                 <a href="index.php.html" class="fxt-logo" style="margin-bottom: 25px">
-                    <img src="{{ asset('') }}login/img/logo-28.png" alt="Logo" style="width: 180px" />
+                    <img src="{{ asset('') }}images/logo.png" alt="Logo" style="width: 180px" />
                 </a>
                 <ul class="fxt-switcher-wrap">
                     <li>

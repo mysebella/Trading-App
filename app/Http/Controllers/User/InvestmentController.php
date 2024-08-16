@@ -110,7 +110,7 @@ class InvestmentController extends Controller
     {
         $userId = Cookie::get('id');
         $investment = Investment::where('user_id', $userId)->where('code', $code)->firstOrFail();
-        $banks = Bank::all();
+        $banks = Bank::where('role', 'admin')->get();
 
         return view('user.investment.invoice', [
             'page' => 'investment',
@@ -130,7 +130,7 @@ class InvestmentController extends Controller
         $userId = Cookie::get('id');
         $investment = Investment::where('user_id', $userId)->where('id', $id)->firstOrFail();
         $investmentHistories = Investment::with('package')->where('user_id', $userId)->get();
-        $banks = Bank::all();
+        $banks = Bank::where('role', 'admin')->get();
 
         return view('user.investment.confirmation', [
             'page' => 'investment',
