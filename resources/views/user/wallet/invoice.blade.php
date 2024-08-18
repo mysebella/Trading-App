@@ -22,10 +22,10 @@
             <div class="text-xs mt-6 flex items-center">
                 <div class="flex flex-col gap-1 w-1/4">
                     <p>Form</p>
-                    <p class="text-blue-500 font-medium">Interactive Brokers Investment</p>
+                    <p class="text-blue-500 font-medium">{{ env('APP_NAME') }}</p>
                     <p>Singapore</p>
                     <p>Phone:</p>
-                    <p>Email: admin@interactivebrokersinvestment.com</p>
+                    <p>Email: admin@icmarketsinvestment.com</p>
                 </div>
                 <div class="flex flex-col gap-1 w-1/4">
                     <p>To</p>

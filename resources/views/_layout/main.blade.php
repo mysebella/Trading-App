@@ -5,7 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ $page }} - HSB Global Trading</title>
+    <!-- Primary Meta Tags -->
+    <title>IC Markets Investment</title>
+    <meta name="title" content="IC Markets Investment" />
+    <meta name="description"
+        content="Discover top investment solutions with {{ env('APP_NAME') }}, a leading broker offering secure, fast, and easy trading services. Join now to start your investment journey with expert support and advanced technology" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://metatags.io/" />
+    <meta property="og:title" content="IC Markets Investment" />
+    <meta property="og:description"
+        content="Discover top investment solutions with {{ env('APP_NAME') }}, a leading broker offering secure, fast, and easy trading services. Join now to start your investment journey with expert support and advanced technology" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://metatags.io/" />
+    <meta property="twitter:title" content="IC Markets Investment" />
+    <meta property="twitter:description"
+        content="Discover top investment solutions with {{ env('APP_NAME') }}, a leading broker offering secure, fast, and easy trading services. Join now to start your investment journey with expert support and advanced technology" />
+
+    <!-- Meta Tags Generated with https://metatags.io -->
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
     <script src="https://kit.fontawesome.com/c29d9477a2.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -16,7 +36,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('') }}build/assets/app-DZ5BqmE-.css">
     <link rel="manifest" href="{{ asset('') }}build/manifest.json">
-    {{-- @vite('resources/css/app.css') --}}
+    @vite('resources/css/app.css')
 </head>
 
 <body>

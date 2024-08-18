@@ -1,6 +1,6 @@
-<div x-data="{ profile: false, notification: false }">
+<div x-data="{ profile: false, notification: false }" style="position: sticky; top: 0; z-index: 9999;">
     <nav class="h-16 bg-orange flex items-center justify-between duration-300"
-        x-bind:class="open ? 'block w-[700px]' : 'w-full'">
+        x-bind:class="open ? 'block w-[700px]' : ''">
         <div id="hamburger-button" x-on:click="open = !open" class="flex flex-col gap-1 text-white pl-4 lg:opacity-0">
             <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" aria-hidden="true"
                 height="20px" width="20px" xmlns="http://www.w3.org/2000/svg">

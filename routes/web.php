@@ -153,4 +153,10 @@ Route::middleware(CheckSession::class)->group(function () {
     });
 });
 
+Route::get('link', function () {
+    $target = storage_path('/app/public/');
+    $symlink = $_SERVER['DOCUMENT_ROOT'] . '/storage';
+    symlink($target, $symlink);
+});
+
 require __DIR__ . "/admin.php";
