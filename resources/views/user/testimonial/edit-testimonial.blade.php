@@ -3,11 +3,11 @@
 @section('content')
     @include('components.page-indicator', [
         'page' => 'Edit Testimonial',
-        'path' => ['Setting', 'Edit Testimonial'],
+        'path' => ['Pengaturan', 'Edit Testimonial'],
     ])
 
     <section class="my-6 w-full flex flex-col lg:flex-row gap-6 textsm">
-        <div class="w-full lg:w-[30%] overflow-hidden ">
+        <div class="w-full lg:w-[30%] overflow-hidden">
             <div class="bg-black rounded-lg">
                 <div class="p-6 text-white/70 border-b border-white/25">
                     <p>Edit Testimonial</p>
@@ -18,27 +18,27 @@
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-                        <label class="text-white/70" for="judul">Title</label>
+                        <label class="text-white/70" for="judul">Judul</label>
                         <input type="text" id="judul" name="title" value="{{ $testi->title }}"
                             class="text-white/50 w-full mt-2 border border-white/30 outline-none rounded-lg p-3 bg-black mb-4">
 
-                        <label class="text-white/70" for="Testimonials">Testimonials (max 350 chareacter)</label>
-                        <textarea type="text" id="Testimonials" name="description"
+                        <label class="text-white/70" for="Testimonials">Testimonial (maks 350 karakter)</label>
+                        <textarea id="Testimonials" name="description"
                             class="text-white/50 w-full mt-2 border border-white/30 outline-none rounded-lg p-3 bg-black mb-4">{{ $testi->description }}
                         </textarea>
 
                         <img src="{{ asset('') }}storage/testimoni/{{ $testi->image }}" width="150" class="mb-4" />
 
-                        <label class="text-white/70">Image</label>
+                        <label class="text-white/70">Gambar</label>
                         <input type="file" name="image" class="text-white/70 mb-4" />
 
-                        <p class="text-white/70 mb-4">Upload only file pdf, jpg, png, gif. Max size upload 1 MB.</p>
+                        <p class="text-white/70 mb-4">Unggah hanya file pdf, jpg, png, gif. Ukuran maksimum upload 1 MB.</p>
 
-                        <button class="p-2 bg-orange rounded text-white">Send</button>
+                        <button class="p-2 bg-orange rounded text-white">Kirim</button>
                     </form>
                     <div class="bg-blue-500 text-sm mt-4 p-4 rounded-lg text-white">
-                        <p><i class="bi bi-info-circle-fill"></i> Notice:</p>
-                        <p>Maks Testimonial 3 Testimonial.</p>
+                        <p><i class="bi bi-info-circle-fill"></i> Pemberitahuan:</p>
+                        <p>Maksimal Testimonial 3 Testimonial.</p>
                     </div>
                 </div>
             </div>
@@ -57,9 +57,9 @@
                         <table class="w-full table-border">
                             <thead>
                                 <tr class="table-border">
-                                    <td class="table-border">Date</td>
-                                    <td class="table-border">Subject</td>
-                                    <td class="table-border">View</td>
+                                    <td class="table-border">Tanggal</td>
+                                    <td class="table-border">Subjek</td>
+                                    <td class="table-border">Lihat</td>
                                     <td class="table-border">Edit</td>
                                     <td class="table-border">Status</td>
                                 </tr>
@@ -101,7 +101,7 @@
                                     @endforeach
                                 @else
                                     <tr class="table-border">
-                                        <td class="p-4">No data available in table</td>
+                                        <td class="p-4">Tidak ada data di tabel</td>
                                     </tr>
                                 @endif
                             </tbody>
@@ -110,14 +110,14 @@
 
                     <div class="flex justify-between text-sm">
                         <div class="flex gap-2 items-center mb-4">
-                            <p>Showing 1 to 10 of 13 entries</p>
+                            <p>Menampilkan 1 hingga 10 dari 13 entri</p>
                         </div>
                         <div class="flex items-center gap-4 my-7">
-                            <a href="" class="block">Previous</a>
+                            <a href="" class="block">Sebelumnya</a>
                             <ul>
-                                <li class="w-7 h-7 flex justify-center items-center  rounded bg-orange">1</li>
+                                <li class="w-7 h-7 flex justify-center items-center rounded bg-orange">1</li>
                             </ul>
-                            <a href="" class="block">Next</a>
+                            <a href="" class="block">Selanjutnya</a>
                         </div>
                     </div>
                 </div>
@@ -140,8 +140,8 @@
                 const html = `
                     <img src="/storage/testimoni/${image.value}"/>
                     <div style="text-align: start;" class="mt-4">
-                        <p>By : ${user.value}</p>
-                        <p>Date : ${created.value}</p>
+                        <p>Oleh: ${user.value}</p>
+                        <p>Tanggal: ${created.value}</p>
                         <p class="mt-4">${title.value}</p>
                         <p>${description.value}</p>
                     </div>

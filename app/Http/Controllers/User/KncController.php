@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Hash;
 class KncController extends Controller
 {
     /**
-     * Show the KYC form.
+     * Menampilkan formulir KYC.
      *
      * @return \Illuminate\View\View
      */
@@ -23,40 +23,40 @@ class KncController extends Controller
     }
 
     /**
-     * Handle the KYC form submission.
+     * Menangani pengiriman formulir KYC.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request)
     {
-        // Get the user ID from cookies
+        // Ambil ID pengguna dari cookie
         $userId = Cookie::get('id');
 
-        // Find the user by ID
+        // Temukan pengguna berdasarkan ID
         $user = User::find($userId);
 
-        // Check if the user exists
+        // Periksa apakah pengguna ada
         if (!$user) {
-            return back()->with('Error', 'User not found');
+            return back()->with('error', 'Pengguna tidak ditemukan');
         }
 
         if (Hash::check($request->password, $user->password)) {
-            // Check if both files are uploaded
+            // Periksa apakah kedua file diunggah
             if ($request->hasFile('identityCard') && $request->hasFile('closeUpPhoto')) {
-                // Get the files
+                // Ambil file
                 $identity = $request->file('identityCard');
                 $closeUp = $request->file('closeUpPhoto');
 
-                // Generate filenames
+                // Hasilkan nama file
                 $filenameIdentity = 'identity-card-' . $user->username . '-' . time() . '.' . $identity->extension();
                 $filenameCloseUp = 'close-up-' . $user->username . '-' . time() . '.' . $closeUp->extension();
 
-                // Store files
+                // Simpan file
                 $identity->storeAs('public/identity-card', $filenameIdentity);
                 $closeUp->storeAs('public/close-up', $filenameCloseUp);
 
-                // Update the profile with new file paths and address
+                // Perbarui profil dengan jalur file baru dan alamat
                 Profile::updateOrCreate(
                     ['user_id' => $user->id],
                     [
@@ -68,14 +68,14 @@ class KncController extends Controller
                 $user->status = 'pending';
                 $user->save();
 
-                Notification::create('Account Actived', 'Account Success Activated');
+                Notification::create('Akun Aktif', 'Akun Berhasil Diaktifkan');
 
-                return back()->with('success', 'Verification Proccess');
+                return back()->with('success', 'Proses Verifikasi');
             }
-            // If files are not uploaded
-            return back()->with('error', 'Verification Error, Files not found');
+            // Jika file tidak diunggah
+            return back()->with('error', 'Kesalahan Verifikasi, File tidak ditemukan');
         }
 
-        return back()->with('error', 'Password wrong');
+        return back()->with('error', 'Kata sandi salah');
     }
 }

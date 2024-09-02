@@ -27,9 +27,9 @@ class DownloadController extends Controller
                 'file' => $filename
             ]);
 
-            return back()->with('success', 'Success Upload File');
+            return back()->with('success', 'Berhasil mengunggah file');
         } else {
-            return back()->with('error', 'File required, please upload a file');
+            return back()->with('error', 'File diperlukan, harap unggah file');
         }
     }
 
@@ -37,9 +37,9 @@ class DownloadController extends Controller
     {
         try {
             File::where('id', $id)->delete();
-            return back()->with('success', 'Delete Success');
+            return back()->with('success', 'Berhasil menghapus file');
         } catch (\Throwable $th) {
-            return back()->with('error', 'Delete Failed');
+            return back()->with('error', 'Gagal menghapus file');
         }
     }
 }

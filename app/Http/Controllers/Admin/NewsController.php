@@ -16,7 +16,6 @@ class NewsController extends Controller
 
     public function store(Request $request)
     {
-
         if ($request->hasFile('cover')) {
             $file = $request->file('cover');
             $filename = $file->getClientOriginalName();
@@ -27,15 +26,15 @@ class NewsController extends Controller
                 'cover' => $filename,
             ]);
 
-            return back()->with('success', 'Success Upload News');
+            return back()->with('success', 'Berita berhasil diunggah');
         } else {
-            return back()->with('error', 'File required, please upload a file');
+            return back()->with('error', 'File diperlukan, silakan unggah file');
         }
     }
 
     public function destroy($id)
     {
         News::where('id', $id)->delete();
-        return back()->with('success', 'Success Delete Data');
+        return back()->with('success', 'Data berhasil dihapus');
     }
 }

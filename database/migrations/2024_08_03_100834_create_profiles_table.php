@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users');
-            $table->decimal('balance')->default(0)->nullable();
+            $table->string('balance', 20, 2)->default(0)->nullable();
             $table->decimal('balanceFree')->default(1000)->nullable();
             $table->string('photoProfile')->default('default.jpg');
             $table->string('address')->nullable();

@@ -2,8 +2,8 @@
 
 @section('content')
     @include('components.page-indicator', [
-        'page' => 'Trade',
-        'path' => ['Home', 'Trade'],
+        'page' => 'Perdagangan',
+        'path' => ['Beranda', 'Perdagangan'],
     ])
 
     <section class="w-full mt-6 overflow-hidden rounded-lg text-white/80">
@@ -18,20 +18,20 @@
                     <option data-instrument="BNB" value="bnb">BNB/USD</option>
                 </select>
 
-                <!-- TradingView Widget BEGIN -->
+                <!-- TradingView Widget MULAI -->
                 <div class="h-96 lg:h-[600px]">
                     <div class="tradingview-widget-container" style="height:100%;width:100%">
                         <div class="tradingview-widget-container__widget" id="tradingviewWidget"
                             style="height:calc(100% - 32px);width:100%"></div>
                     </div>
                 </div>
-                <!-- TradingView Widget END -->
+                <!-- TradingView Widget SELESAI -->
 
                 <div class="flex lg:flex-row flex-col gap-4 items-center">
                     <div class="w-full">
                         @include('components.input-icon', [
                             'name' => 'amount',
-                            'icon' => 'USD',
+                            'icon' => 'RP',
                             'required' => true,
                         ])
                     </div>
@@ -44,21 +44,22 @@
 
                         <select name="timeFrame"
                             class="text-white/50 w-full mt-2 outline-none rounded-r-lg p-3 bg-black mb-2">
-                            <option value="{{ 30 }}">30 Second</option>
-                            <option value="{{ 30 * 2 * 1 }}">1 Minute</option>
-                            <option value="{{ 30 * 2 * 5 }}">5 Minute</option>
-                            <option value="{{ 30 * 2 * 10 }}">10 Minute</option>
+                            <option value="{{ 30 }}">30 Detik</option>
+                            <option value="{{ 30 * 2 * 1 }}">1 Menit</option>
+                            <option value="{{ 30 * 2 * 5 }}">5 Menit</option>
+                            <option value="{{ 30 * 2 * 10 }}">10 Menit</option>
                         </select>
                     </div>
 
                     <div class="flex w-full items-center">
                         <button class="bg-red-400 p-3 rounded-lg w-full text-white h-[50px]" value="sell"
-                            name="type">Sell
+                            name="type">Jual
                             50%</button>
                     </div>
 
                     <div class="flex w-full items-center">
-                        <button class="bg-green p-3 rounded-lg w-full text-white h-[50px]" value="buy" name="type">Buy
+                        <button class="bg-green p-3 rounded-lg w-full text-white h-[50px]" value="buy"
+                            name="type">Beli
                             50%</button>
                     </div>
                 </div>
@@ -67,20 +68,20 @@
 
         <div class="w-full mt-6 rounded-lg overflow-hidden bg-black">
             <div class="p-6 text-white/70 border-b border-white/25">
-                <p>History</p>
+                <p>Riwayat</p>
             </div>
             <div class="p-4 lg:p-6 overflow-x-scroll">
                 <div class="w-[900px] lg:w-auto">
                     <table class="w-full table-bottom-border">
                         <thead>
                             <tr class="table-bottom-border">
-                                <td class="table-bottom-border">Date</td>
-                                <td class="table-bottom-border">Market</td>
+                                <td class="table-bottom-border">Tanggal</td>
+                                <td class="table-bottom-border">Pasar</td>
                                 <td class="table-bottom-border">Trx</td>
-                                <td class="table-bottom-border">Package</td>
-                                <td class="table-bottom-border">Amount</td>
-                                <td class="table-bottom-border">Rate Stake</td>
-                                <td class="table-bottom-border">Profit</td>
+                                <td class="table-bottom-border">Paket</td>
+                                <td class="table-bottom-border">Jumlah</td>
+                                <td class="table-bottom-border">Tarif Taruhan</td>
+                                <td class="table-bottom-border">Keuntungan</td>
                                 <td class="table-bottom-border">Status</td>
                             </tr>
                         </thead>
@@ -102,7 +103,7 @@
                                         <td class="table-bottom-border">@money($trading->open)</td>
                                         <td class="table-bottom-border">
                                             @if ($trading->status == 'pending')
-                                                <button class="bg-orange px-2 py-1 rounded">Pending</button>
+                                                <button class="bg-orange px-2 py-1 rounded">Tertunda</button>
                                             @else
                                                 <p>{{ $trading->profit }}</p>
                                             @endif
@@ -115,7 +116,7 @@
                                 @endforeach
                             @else
                                 <tr>
-                                    <td class="p-4">No data available in table</td>
+                                    <td class="p-4">Tidak ada data tersedia dalam tabel</td>
                                 </tr>
                             @endif
                         </tbody>
@@ -128,20 +129,20 @@
 
 @section('javascript')
     <script type="text/javascript">
-        // Function to update TradingView widget
+        // Fungsi untuk memperbarui widget TradingView
         function updateTradingViewWidget(symbol) {
             const widgetContainer = document.getElementById('tradingviewWidget');
 
-            // Clear the existing widget
+            // Kosongkan widget yang ada
             widgetContainer.innerHTML = '';
 
-            // Create a new script element
+            // Buat elemen script baru
             const script = document.createElement('script');
             script.type = 'text/javascript';
             script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js';
             script.async = true;
 
-            // Set the new widget configuration
+            // Setel konfigurasi widget baru
             script.innerHTML = JSON.stringify({
                 "autosize": true,
                 "symbol": symbol,
@@ -155,11 +156,11 @@
                 "support_host": "https://www.tradingview.com"
             });
 
-            // Append the script to the widget container
+            // Tambahkan script ke dalam widget container
             widgetContainer.appendChild(script);
         }
 
-        // Update widget on select change
+        // Perbarui widget saat pilihan berubah
         document.getElementById('instrumentSelect').addEventListener('change', function() {
             const selectedOption = this.options[this.selectedIndex];
             // Ambil nilai dari atribut data-instrument
@@ -167,9 +168,9 @@
             updateTradingViewWidget(instrument);
         });
 
-        // Set default instrument on page load
+        // Setel instrumen default saat halaman dimuat
         window.addEventListener('load', function() {
-            updateTradingViewWidget('CRYPTO:BTCUSD');
+            updateTradingViewWidget('BTC');
         });
     </script>
 @endsection

@@ -2,8 +2,8 @@
 
 @section('content')
     @include('components.page-indicator', [
-        'page' => 'Investment',
-        'path' => ['Home', 'Investment'],
+        'page' => 'Investasi',
+        'path' => ['Beranda', 'Investasi'],
     ])
 
     <section class="w-full mt-6 overflow-hidden rounded-lg text-white/80">
@@ -14,41 +14,40 @@
                     <p class="font-semibold text-blue-400 text-xl text-center">{{ $package->name }}</p>
 
                     <ul class="list-disc p-10 text-sm">
-                        <li>Min. Amount @money($package->min)</li>
-                        <li>Max. Amount @money($package->max)</li>
-                        <li>Profit {{ $package->profit }}% ({{ $package->estimasiProfit }})</li>
-                        <li>Contract {{ $package->contract }} Day</li>
+                        <li>Jumlah Min. @money($package->min)</li>
+                        <li>Jumlah Max. @money($package->max)</li>
+                        <li>Keuntungan {{ $package->profit }}% ({{ $package->estimasiProfit }})</li>
+                        <li>Kontrak {{ $package->contract }} Hari</li>
                     </ul>
 
                     <input type="number" class="hidden" name="package" value="{{ $package->id }}">
 
                     @include('components.input-icon', [
-                        'icon' => 'USD',
+                        'icon' => 'RP',
                         'name' => 'amount',
                         'type' => 'tel',
                         'required' => true,
                     ])
 
-                    <button class="bg-orange p-3 rounded-lg w-full text-black mt-4">Invest Now</button>
+                    <button class="bg-orange p-3 rounded-lg w-full text-black mt-4">Investasi Sekarang</button>
                 </form>
             @endforeach
         </div>
 
-
         <div class="w-full mt-6 rounded-lg overflow-hidden bg-black">
             <div class="p-6 text-white/70 border-b border-white/25">
-                <p>History</p>
+                <p>Riwayat</p>
             </div>
             <div class="p-4 lg:p-6 overflow-x-scroll">
                 <div class="w-[900px] lg:w-auto">
                     <table class="w-full table-border">
                         <thead>
                             <tr class="table-border">
-                                <td class="table-border">Date</td>
-                                <td class="table-border">Package</td>
-                                <td class="table-border">Amount</td>
+                                <td class="table-border">Tanggal</td>
+                                <td class="table-border">Paket</td>
+                                <td class="table-border">Jumlah</td>
                                 <td class="table-border">Status</td>
-                                <td class="table-border">Invoice</td>
+                                <td class="table-border">Faktur</td>
                                 <td class="table-border">Status</td>
                                 <td class="table-border">Detail</td>
                             </tr>
@@ -58,7 +57,7 @@
                                 @foreach ($histories as $history)
                                     <tr class="table-border p-10">
                                         <td class="table-border">{{ $history->created_at }}</td>
-                                        <td class="table-border">Package {{ $history->package->name }}</td>
+                                        <td class="table-border">Paket {{ $history->package->name }}</td>
                                         <td class="table-border">@money($history->amount)</td>
                                         <td class="table-border">
                                             @if ($history->proccess == 'success')
@@ -73,7 +72,7 @@
                                         </td>
                                         <td class="table-border">
                                             <a href="{{ route('investment.invoice', ['code' => $history->code]) }}"
-                                                class="py-1 px-3 rounded bg-blue-500">Invoice</a>
+                                                class="py-1 px-3 rounded bg-blue-500">Faktur</a>
                                         </td>
                                         <td class="table-border">
                                             <a
@@ -81,16 +80,16 @@
                                         </td>
                                         <td class="table-border">
                                             @if ($history->isPaid == 1)
-                                                <button class="py-1 px-3 rounded bg-green">PAID</button>
+                                                <button class="py-1 px-3 rounded bg-green">TERBAYAR</button>
                                             @else
-                                                <button class="py-1 px-3 rounded bg-red-500">UNPAID</button>
+                                                <button class="py-1 px-3 rounded bg-red-500">BELUM TERBAYAR</button>
                                             @endif
                                         </td>
                                     </tr>
                                 @endforeach
                             @else
                                 <tr class="table-border">
-                                    <td class="p-4">No data available in table</td>
+                                    <td class="p-4">Data tidak tersedia di tabel</td>
                                 </tr>
                             @endif
                         </tbody>

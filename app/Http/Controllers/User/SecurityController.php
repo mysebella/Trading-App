@@ -31,6 +31,6 @@ class SecurityController extends Controller
     {
         User::where('id', Cookie::get('id'))->update(['twoFactorCode' => $request->twoFactorCode]);
 
-        return back()->with('success', 'Two Factor Enabled');
+        return back()->with('success', 'Two Factor Di aktifkan');
     }
 }

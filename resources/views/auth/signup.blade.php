@@ -13,15 +13,15 @@
                 </a>
 
                 <ul class="fxt-switcher-wrap">
-                    <li><a href="{{ route('auth.signin') }}" class="switcher-text">Login</a></li>
-                    <li><a href="{{ route('auth.signup') }}" class="switcher-text active">Register</a></li>
-                    <li><a href="{{ route('auth.forget') }}" class="switcher-text">Forgot Password</a></li>
+                    <li><a href="{{ route('auth.signin') }}" class="switcher-text">Masuk</a></li>
+                    <li><a href="{{ route('auth.signup') }}" class="switcher-text active">Daftar</a></li>
+                    <li><a href="{{ route('auth.forget') }}" class="switcher-text">Lupa Kata Sandi</a></li>
                 </ul>
             </div>
 
             <div class="fxt-form">
                 <div class="fxt-transformY-50 fxt-transition-delay-1">
-                    <p>Register New Member</p>
+                    <p>Daftar Anggota Baru</p>
                     <form action="{{ route('auth.signup.post') }}" method="POST">
                         @csrf
 
@@ -37,15 +37,15 @@
 
                         <div class="form-group">
                             <div class="fxt-transformY-50 fxt-transition-delay-2">
-                                <label class="control-label">Name</label>
-                                <input class="form-control" placeholder="Enter Full Name" required name="name"
+                                <label class="control-label">Nama</label>
+                                <input class="form-control" placeholder="Masukkan Nama Lengkap" required name="name"
                                     type="text" value="">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="fxt-transformY-50 fxt-transition-delay-2">
-                                <label class="control-label">Country | Phone Number</label>
+                                <label class="control-label">Negara | Nomor Telepon</label>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <select id="country" name="country" class="form-control" required
@@ -309,26 +309,26 @@
 
                         <div class="form-group">
                             <div class="fxt-transformY-50 fxt-transition-delay-2">
-                                <label class="control-label">Email Address</label>
+                                <label class="control-label">Alamat Email</label>
                                 <input class="form-control" required name="email" type="email" value=""
-                                    placeholder="Enter Email Address">
+                                    placeholder="Masukkan Alamat Email">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="fxt-transformY-50 fxt-transition-delay-2">
-                                <label class="control-label">Username</label>
+                                <label class="control-label">Nama Pengguna</label>
                                 <input class="form-control" required name="username" type="text" value=""
-                                    maxlength="25" placeholder="Enter Username">
+                                    maxlength="25" placeholder="Masukkan Nama Pengguna">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="fxt-transformY-50 fxt-transition-delay-2">
-                                <label class="control-label">Password</label>
+                                <label class="control-label">Kata Sandi</label>
                                 <input class="form-control" required name="password" id="password" type="password"
-                                    value="" placeholder="Enter Password"> <i toggle="#password"
-                                    class="fa fa-fw fa-eye toggle-password field-icon"></i>
+                                    value="" placeholder="Masukkan Kata Sandi">
+                                <i toggle="#password" class="fa fa-fw fa-eye toggle-password field-icon"></i>
                             </div>
                         </div>
 
@@ -337,19 +337,19 @@
                                 <div class="fxt-checkbox-area">
                                     <div class="checkbox">
                                         <input id="checkbox" type="checkbox">
-                                        <label for="checkbox">I agree <a href="term.php.html" style="color:#FC0;">Terms
-                                                and Conditions</a></label>
+                                        <label for="checkbox">Saya setuju dengan <a href="term.php.html"
+                                                style="color:#FC0;">Syarat dan Ketentuan</a></label>
                                     </div>
                                     <div id="showme" style="display:none;">
                                         <a href="">
-                                            <button type="button" class="fxt-btn-fill">Reload</button>
+                                            <button type="button" class="fxt-btn-fill">Muat Ulang</button>
                                         </a>
                                     </div>
                                     <div id="loadingGif" style="display:none">
                                         <img src="{{ asset('') }}login/images/ld.gif" style="width:100px;">
                                     </div>
                                     <button type="submit" class="fxt-btn-fill" name="submitreg" onclick="signup()"
-                                        id="Login">Signup Now</button>
+                                        id="Login">Daftar Sekarang</button>
                                 </div>
                             </div>
                         </div>

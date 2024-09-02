@@ -3,9 +3,9 @@
 @section('content')
     <section class="fxt-template-animation fxt-template-layout28">
 
-        <!-- Animation Start Here -->
+        <!-- Animasi Dimulai Di Sini -->
         <div id="particles-js"></div>
-        <!-- Animation End Here -->
+        <!-- Animasi Selesai Di Sini -->
 
         <div class="fxt-content">
             <div class="fxt-header" style="margin-top: -30px">
@@ -14,32 +14,33 @@
                 </a>
                 <ul class="fxt-switcher-wrap">
                     <li>
-                        <a href="{{ route('auth.signin') }}" class="switcher-text">Login</a>
+                        <a href="{{ route('auth.signin') }}" class="switcher-text">Masuk</a>
                     </li>
                     <li>
-                        <a href="{{ route('auth.signup') }}" class="switcher-text">Register</a>
+                        <a href="{{ route('auth.signup') }}" class="switcher-text">Daftar</a>
                     </li>
                     <li>
-                        <a href="{{ route('auth.forget') }}" class="switcher-text  active">Forgot Password</a>
+                        <a href="{{ route('auth.forget') }}" class="switcher-text active">Lupa Kata Sandi</a>
                     </li>
                 </ul>
             </div>
             <div class="fxt-form">
                 <div class="fxt-transformY-50 fxt-transition-delay-1">
-                    <p>Reset Your Password</p>
+                    <p>Atur Ulang Kata Sandi Anda</p>
                 </div>
 
                 <form action="{{ route('auth.forget.post') }}" method="POST">
                     @csrf
                     <div class="form-group">
                         <div class="fxt-transformY-50 fxt-transition-delay-2">
-                            <input type="text" class="form-control" placeholder="Username" required name="username" />
+                            <input type="text" class="form-control" placeholder="Nama Pengguna" required
+                                name="username" />
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="fxt-transformY-50 fxt-transition-delay-3">
-                            <input type="email"class="form-control" placeholder="Email Address" required name="email" />
+                            <input type="email" class="form-control" placeholder="Alamat Email" required name="email" />
                         </div>
                     </div>
 
@@ -49,7 +50,7 @@
                                 <div id="showme" style="display: none">
                                     <a href="">
                                         <button type="button" class="fxt-btn-fill">
-                                            Reload
+                                            Muat Ulang
                                         </button>
                                     </a>
                                 </div>
@@ -59,7 +60,7 @@
                                 </div>
 
                                 <button type="submit" class="fxt-btn-fill" id="Login" onclick="signin()">
-                                    Log in
+                                    Masuk
                                 </button>
                             </div>
                         </div>

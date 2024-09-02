@@ -2,8 +2,8 @@
 
 @section('content')
     @include('components.page-indicator', [
-        'page' => 'RM Wallet',
-        'path' => ['Setting', 'RM Wallet'],
+        'page' => 'Dompet',
+        'path' => ['Dompet', 'Transfer'],
     ])
 
     <section class="my-6 w-full flex flex-col lg:flex-row gap-6">
@@ -19,22 +19,22 @@
                             @csrf
                             <div class="mb-4">
                                 @include('components.input-icon', [
-                                    'icon' => 'USD',
-                                    'label' => 'Amount Transfer',
+                                    'icon' => 'RP',
+                                    'label' => 'Jumlah Transfer',
                                     'name' => 'amount',
                                     'type' => 'tel',
                                 ])
                             </div>
                             <div>
                                 @include('components.input', [
-                                    'label' => 'Transfer To',
-                                    'placeholder' => 'Enter destination username',
+                                    'label' => 'Transfer Ke',
+                                    'placeholder' => 'Masukkan username tujuan',
                                     'name' => 'recipient',
                                 ])
                             </div>
                             <div>
                                 @include('components.input', [
-                                    'label' => 'Note',
+                                    'label' => 'Catatan',
                                     'name' => 'note',
                                 ])
                             </div>
@@ -48,10 +48,10 @@
             </div>
         </div>
 
-        <div class="w-full lg:w-[70%] rounded-lg overflow-hidden  text-white/80">
+        <div class="w-full lg:w-[70%] rounded-lg overflow-hidden text-white/80">
             <div class="w-full rounded-lg overflow-hidden bg-black">
                 <div class="p-6 text-white/70 border-b border-white/25">
-                    <p>Transfer History</p>
+                    <p>Riwayat Transfer</p>
                 </div>
 
                 <div class="p-4 lg:p-6 overflow-x-scroll">
@@ -61,10 +61,10 @@
                         <table class="w-full table-border">
                             <thead>
                                 <tr class="table-border">
-                                    <td class="table-border">Date</td>
-                                    <td class="table-border">To</td>
-                                    <td class="table-border">Amount</td>
-                                    <td class="table-border">News</td>
+                                    <td class="table-border">Tanggal</td>
+                                    <td class="table-border">Kepada</td>
+                                    <td class="table-border">Jumlah</td>
+                                    <td class="table-border">Catatan</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -79,7 +79,7 @@
                                     @endforeach
                                 @else
                                     <tr class="table-border">
-                                        <td class="p-4">No data available in table</td>
+                                        <td class="p-4">Tidak ada data yang tersedia di tabel</td>
                                     </tr>
                                 @endif
                             </tbody>
@@ -88,14 +88,14 @@
 
                     <div class="flex justify-between text-sm">
                         <div class="flex gap-2 items-center mb-4">
-                            <p>Showing 1 to 10 of 13 entries</p>
+                            <p>Menampilkan 1 hingga 10 dari 13 entri</p>
                         </div>
                         <div class="flex items-center gap-4 my-7">
-                            <a href="" class="block">Previous</a>
+                            <a href="" class="block">Sebelumnya</a>
                             <ul>
-                                <li class="w-7 h-7 flex justify-center items-center  rounded bg-orange">1</li>
+                                <li class="w-7 h-7 flex justify-center items-center rounded bg-orange">1</li>
                             </ul>
-                            <a href="" class="block">Next</a>
+                            <a href="" class="block">Berikutnya</a>
                         </div>
                     </div>
                 </div>

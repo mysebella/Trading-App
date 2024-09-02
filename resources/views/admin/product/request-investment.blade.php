@@ -2,14 +2,14 @@
 
 @section('content')
     @include('components.page-indicator', [
-        'page' => 'Request Investment',
-        'path' => ['Home', 'Request Investment'],
+        'page' => 'Permintaan Investasi',
+        'path' => ['Beranda', 'Permintaan Investasi'],
     ])
 
     <section class="my-6 w-full overflow-hidden rounded-lg text-white/80">
         <div class="w-full rounded-lg overflow-hidden bg-black">
             <div class="p-6 text-white/70 border-b border-white/25">
-                <p>Request Investment</p>
+                <p>Permintaan Investasi</p>
             </div>
 
             <div class="p-4 lg:p-6 overflow-x-scroll">
@@ -19,15 +19,15 @@
                     <table class="w-full table-border">
                         <thead>
                             <tr class="table-border">
-                                <td class="table-border">Date</td>
-                                <td class="table-border">Proof Payment</td>
-                                <td class="table-border">Code</td>
-                                <td class="table-border">User</td>
-                                <td class="table-border">Package</td>
-                                <td class="table-border">Amount</td>
-                                <td class="table-border">isPaid</td>
-                                <td class="table-border">Expires At</td>
-                                <td class="table-border">Note</td>
+                                <td class="table-border">Tanggal</td>
+                                <td class="table-border">Bukti Pembayaran</td>
+                                <td class="table-border">Kode</td>
+                                <td class="table-border">Pengguna</td>
+                                <td class="table-border">Paket</td>
+                                <td class="table-border">Jumlah</td>
+                                <td class="table-border">Status Pembayaran</td>
+                                <td class="table-border">Berlaku Hingga</td>
+                                <td class="table-border">Catatan</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -44,17 +44,17 @@
                                     </td>
                                     <td class="table-border">588NY6NR2YZ2</td>
                                     <td class="table-border">{{ $invest->user->username }}</td>
-                                    <td class="table-border">Package {{ $invest->package->name }}</td>
+                                    <td class="table-border">Paket {{ $invest->package->name }}</td>
                                     <td class="table-border">@money($invest->amount)</td>
                                     <td class="table-border">
                                         @if ($invest->isPaid == 1)
-                                            <button class="bg-green rounded px-3 py-1">PAID</button>
+                                            <button class="bg-green rounded px-3 py-1">TERBAYAR</button>
                                         @else
-                                            <button class="bg-red-500 rounded px-3 py-1">UNPAID</button>
+                                            <button class="bg-red-500 rounded px-3 py-1">BELUM TERBAYAR</button>
                                         @endif
                                     </td>
                                     <td class="table-border">
-                                        {{ !$invest->expiresAt ? 'Please ACC to see' : $invest->expiresAt }}
+                                        {{ !$invest->expiresAt ? 'Silakan ACC untuk melihat' : $invest->expiresAt }}
                                     </td>
                                     <td class="table-border">{{ $invest->note }}</td>
                                     <td class="table-border">
@@ -62,7 +62,7 @@
                                             <div class="flex justify-center">
                                                 <button
                                                     class="bg-green font-semibold h-10 rounded w-20 flex justify-center items-center">
-                                                    Success
+                                                    Sukses
                                                 </button>
                                             </div>
                                         @else
@@ -72,7 +72,7 @@
                                                 @method('PUT')
                                                 <button
                                                     class="bg-green font-semibold h-10 rounded w-20 flex justify-center items-center">
-                                                    Approve
+                                                    Setujui
                                                 </button>
                                             </form>
                                         @endif
@@ -85,14 +85,14 @@
 
                 <div class="flex justify-between text-sm">
                     <div class="flex gap-2 items-center mb-4">
-                        <p>Showing 1 to 10 of 13 entries</p>
+                        <p>Menampilkan 1 hingga 10 dari 13 entri</p>
                     </div>
                     <div class="flex items-center gap-4 my-7">
-                        <a href="" class="block">Previous</a>
+                        <a href="" class="block">Sebelumnya</a>
                         <ul>
                             <li class="w-7 h-7 flex justify-center items-center  rounded bg-orange">1</li>
                         </ul>
-                        <a href="" class="block">Next</a>
+                        <a href="" class="block">Berikutnya</a>
                     </div>
                 </div>
             </div>

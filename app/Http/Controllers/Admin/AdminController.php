@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Cookie;
 
 class AdminController extends Controller
 {
-    public function  addAccountBank(Request $request)
+    public function addAccountBank(Request $request)
     {
         $filename = '';
 
@@ -24,12 +24,12 @@ class AdminController extends Controller
 
         Bank::create([...$request->all(), 'role' => $user->role, 'user_id' => $user->id, 'image' => $filename]);
 
-        return back()->with('success', 'Create Bank Success');
+        return back()->with('success', 'Pembuatan Rekening Bank Berhasil');
     }
 
     public function deleteAccountBank($id)
     {
         Bank::where('id', $id)->delete();
-        return back()->with('success', 'Delete Success');
+        return back()->with('success', 'Penghapusan Berhasil');
     }
 }

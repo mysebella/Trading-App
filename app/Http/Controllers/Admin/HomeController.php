@@ -22,6 +22,11 @@ class HomeController extends Controller
 
         $pendingTestimonials = Testimoni::with('user')->where('status', 'pending')->get();
 
-        return view('admin.index', ['page' => 'dashboard.home', 'balances' => $balances, 'withdraws' => $withdraws, 'pendingTestimonials' => $pendingTestimonials]);
+        return view('admin.index', [
+            'page' => 'dashboard.home',
+            'balances' => $balances,
+            'withdraws' => $withdraws,
+            'pendingTestimonials' => $pendingTestimonials
+        ]);
     }
 }

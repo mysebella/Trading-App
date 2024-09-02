@@ -8,7 +8,6 @@ use App\Models\Package;
 use App\Models\PackageInvestment;
 use App\Models\User;
 use Illuminate\Http\Request;
-use PHPUnit\Event\Code\Throwable;
 
 class PackageInvestmentController extends Controller
 {
@@ -19,35 +18,33 @@ class PackageInvestmentController extends Controller
 
     public function requestInvestment()
     {
-        $invesment = Investment::with(['package', 'user'])->where('status', 'noactive')->get();
+        $investment = Investment::with(['package', 'user'])->where('status', 'noactive')->get();
 
         return view('admin.product.request-investment', [
             'page' => 'investment',
-            'investment' => $invesment
+            'investment' => $investment
         ]);
     }
 
     public function approveInvestment($id)
     {
-        // get investment
-        $invesment = Investment::where('id', $id)->first();
+        // Ambil investasi
+        $investment = Investment::where('id', $id)->first();
 
-        // check apakah user sudah membayar atau belum
-        if ($invesment->isPaid == 0) {
-            return back()->with('error', 'User hasn’t paid yet');
+        // Periksa apakah pengguna sudah membayar atau belum
+        if ($investment->isPaid == 0) {
+            return back()->with('error', 'Pengguna belum membayar');
         }
 
-        // get package
-        $package = Package::where('id', $invesment->package_id)->first();
+        // Ambil paket
+        $package = Package::where('id', $investment->package_id)->first();
 
-        // variabel buat nyimpan hari expires
+        // Variabel untuk menyimpan hari kadaluarsa
         $expiresDay = 0;
 
-        // ambil contract dan jadikan type number
+        // Ambil kontrak dan jadikan tipe angka
         $contract = intval($package->contract);
-        // ambil contract di package
-        // check kondisi apaah day, week atau month
-        // dan rubah menjadi satuan hari
+        // Periksa jenis estimasi profit
         switch ($package->estimasiProfit) {
             case 'Daily':
                 $expiresDay = $contract; // Anggap $package->contract sudah dalam hari
@@ -59,35 +56,33 @@ class PackageInvestmentController extends Controller
                 $expiresDay = $contract * 30; // Mengalikan jumlah bulan dengan 30 hari (ini adalah estimasi; Anda bisa menyesuaikan sesuai kebutuhan)
                 break;
             default:
-                // Jika estimasi profit tidak sesuai dengan kategori yang diketahui
-                // Anda bisa menetapkan nilai default atau menampilkan pesan kesalahan
                 $expiresDay = 0; // Atau bisa menjadi nilai default yang sesuai
                 break;
         }
 
-        // save tanggal expries yang di tentukan dari hari ini + hari contract
-        $invesment->expiresAt = now()->addDays($expiresDay);
-        // update status investment menjadi aktif
-        $invesment->status = 'active';
-        // dan simpan
-        $invesment->save();
+        // Simpan tanggal kadaluarsa yang ditentukan dari hari ini + hari kontrak
+        $investment->expiresAt = now()->addDays($expiresDay);
+        // Update status investasi menjadi aktif
+        $investment->status = 'active';
+        // Simpan
+        $investment->save();
 
-        return back()->with('success', 'Acc success');
+        return back()->with('success', 'Persetujuan berhasil');
     }
 
     public function store(Request $request)
     {
         Package::create($request->all());
-        return back()->with('success', 'Create Package Investment Success');
+        return back()->with('success', 'Paket investasi berhasil dibuat');
     }
 
     public function destroy(Request $request, $id)
     {
         try {
             $package = Package::where('id', $id)->delete();
-            return back()->with('success', 'Delete Success');
+            return back()->with('success', 'Hapus berhasil');
         } catch (\Throwable $e) {
-            return back()->with('error', 'Delete data failed');
+            return back()->with('error', 'Hapus data gagal');
         }
     }
 }

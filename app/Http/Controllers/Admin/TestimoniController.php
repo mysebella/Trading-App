@@ -9,10 +9,10 @@ class TestimoniController extends Controller
 {
     public function index()
     {
-        $pendingTestimonials = Testimoni::with('user')->where('status', 'pending')->get();
+        $testimoniTertunda = Testimoni::with('user')->where('status', 'pending')->get();
         return view('admin.testimoni.request-testimoni', [
             'page' => 'testimonial',
-            'pendingTestimonials' => $pendingTestimonials
+            'pendingTestimonials' => $testimoniTertunda
         ]);
     }
 
@@ -22,6 +22,6 @@ class TestimoniController extends Controller
         $testimoni->status = $method;
         $testimoni->save();
 
-        return back()->with('success', 'Update data success');
+        return back()->with('success', 'Update data berhasil');
     }
 }

@@ -27,7 +27,7 @@ class TestimonialController extends Controller
         $testimoni = Testimoni::where('user_id', Cookie::get('id'))->get();
 
         if (count($testimoni) >= 3) {
-            return back()->with('error', 'Maks Testimonial 3 Testimonial');
+            return back()->with('error', 'Maksimal 3 Testimoni');
         }
 
         if ($request->hasFile('image')) {
@@ -42,7 +42,7 @@ class TestimonialController extends Controller
                 'description' => $request->description,
             ]);
 
-            return back()->with('success', 'Testimonials successfully created. We will review before it is displayed');
+            return back()->with('success', 'Testimoni berhasil di buat, akan di review sebelum di tampilkan');
         }
     }
 

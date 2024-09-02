@@ -3,7 +3,7 @@
 @section('content')
     @include('components.page-indicator', [
         'page' => 'Download',
-        'path' => ['Home', 'Download'],
+        'path' => ['Beranda', 'Download'],
     ])
 
     <section class="w-full overflow-hidden rounded-lg text-white/80">
@@ -19,10 +19,10 @@
                     <table class="w-full table-border">
                         <thead>
                             <tr class="table-border">
-                                <td class="table-border">Title</td>
-                                <td class="table-border">Description</td>
+                                <td class="table-border">Judul</td>
+                                <td class="table-border">Deskripsi</td>
                                 <td class="table-border">Hits</td>
-                                <td class="table-border">Download</td>
+                                <td class="table-border">Status</td>
                                 <td class="table-border">File</td>
                             </tr>
                         </thead>
@@ -36,19 +36,19 @@
                                         <td class="table-border">
                                             <button
                                                 class="px-3 py-1 {{ $item->isDownloaded == 0 ? 'bg-red-500' : 'bg-green' }} rounded">
-                                                {{ $item->isDownloaded == 0 ? 'Belum Di Download' : 'Download' }}
+                                                {{ $item->isDownloaded == 0 ? 'Belum Diunduh' : 'Diunduh' }}
                                             </button>
                                         </td>
                                         <td class="table-border">
                                             <button class="px-3 py-1 bg-green rounded">
-                                                Download
+                                                Unduh
                                             </button>
                                         </td>
                                     </tr>
                                 @endforeach
                             @else
                                 <tr class="table-border">
-                                    <td class="p-4">No data available in table</td>
+                                    <td class="p-4">Tidak ada data di tabel</td>
                                 </tr>
                             @endif
                         </tbody>
@@ -57,14 +57,14 @@
 
                 <div class="flex justify-between text-sm">
                     <div class="flex gap-2 items-center mb-4">
-                        <p>Showing 1 to 10 of 13 entries</p>
+                        <p>Menampilkan 1 hingga 10 dari 13 entri</p>
                     </div>
                     <div class="flex items-center gap-4 my-7">
-                        <a href="" class="block">Previous</a>
+                        <a href="" class="block">Sebelumnya</a>
                         <ul>
-                            <li class="w-7 h-7 flex justify-center items-center  rounded bg-orange">1</li>
+                            <li class="w-7 h-7 flex justify-center items-center rounded bg-orange">1</li>
                         </ul>
-                        <a href="" class="block">Next</a>
+                        <a href="" class="block">Berikutnya</a>
                     </div>
                 </div>
             </div>

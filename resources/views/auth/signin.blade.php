@@ -14,19 +14,19 @@
                 </a>
                 <ul class="fxt-switcher-wrap">
                     <li>
-                        <a href="{{ route('auth.signin') }}" class="switcher-text active">Login</a>
+                        <a href="{{ route('auth.signin') }}" class="switcher-text active">Masuk</a>
                     </li>
                     <li>
-                        <a href="{{ route('auth.signup') }}" class="switcher-text">Register</a>
+                        <a href="{{ route('auth.signup') }}" class="switcher-text">Daftar</a>
                     </li>
                     <li>
-                        <a href="{{ route('auth.forget') }}" class="switcher-text">Forgot Password</a>
+                        <a href="{{ route('auth.forget') }}" class="switcher-text">Lupa Kata Sandi</a>
                     </li>
                 </ul>
             </div>
             <div class="fxt-form">
                 <div class="fxt-transformY-50 fxt-transition-delay-1">
-                    <p>Login into your account</p>
+                    <p>Masuk ke akun Anda</p>
                 </div>
                 <form action="{{ route('auth.signin.post') }}" method="POST">
                     @csrf
@@ -38,9 +38,9 @@
 
                     <div class="form-group">
                         <div class="fxt-transformY-50 fxt-transition-delay-3">
-                            <input type="password" id="password" class="form-control" placeholder="Password" required
+                            <input type="password" id="loginPassword" class="form-control" placeholder="Kata Sandi" required
                                 name="password" />
-                            <i toggle="#password" class="fa fa-fw fa-eye toggle-password field-icon"></i>
+                            <i toggle="#loginPassword" class="fa fa-fw fa-eye toggle-password field-icon"></i>
                         </div>
                     </div>
 
@@ -49,14 +49,14 @@
                             <div class="fxt-checkbox-area">
 
                                 <div class="checkbox">
-                                    <input id="checkbox1" type="checkbox" />
-                                    <label for="checkbox1">Keep me logged in</label>
+                                    <input id="rememberMe" type="checkbox" />
+                                    <label for="rememberMe">Ingat saya</label>
                                 </div>
 
                                 <div id="showme" style="display: none">
                                     <a href="">
                                         <button type="button" class="fxt-btn-fill">
-                                            Reload
+                                            Muat Ulang
                                         </button>
                                     </a>
                                 </div>
@@ -66,7 +66,7 @@
                                 </div>
 
                                 <button type="submit" class="fxt-btn-fill" id="Login" onclick="signin()">
-                                    Log in
+                                    Masuk
                                 </button>
                             </div>
                         </div>

@@ -54,7 +54,7 @@
                 <p class="text-lg">{{ $user->username }}</p>
                 <p>{{ $user->name }}</p>
                 <a class="block rounded-full bg-red-400 p-1 text-center mt-2" href="{{ route('setting.profile') }}">
-                    View Profile
+                    Kunjungi Profile
                 </a>
             </div>
         </div>
@@ -63,18 +63,18 @@
                 <li>
                     <a class="flex py-3 px-2 gap-2 items-center" href="{{ route('setting.profile') }}">
                         <i class="fa-solid fa-gear text-lg"></i>
-                        <p>My Profile</p>
+                        <p>Profile Saya</p>
                     </a>
                 </li>
                 <li>
                     <a class="flex py-3 px-2 gap-2 items-center" href="{{ route('setting.image') }}">
                         <i class="fa-solid fa-user"></i>
-                        <p>Profile Image</p>
+                        <p>Gambar Profile</p>
                     </a>
                 </li>
                 <li onclick="logout()" class="flex py-3 px-2 gap-2 items-center">
                     <i class="fa-solid fa-power-off"></i>
-                    <p>Log Out</p>
+                    <p>Keluar</p>
                 </li>
             </ul>
         </div>
@@ -84,7 +84,7 @@
         x-bind:class="notification ? 'p-3' : 'h-0'">
         <div class="flex gap-4 items-center border-b border-white/30 py-4">
             <div class="text-white/70">
-                <p class="text-lg">Notification</p>
+                <p class="text-lg">Notifikasi</p>
             </div>
         </div>
         <div class="text-white/70">

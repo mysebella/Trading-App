@@ -2,14 +2,14 @@
 
 @section('content')
     @include('components.page-indicator', [
-        'page' => 'RM Wallet',
-        'path' => ['Home', 'RM Wallet'],
+        'page' => 'Dompet',
+        'path' => ['Beranda', 'Dompet'],
     ])
 
     <section class="w-full overflow-hidden rounded-lg text-white/80">
         <div class="w-full mt-6 rounded-lg overflow-hidden bg-black">
             <div class="p-6 text-white/70 border-b border-white/25">
-                <p>Balance [ @money($user->profile[0]->balance) ]</p>
+                <p>Saldo [ @money($user->profile[0]->balance) ]</p>
             </div>
 
             <div class="p-4 lg:p-6 overflow-x-scroll">
@@ -19,10 +19,10 @@
                     <table class="w-full table-border">
                         <thead>
                             <tr class="table-border">
-                                <td class="table-border w-[16%] uppercase">CODE</td>
-                                <td class="table-border w-[16%] uppercase">Date</td>
-                                <td class="table-border w-[16%] uppercase">Amount</td>
-                                <td class="table-border w-[16%] uppercase">Note</td>
+                                <td class="table-border w-[16%] uppercase">KODE</td>
+                                <td class="table-border w-[16%] uppercase">Tanggal</td>
+                                <td class="table-border w-[16%] uppercase">Jumlah</td>
+                                <td class="table-border w-[16%] uppercase">Catatan</td>
                                 <td class="table-border w-[16%] uppercase">Status</td>
                             </tr>
                         </thead>
@@ -47,7 +47,7 @@
                                 @endforeach
                             @else
                                 <tr class="table-border">
-                                    <td class="p-4">No data available in table</td>
+                                    <td class="p-4">Data tidak tersedia di tabel</td>
                                 </tr>
                             @endif
                         </tbody>
@@ -55,14 +55,14 @@
                 </div>
                 <div class="flex justify-between text-sm">
                     <div class="flex gap-2 items-center mb-4">
-                        <p>Showing 1 to 10 of 13 entries</p>
+                        <p>Menampilkan 1 hingga 10 dari 13 entri</p>
                     </div>
                     <div class="flex items-center gap-4 my-7">
-                        <a href="" class="block">Previous</a>
+                        <a href="" class="block">Sebelumnya</a>
                         <ul>
-                            <li class="w-7 h-7 flex justify-center items-center  rounded bg-orange">1</li>
+                            <li class="w-7 h-7 flex justify-center items-center rounded bg-orange">1</li>
                         </ul>
-                        <a href="" class="block">Next</a>
+                        <a href="" class="block">Selanjutnya</a>
                     </div>
                 </div>
             </div>

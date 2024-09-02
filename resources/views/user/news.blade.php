@@ -2,14 +2,14 @@
 
 @section('content')
     @include('components.page-indicator', [
-        'page' => 'Latest News',
-        'path' => ['Home', 'Latest News'],
+        'page' => 'Berita Terbaru',
+        'path' => ['Beranda', 'Berita Terbaru'],
     ])
 
     <section class="my-6 w-full">
         <div class="w-full rounded-lg overflow-hidden bg-black">
             <div class="p-6 text-white border-b border-white/25">
-                <p>Latest Notification</p>
+                <p>Notifikasi Terbaru</p>
             </div>
             <div class="text-white text-sm">
                 <ul>
@@ -29,7 +29,7 @@
                         @endforeach
                     @else
                         <li class="p-4">
-                            <p class="p-4">No News</p>
+                            <p class="p-4">Tidak Ada Berita</p>
                         </li>
                     @endif
                 </ul>

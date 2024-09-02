@@ -3,7 +3,7 @@
 @section('content')
     @include('components.page-indicator', [
         'page' => 'Testimonial',
-        'path' => ['Home', 'Testimonial'],
+        'path' => ['Beranda', 'Testimonial'],
     ])
 
     <section class="w-full overflow-hidden rounded-lg text-white/80 my-6">
@@ -17,9 +17,9 @@
                     <table class="w-full table-border">
                         <thead>
                             <tr class="table-border">
-                                <td class="table-border w-[20%]">Date</td>
-                                <td class="table-border">Subject</td>
-                                <td class="table-border">View</td>
+                                <td class="table-border w-[20%]">Tanggal</td>
+                                <td class="table-border">Subjek</td>
+                                <td class="table-border">Lihat</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -48,7 +48,7 @@
                                 @endforeach
                             @else
                                 <tr class="table-border">
-                                    <td class="p-4">No data available in table</td>
+                                    <td class="p-4">Tidak ada data di tabel</td>
                                 </tr>
                             @endif
                         </tbody>
@@ -58,7 +58,6 @@
         </div>
     </section>
 @endsection
-
 
 @section('javascript')
     <script>
@@ -74,8 +73,8 @@
                 const html = `
                     <img src="/storage/testimoni/${image.value}"/>
                     <div style="text-align: start;" class="mt-4">
-                        <p>By : ${user.value}</p>
-                        <p>Date : ${created.value}</p>
+                        <p>Oleh: ${user.value}</p>
+                        <p>Tanggal: ${created.value}</p>
                         <p class="mt-4">${title.value}</p>
                         <p>${description.value}</p>
                     </div>

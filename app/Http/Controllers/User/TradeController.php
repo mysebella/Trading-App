@@ -31,7 +31,7 @@ class TradeController extends Controller
         // check balance user apakah cukup atau tidak
         if ($balance == 0 or $balance < $request->amount) {
             // jika tidak maka kirim pesan error
-            return back()->with('error', 'your balance is not enough');
+            return back()->with('error', 'Saldo Anda tidak mencukupi');
         }
 
         // update balance user
@@ -54,11 +54,11 @@ class TradeController extends Controller
             ]);
 
             // simpan log
-            Notification::create("Add Stake $trade->code", "you $request->type at $trade->created_at");
+            Notification::create("Tambah Stake $trade->code", "Anda $request->type pada $trade->created_at");
 
-            return back()->with('success', $request->type . ' Success');
+            return back()->with('success', $request->type . ' Berhasil');
         } else {
-            return back()->with('error', $request->type . '  Failed');
+            return back()->with('error', $request->type . ' Gagal');
         }
     }
 
@@ -84,6 +84,6 @@ class TradeController extends Controller
     public function convertSecondtoString($second)
     {
         $timeFrame = $second / 60;
-        return ($timeFrame < 1) ? "30 Second" : $timeFrame . " Minute";
+        return ($timeFrame < 1) ? "30 Detik" : $timeFrame . " Menit";
     }
 }

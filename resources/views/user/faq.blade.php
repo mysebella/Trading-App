@@ -2,8 +2,8 @@
 
 @section('content')
     @include('components.page-indicator', [
-        'page' => 'Frequently Asked Questions (FAQ)',
-        'path' => ['Home', 'FAQ'],
+        'page' => 'Pertanyaan yang Sering Diajukan (FAQ)',
+        'path' => ['Beranda', 'FAQ'],
     ])
 
     <section class="mt-4 w-full overflow-hidden rounded-lg text-sm text-white/80">
@@ -11,112 +11,113 @@
             <div class="p-4 lg:p-6 overflow-x-scroll">
                 <div class="bg-background rounded-lg p-4">
                     @include('components.faq-item', [
-                        'label' => 'What are the additional fees?',
-                        'description' => 'There are no additional fees charged.',
+                        'label' => 'Apa saja biaya tambahan?',
+                        'description' => 'Tidak ada biaya tambahan yang dikenakan.',
                     ])
                     @include('components.faq-item', [
-                        'label' => 'When does the market open for trading investment?',
+                        'label' => 'Kapan pasar dibuka untuk investasi perdagangan?',
                         'description' =>
-                            'The forex market is open 24 hours daily in several parts of the globe, from 5 p.m. EST on Sunday until 4 p.m. EST on Friday. the flexibility of the forex to trade invest over 24 hours is due partially to different international time zones.',
+                            'Pasar forex buka 24 jam setiap hari di beberapa bagian dunia, dari pukul 5 sore EST pada hari Minggu hingga pukul 4 sore EST pada hari Jumat. Fleksibilitas forex untuk perdagangan investasi selama 24 jam sebagian disebabkan oleh zona waktu internasional yang berbeda.',
                     ])
                     @include('components.faq-item', [
-                        'label' => 'How to manage my risk?',
+                        'label' => 'Bagaimana cara mengelola risiko saya?',
                         'description' =>
-                            'The limit orders and the stop-loss orders are the most common risk management tools in Forex Trading Investment. A limit order helps to restrict the minimum price to be received or a maximum price to be paid. Stop-loss orders are used to set a position to be involuntarily liquidated at a present price to limit possible losses that the market should move against an investor’s position.',
+                            'Limit order dan stop-loss order adalah alat manajemen risiko yang paling umum dalam Investasi Perdagangan Forex. Limit order membantu membatasi harga minimum yang akan diterima atau harga maksimum yang akan dibayar. Stop-loss order digunakan untuk menetapkan posisi agar dilikuidasi secara tidak sengaja pada harga tertentu untuk membatasi kemungkinan kerugian jika pasar bergerak melawan posisi investor.',
                     ])
                     @include('components.faq-item', [
-                        'label' => 'What type of account do you offer?',
+                        'label' => 'Jenis akun apa yang Anda tawarkan?',
                         'description' =>
-                            'We have a wide range of account types. You can explore the account types here and choose the one that suits you.',
+                            'Kami memiliki berbagai jenis akun. Anda dapat menjelajahi jenis akun di sini dan memilih yang sesuai dengan Anda.',
                     ])
                     @include('components.faq-item', [
-                        'label' => 'Is there any minimum trading investment volume?',
-                        'description' => 'You can trade with as low as few dollars using our micro-accounts',
-                    ])
-                    @include('components.faq-item', [
-                        'label' => 'What is spread?',
+                        'label' => 'Apakah ada volume perdagangan investasi minimum?',
                         'description' =>
-                            'Spread is a difference between the bid and ask price of the base currency.',
+                            'Anda dapat berdagang dengan hanya beberapa dolar menggunakan akun mikro kami.',
                     ])
                     @include('components.faq-item', [
-                        'label' => 'How can I open a trading investment account?',
+                        'label' => 'Apa itu spread?',
+                        'description' => 'Spread adalah selisih antara harga bid dan ask dari mata uang dasar.',
+                    ])
+                    @include('components.faq-item', [
+                        'label' => 'Bagaimana cara membuka akun investasi perdagangan?',
                         'description' =>
-                            'You can open two types of accounts- Demo account and live account. In the demo account, you will get virtual money through with you can trade and learn virtually. In live account first, you need to deposit funds to trade  invest',
+                            'Anda dapat membuka dua jenis akun - akun demo dan akun live. Dalam akun demo, Anda akan mendapatkan uang virtual yang dapat Anda gunakan untuk berdagang dan belajar secara virtual. Dalam akun live, pertama-tama Anda perlu menyetor dana untuk berdagang.',
                     ])
                     @include('components.faq-item', [
-                        'label' => 'How to login to the trading investment platform?',
+                        'label' => 'Bagaimana cara login ke platform investasi perdagangan?',
                         'description' =>
-                            'Upon registering you will get a username and password through which you can log in into your account.',
+                            'Setelah mendaftar, Anda akan mendapatkan nama pengguna dan kata sandi yang dapat Anda gunakan untuk masuk ke akun Anda.',
                     ])
                     @include('components.faq-item', [
-                        'label' => 'Is any document required to open an account with Daxtradefx?',
+                        'label' => 'Apakah dokumen diperlukan untuk membuka akun dengan Daxtradefx?',
                         'description' =>
-                            'To open an account following documents will be required: <br/> - Identification proof like passport or driving license. <br/> -  Residential proof',
+                            'Untuk membuka akun, dokumen berikut akan diperlukan: <br/> - Bukti identitas seperti paspor atau SIM. <br/> - Bukti tempat tinggal',
                     ])
                     @include('components.faq-item', [
-                        'label' => 'How many accounts can I open?',
+                        'label' => 'Berapa banyak akun yang dapat saya buka?',
                         'description' =>
-                            'Daxtradefx offers three base currencies in which you can trade invest. You can have multiple accounts for each base currency.',
+                            'Daxtradefx menawarkan tiga mata uang dasar di mana Anda dapat berdagang. Anda dapat memiliki beberapa akun untuk setiap mata uang dasar.',
                     ])
                     @include('components.faq-item', [
-                        'label' => 'What leverage is applied to my account?',
-                        'description' => 'Your account can have a maximum of 1:1000 leverage.',
+                        'label' => 'Leverage apa yang diterapkan pada akun saya?',
+                        'description' => 'Akun Anda dapat memiliki leverage maksimum 1:1000.',
                     ])
                     @include('components.faq-item', [
-                        'label' => 'How can I verify my account?',
-                        'description' => 'How can I verify my account?',
+                        'label' => 'Bagaimana cara memverifikasi akun saya?',
+                        'description' => 'Bagaimana cara memverifikasi akun saya?',
                     ])
                     @include('components.faq-item', [
-                        'label' => 'How can I open an account?',
+                        'label' => 'Bagaimana cara membuka akun?',
                         'description' =>
-                            'To open an account with Daxtradefx you need to provide us with some necessary information and submit some identification documents.',
+                            'Untuk membuka akun dengan Daxtradefx, Anda perlu memberikan informasi yang diperlukan dan menyerahkan beberapa dokumen identifikasi.',
                     ])
                     @include('components.faq-item', [
-                        'label' => 'How can I deposit funds into my account?',
+                        'label' => 'Bagaimana cara menyetor dana ke akun saya?',
                         'description' =>
-                            'First, you need to go through our security and identification documents and then you can deposit funds into your account using a variety of different methods including bank transfer, bitcoin & many more.',
+                            'Pertama, Anda perlu melewati proses keamanan dan dokumen identifikasi kami, lalu Anda dapat menyetor dana ke akun Anda menggunakan berbagai metode, termasuk transfer bank, bitcoin, dan banyak lagi.',
                     ])
                     @include('components.faq-item', [
-                        'label' => 'How can I withdraw money?',
+                        'label' => 'Bagaimana cara menarik uang?',
                         'description' =>
-                            'To do so you need to fill our security and identification documents and select the amount you wish to withdraw.',
+                            'Untuk melakukannya, Anda perlu mengisi dokumen keamanan dan identifikasi kami dan memilih jumlah yang ingin Anda tarik.',
                     ])
                     @include('components.faq-item', [
-                        'label' => 'Do you offer Islamic accounts?',
-                        'description' => 'Yes, we do offer it.',
+                        'label' => 'Apakah Anda menawarkan akun Islami?',
+                        'description' => 'Ya, kami menawarkannya.',
                     ])
                     @include('components.faq-item', [
-                        'label' => 'What spreads do you offers?',
+                        'label' => 'Spread apa yang Anda tawarkan?',
                         'description' =>
-                            'We offer variable spreads that may be as low as 0.0 pips. We have got no re-quoting: our clients are given directly the value that our system receives.',
+                            'Kami menawarkan spread variabel yang mungkin serendah 0,0 pips. Kami tidak memiliki re-quoting: klien kami langsung diberikan nilai yang diterima sistem kami.',
                     ])
                     @include('components.faq-item', [
-                        'label' => 'What leverage do you offer?',
+                        'label' => 'Leverage apa yang Anda tawarkan?',
                         'description' =>
-                            'Leverage offered for Daxtradefx trading accounts is up to 1:1000 depending on the account type.',
+                            'Leverage yang ditawarkan untuk akun perdagangan Daxtradefx adalah hingga 1:1000, tergantung pada jenis akun.',
                     ])
                     @include('components.faq-item', [
-                        'label' => 'Do you allow scalping?',
-                        'description' => 'Yes, we allow scalping.',
+                        'label' => 'Apakah Anda mengizinkan scalping?',
+                        'description' => 'Ya, kami mengizinkan scalping.',
                     ])
                     @include('components.faq-item', [
-                        'label' => 'What is stop loss?',
+                        'label' => 'Apa itu stop loss?',
                         'description' =>
-                            '- Stop-loss is an order for closing a previously opened position at a price less profitable for the client than the worth at the time of placing the stop loss. Stop loss could be a limit that you simply set to your order. <br/> - Once this limit is reached, your order is closed. Please note that you just must leave certain distances from the present market value after you founded stop/limit orders. For further details about the gap in points for every currency pair, please view the limit and stop levels here.<br/> - Using stop loss is beneficial if you would like to reduce your losses when the market goes against you. Stop-loss points are always set below the present damage on BUY, or above the present ASK price on SELL.',
+                            '- Stop-loss adalah perintah untuk menutup posisi yang telah dibuka sebelumnya pada harga yang kurang menguntungkan bagi klien dibandingkan dengan nilai pada saat menempatkan stop loss. Stop loss bisa menjadi batas yang Anda tetapkan untuk pesanan Anda. <br/> - Setelah batas ini tercapai, pesanan Anda ditutup. Harap diperhatikan bahwa Anda harus meninggalkan jarak tertentu dari nilai pasar saat ini saat Anda membuat pesanan stop/limit. Untuk detail lebih lanjut tentang jarak dalam poin untuk setiap pasangan mata uang, silakan lihat level limit dan stop di sini.<br/> - Menggunakan stop loss bermanfaat jika Anda ingin mengurangi kerugian Anda ketika pasar bergerak melawan Anda. Titik stop-loss selalu diatur di bawah kerugian saat ini pada BUY, atau di atas harga ASK saat ini pada SELL.',
                     ])
                     @include('components.faq-item', [
-                        'label' => 'Do you allow hedging?',
+                        'label' => 'Apakah Anda mengizinkan hedging?',
                         'description' =>
-                            '- Yes, we do. You are liberated to hedge your positions on your trading investment account. Hedging takes place after you open a protracted and a brief position on the identical instrument simultaneously. once you open a BUY and a SELL position on the identical instrument and within the same lot size, the margin is 0. <br/> - However, after you open a BUY and a SELL position on a CFD of the identical type and lot size, the margin is merely needed once, and it will be seen here. The margin of CFDs, once you are hedged, is usually 50%.',
+                            '- Ya, kami mengizinkannya. Anda bebas untuk melakukan hedging pada akun perdagangan investasi Anda. Hedging terjadi ketika Anda membuka posisi panjang dan pendek pada instrumen yang sama secara bersamaan. Ketika Anda membuka posisi BUY dan SELL pada instrumen yang sama dan dalam ukuran lot yang sama, margin adalah 0. <br/> - Namun, ketika Anda membuka posisi BUY dan SELL pada CFD dari jenis yang sama dan ukuran lot yang sama, margin hanya diperlukan sekali, dan dapat dilihat di sini. Margin CFD, saat Anda di-hedge, biasanya 50%.',
                     ])
                     @include('components.faq-item', [
-                        'label' => 'Can I change my leverage? If yes then how?',
+                        'label' => 'Bisakah saya mengubah leverage saya? Jika ya, bagaimana?',
                         'description' =>
-                            'Yes, under the My Account tab, you can change the leverage, and then press the Change Leverage button in our Members section. That is the instant leverage change method.',
+                            'Ya, di bawah tab Akun Saya, Anda dapat mengubah leverage, lalu tekan tombol Ubah Leverage di bagian Anggota kami. Itu adalah metode perubahan leverage instan.',
                     ])
                     @include('components.faq-item', [
-                        'label' => 'I still have questions.',
-                        'description' => 'For further queries, you can contact us on our email and contact no.',
+                        'label' => 'Saya masih memiliki pertanyaan.',
+                        'description' =>
+                            'Untuk pertanyaan lebih lanjut, Anda dapat menghubungi kami melalui email dan nomor kontak kami.',
                     ])
                 </div>
             </div>

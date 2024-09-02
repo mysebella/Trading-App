@@ -4,12 +4,10 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Profile;
-use App\Models\ProfileUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
-use Mockery\Generator\StringManipulation\Pass\Pass;
 
 class SettingController extends Controller
 {
@@ -26,7 +24,7 @@ class SettingController extends Controller
         User::updateOrCreate(['id' => Cookie::get('id')], $user);
         Profile::updateOrCreate(['user_id' => Cookie::get('id')], $profile);
 
-        return back()->with('success', 'Update Profile Success');
+        return back()->with('success', 'Profil berhasil diperbarui');
     }
 
     public function profileUpdatePassword(Request $request)
@@ -38,12 +36,12 @@ class SettingController extends Controller
             if (Hash::check($password['currentPassword'], $user->password)) {
                 $user->password = Hash::make($password['newPassword']);
                 $user->save();
-                return back()->with('success', 'password success change');
+                return back()->with('success', 'Password berhasil diubah');
             } else {
-                return back()->with('error', 'current password is wrong');
+                return back()->with('error', 'Password saat ini salah');
             }
         } else {
-            return back()->with('error', 'confirm password not match');
+            return back()->with('error', 'Password konfirmasi tidak cocok');
         }
     }
 
@@ -54,26 +52,26 @@ class SettingController extends Controller
 
     public function imageUpdate(Request $request)
     {
-        // check if user upload file
+        // Cek jika pengguna mengunggah file
         if ($request->hasFile('photoProfile')) {
 
-            // get photo
+            // Ambil file foto
             $file = $request->file('photoProfile');
 
-            // generate name for photo
-            $filename = "photo-profile-" . time() . '.' . $file->extension();
+            // Buat nama untuk foto
+            $filename = "foto-profil-" . time() . '.' . $file->extension();
 
-            // save
+            // Simpan foto
             $file->storeAs('public/photo-profile', $filename);
 
-            // update profile user
+            // Perbarui profil pengguna
             Profile::where('user_id', Cookie::get('id'))->update(['photoProfile' => $filename]);
 
-            // return back
-            return back()->with('success', 'Upload photo profile success');
+            // Kembali dengan pesan sukses
+            return back()->with('success', 'Foto profil berhasil diunggah');
         }
 
-        return back()->with('error', 'upload error');
+        return back()->with('error', 'Kesalahan unggah');
     }
 
     public function bank() {}

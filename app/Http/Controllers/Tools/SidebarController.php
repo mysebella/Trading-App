@@ -16,7 +16,7 @@ class SidebarController extends Controller
             ],
             [
                 "icon" => '<i class="bi bi-gear-fill"></i>',
-                "name" => "Setting",
+                "name" => "Pengaturan",
                 "route" => 'setting',
                 "sub" => [
                     [
@@ -35,7 +35,7 @@ class SidebarController extends Controller
             ],
             [
                 "icon" => '<i class="bi bi-shield-shaded"></i>',
-                "name" => "Security",
+                "name" => "Keamanan",
                 "route" => 'security.index'
             ],
             [
@@ -45,7 +45,7 @@ class SidebarController extends Controller
             ],
             [
                 "icon" => '<i class="bi bi-check2-circle"></i>',
-                "name" => "Investment",
+                "name" => "Investasi",
                 "route" => 'investment.index'
             ],
             [
@@ -58,18 +58,18 @@ class SidebarController extends Controller
                         "route" => 'trade.index'
                     ],
                     [
-                        "name" => "History",
+                        "name" => "Riwayat",
                         "route" => 'trade.history'
                     ],
                     [
-                        "name" => "Profits",
+                        "name" => "Keuntungan",
                         "route" => 'trade.profits'
                     ]
                 ]
             ],
             [
                 "icon" => '<i class="bi bi-cash"></i>',
-                "name" => "Funds",
+                "name" => "Dana",
                 "route" => 'fund',
                 "sub" => [
                     [
@@ -77,22 +77,22 @@ class SidebarController extends Controller
                         "route" => 'fund.bonus'
                     ],
                     [
-                        "name" => "Profits",
+                        "name" => "Keuntungan",
                         "route" => 'fund.profits'
                     ]
                 ]
             ],
             [
                 "icon" => '<i class="bi bi-wallet-fill"></i>',
-                "name" => "Wallet",
+                "name" => "Dompet",
                 "route" => 'wallet',
                 "sub" => [
                     [
-                        "name" => "Balance",
+                        "name" => "Saldo",
                         "route" => 'wallet.balance'
                     ],
                     [
-                        "name" => "Add Balance",
+                        "name" => "Tambah Saldo",
                         "route" => 'wallet.add-balance'
                     ],
                     [
@@ -107,7 +107,7 @@ class SidebarController extends Controller
             ],
             [
                 "icon" => '<i class="bi bi-diagram-3-fill"></i>',
-                "name" => "Network",
+                "name" => "Jaringan",
                 "route" => 'network',
                 "sub" => [
                     [
@@ -122,7 +122,7 @@ class SidebarController extends Controller
             ],
             [
                 "icon" => '<i class="fa fa-pencil-square-o"></i>',
-                "name" => "Register",
+                "name" => "Pendaftaran",
                 "route" => 'register.index'
             ],
             [
@@ -132,7 +132,7 @@ class SidebarController extends Controller
             ],
             [
                 "icon" => '<i class="fa fa-newspaper-o"></i>',
-                "name" => "Latest News",
+                "name" => "Berita Terbaru",
                 "route" => 'news'
             ],
             [
@@ -145,19 +145,19 @@ class SidebarController extends Controller
                         "route" => 'testimonial.index'
                     ],
                     [
-                        "name" => "Add Testimonial",
+                        "name" => "Tambah Testimonial",
                         "route" => 'testimonial.add'
                     ]
                 ]
             ],
             [
                 "icon" => '<i class="fa fa-download"></i>',
-                "name" => "Download",
+                "name" => "Unduh",
                 "route" => 'download'
             ],
             [
                 "icon" => '<i class="fa fa-power-off"></i>',
-                "name" => "Log Out",
+                "name" => "Keluar",
                 "route" => 'logout'
             ],
         ];
@@ -172,11 +172,11 @@ class SidebarController extends Controller
             ],
             [
                 "icon" => '<i class="bi bi-people-fill"></i>',
-                "name" => "Users",
+                "name" => "Pengguna",
                 "route" => 'dashboard.users',
                 "sub" => [
                     [
-                        "name" => "List User",
+                        "name" => "Daftar User",
                         "route" => 'dashboard.users'
                     ],
                     [

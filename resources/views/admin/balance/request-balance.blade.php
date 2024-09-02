@@ -2,14 +2,14 @@
 
 @section('content')
     @include('components.page-indicator', [
-        'page' => 'Request Balance',
-        'path' => ['Home', 'Request Balance'],
+        'page' => 'Permintaan Saldo',
+        'path' => ['Beranda', 'Permintaan Saldo'],
     ])
 
     <section class="w-full overflow-hidden rounded-lg text-white/80">
         <div class="w-full mt-6 rounded-lg overflow-hidden bg-black">
             <div class="p-6 text-white/70 border-b border-white/25">
-                <p>Request Balance</p>
+                <p>Permintaan Saldo</p>
             </div>
 
             <div class="p-4 lg:p-6 overflow-x-scroll">
@@ -19,14 +19,14 @@
                     <table class="w-full table-border">
                         <thead>
                             <tr class="table-border">
-                                <td class="table-border">Date</td>
+                                <td class="table-border">Tanggal</td>
                                 <td class="table-border">No</td>
-                                <td class="table-border">User</td>
+                                <td class="table-border">Pengguna</td>
                                 <td class="table-border">Bukti Pembayaran</td>
-                                <td class="table-border">Payment To</td>
-                                <td class="table-border">Amount</td>
-                                <td class="table-border">Note</td>
-                                <td class="table-border">Status Paid</td>
+                                <td class="table-border">Pembayaran Ke</td>
+                                <td class="table-border">Jumlah</td>
+                                <td class="table-border">Catatan</td>
+                                <td class="table-border">Status Dibayar</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -48,9 +48,9 @@
                                     <td class="table-border">{{ $balance->note }}</td>
                                     <td class="table-border">
                                         @if ($balance->isPaid == 1)
-                                            <button class="bg-green rounded px-3 py-1">PAID</button>
+                                            <button class="bg-green rounded px-3 py-1">DIBAYAR</button>
                                         @else
-                                            <button class="bg-red-500 rounded px-3 py-1">UNPAID</button>
+                                            <button class="bg-red-500 rounded px-3 py-1">BELUM DIBAYAR</button>
                                         @endif
                                     </td>
                                     <td class="table-border">
@@ -68,7 +68,7 @@
                                                 @method('PUT')
                                                 <button
                                                     class="bg-green font-semibold h-10 px-3 rounded flex justify-center items-center">
-                                                    Approve
+                                                    Setujui
                                                 </button>
                                             </form>
                                         @endif
@@ -81,14 +81,14 @@
 
                 <div class="flex justify-between text-sm">
                     <div class="flex gap-2 items-center mb-4">
-                        <p>Showing 1 to 10 of 13 entries</p>
+                        <p>Menampilkan 1 sampai 10 dari 13 entri</p>
                     </div>
                     <div class="flex items-center gap-4 my-7">
-                        <a href="" class="block">Previous</a>
+                        <a href="" class="block">Sebelumnya</a>
                         <ul>
                             <li class="w-7 h-7 flex justify-center items-center  rounded bg-orange">1</li>
                         </ul>
-                        <a href="" class="block">Next</a>
+                        <a href="" class="block">Berikutnya</a>
                     </div>
                 </div>
             </div>

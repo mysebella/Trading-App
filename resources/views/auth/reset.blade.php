@@ -3,14 +3,14 @@
 @section('content')
     <section class="fxt-template-animation fxt-template-layout28">
 
-        <!-- Animation Start Here -->
+        <!-- Animasi Dimulai Di Sini -->
         <div id="particles-js"></div>
-        <!-- Animation End Here -->
+        <!-- Animasi Selesai Di Sini -->
 
         <div class="fxt-content">
             <div class="fxt-form">
                 <div class="fxt-transformY-50 fxt-transition-delay-1">
-                    <p>Reset Your Password</p>
+                    <p>Atur Ulang Kata Sandi Anda</p>
                 </div>
 
                 <form action="{{ route('auth.reset.update') }}" method="POST">
@@ -21,25 +21,25 @@
 
                     <div class="form-group">
                         <div class="fxt-transformY-50 fxt-transition-delay-3">
-                            <input type="password" id="password" class="form-control" placeholder="Current Password"
-                                required name="currentPassword" />
-                            <i toggle="#password" class="fa fa-fw fa-eye toggle-password field-icon"></i>
+                            <input type="password" id="currentPassword" class="form-control"
+                                placeholder="Kata Sandi Saat Ini" required name="currentPassword" />
+                            <i toggle="#currentPassword" class="fa fa-fw fa-eye toggle-password field-icon"></i>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="fxt-transformY-50 fxt-transition-delay-3">
-                            <input type="password" id="password" class="form-control" placeholder="New Password" required
-                                name="newPassword" />
-                            <i toggle="#password" class="fa fa-fw fa-eye toggle-password field-icon"></i>
+                            <input type="password" id="newPassword" class="form-control" placeholder="Kata Sandi Baru"
+                                required name="newPassword" />
+                            <i toggle="#newPassword" class="fa fa-fw fa-eye toggle-password field-icon"></i>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="fxt-transformY-50 fxt-transition-delay-3">
-                            <input type="password" id="password" class="form-control" placeholder="Confirm Password"
-                                required name="confirmPassword" />
-                            <i toggle="#password" class="fa fa-fw fa-eye toggle-password field-icon"></i>
+                            <input type="password" id="confirmPassword" class="form-control"
+                                placeholder="Konfirmasi Kata Sandi" required name="confirmPassword" />
+                            <i toggle="#confirmPassword" class="fa fa-fw fa-eye toggle-password field-icon"></i>
                         </div>
                     </div>
 
@@ -49,7 +49,7 @@
                                 <div id="showme" style="display: none">
                                     <a href="">
                                         <button type="button" class="fxt-btn-fill">
-                                            Reload
+                                            Muat Ulang
                                         </button>
                                     </a>
                                 </div>
@@ -58,8 +58,8 @@
                                     <img src="{{ asset('') }}login/images/ld.gif" style="width: 100px" />
                                 </div>
 
-                                <button type="submit" class="fxt-btn-fill" id="Login" onclick="signin()">
-                                    Reset
+                                <button type="submit" class="fxt-btn-fill" id="Reset" onclick="signin()">
+                                    Atur Ulang
                                 </button>
                             </div>
                         </div>

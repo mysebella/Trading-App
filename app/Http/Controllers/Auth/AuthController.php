@@ -30,9 +30,9 @@ class AuthController extends Controller
 
         if ($user->wasRecentlyCreated) {
             Profile::create(['user_id' => $user->id]);
-            return back()->with('success', 'Register Success');
+            return back()->with('success', 'Pendaftaran berhasil');
         } else {
-            return back()->with('error', 'User already exist');
+            return back()->with('error', 'Pengguna sudah ada');
         }
     }
 
@@ -45,10 +45,10 @@ class AuthController extends Controller
                 Session::put('id', $user->id);
                 return redirect('/')->cookie(Cookie::make('id', $user->id, 1440));
             } else {
-                return back()->with('error', 'Credentials not valid');
+                return back()->with('error', 'Kredensial tidak valid');
             }
         } else {
-            return back()->with('error', 'User not registered');
+            return back()->with('error', 'Pengguna tidak terdaftar');
         }
     }
 
@@ -57,9 +57,9 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
         if ($user->username == $request->username) {
             Mail::to($user->email)->send(new ForgetEmail($user->name, $user->email));
-            return back()->with('success', 'We send confirmation email to your mailbox, please see it and reset your password');
+            return back()->with('success', 'Kami telah mengirimkan email konfirmasi ke kotak masuk Anda, silakan lihat dan reset kata sandi Anda');
         } else {
-            return back()->with('error', 'User not found');
+            return back()->with('error', 'Pengguna tidak ditemukan');
         }
     }
 
@@ -72,12 +72,12 @@ class AuthController extends Controller
             if (Hash::check($password['currentPassword'], $user->password)) {
                 $user->password = Hash::make($password['newPassword']);
                 $user->save();
-                return redirect()->to(route('auth.signin'))->with('success', 'password success change');
+                return redirect()->to(route('auth.signin'))->with('success', 'Kata sandi berhasil diubah');
             } else {
-                return back()->with('error', 'current password is wrong');
+                return back()->with('error', 'Kata sandi saat ini salah');
             }
         } else {
-            return back()->with('error', 'confirm password not match');
+            return back()->with('error', 'Konfirmasi kata sandi tidak cocok');
         }
     }
 }

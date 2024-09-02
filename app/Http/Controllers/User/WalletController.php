@@ -77,12 +77,12 @@ class WalletController extends Controller
         $balance = Balance::where('user_id', Cookie::get('id'))->where('id', $id)->first();
 
         if (!$balance) {
-            return back('')->with('error', 'Payment Failed');
+            return back()->with('error', 'Pembayaran gagal');
         }
 
         if ($request->hasFile('proof')) {
             $file = $request->file('proof');
-            $filename = "proof-payment-balance-" . time() . '.' . $file->extension();
+            $filename = "bukti-pembayaran-balance-" . time() . '.' . $file->extension();
             $file->storeAs('public/proof-balance/', $filename);
 
             $balance->note = $request->note;
@@ -91,9 +91,9 @@ class WalletController extends Controller
             $balance->paymentTo = $request->paymentTo;
             $balance->save();
         } else {
-            return back('')->with('error', 'please upload proof of payment');
+            return back()->with('error', 'Silakan unggah bukti pembayaran');
         }
-        return redirect(route('wallet.balance'))->with('success', 'Buy Success');
+        return redirect(route('wallet.balance'))->with('success', 'Pembelian sukses');
     }
 
     public function transfer()
@@ -106,12 +106,12 @@ class WalletController extends Controller
     {
         $user = User::with('profile')->where('id', Cookie::get('id'))->first();
         if ($user->profile[0]->balance <= $request->amount) {
-            return back()->with('error', 'your balance not enough');
+            return back()->with('error', 'Saldo Anda tidak cukup');
         }
 
         $checkUser = User::with('profile')->where('username', $request->recipient)->first();
         if (!$checkUser) {
-            return back()->with('error', "User $request->recipient not found");
+            return back()->with('error', "Pengguna $request->recipient tidak ditemukan");
         }
 
         $transfer = Transfer::create([
@@ -130,12 +130,12 @@ class WalletController extends Controller
                 'balance' => $checkUser->profile[0]->balance + $transfer->amount
             ]);
 
-            Notification::create('Transfer Success', "your transfer USD $request->amount to $checkUser->name success");
+            Notification::create('Transfer Berhasil', "transfer Anda sebesar RP $request->amount ke $checkUser->name berhasil");
 
-            return back()->with('success', 'Transfer success');
+            return back()->with('success', 'Transfer berhasil');
         }
 
-        return back()->with('error', 'Transfer failed');
+        return back()->with('error', 'Transfer gagal');
     }
 
     public function withdraw()
@@ -152,15 +152,15 @@ class WalletController extends Controller
         $user = Profile::where('user_id', Cookie::get('id'))->first();
 
         if ($user->balance <= $request->amount) {
-            return back()->with('error', 'Balance not Enough');
+            return back()->with('error', 'Saldo tidak cukup');
         }
 
         $user->balance = $user->balance - $request->amount;
         $user->save();
 
         Withdraw::create($request->all());
-        Notification::create('Withdraw Process', "your withdraw USD $request->amount processed");
+        Notification::create('Proses Penarikan', "penarikan Anda sebesar RP $request->amount diproses");
 
-        return back()->with('success', "Request withdraw success, please wait to admin acc");
+        return back()->with('success', "Permintaan penarikan berhasil, harap tunggu konfirmasi dari admin");
     }
 }

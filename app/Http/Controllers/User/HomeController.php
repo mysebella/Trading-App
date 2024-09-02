@@ -12,14 +12,14 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        // ambil investmen yang sedang di jalani user
+        // Ambil investasi yang sedang dijalani oleh pengguna
         $packageActive = Investment::with('package')
             ->where('user_id', Cookie::get('id'))
             ->where('status', 'active')->first();
 
         $totalProfit = Investment::where('user_id', Cookie::get('id'))->sum('profit');
 
-        $totalRefferal =  count(Refferal::where('inviting', Cookie::get('id'))->get());
+        $totalRefferal = count(Refferal::where('inviting', Cookie::get('id'))->get());
 
         return view('user.home', [
             'page' => 'home',

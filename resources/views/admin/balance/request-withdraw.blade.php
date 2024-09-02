@@ -2,14 +2,14 @@
 
 @section('content')
     @include('components.page-indicator', [
-        'page' => 'Request Withdraw',
-        'path' => ['Home', 'Request Withdraw'],
+        'page' => 'Permintaan Penarikan',
+        'path' => ['Beranda', 'Permintaan Penarikan'],
     ])
 
     <section class="w-full overflow-hidden rounded-lg text-white/80">
         <div class="w-full mt-6 rounded-lg overflow-hidden bg-black">
             <div class="p-6 text-white/70 border-b border-white/25">
-                <p>Request Withdraw</p>
+                <p>Permintaan Penarikan</p>
             </div>
 
             <div class="p-4 lg:p-6 overflow-x-scroll">
@@ -19,12 +19,12 @@
                     <table class="w-full table-border">
                         <thead>
                             <tr class="table-border">
-                                <td class="table-border">Date</td>
-                                <td class="table-border">Amount</td>
-                                <td class="table-border">Withdraw to</td>
-                                <td class="table-border">Name</td>
+                                <td class="table-border">Tanggal</td>
+                                <td class="table-border">Jumlah</td>
+                                <td class="table-border">Penarikan ke</td>
+                                <td class="table-border">Nama</td>
                                 <td class="table-border">No Rekening</td>
-                                <td class="table-border">Note</td>
+                                <td class="table-border">Catatan</td>
                                 <td class="table-border">Status</td>
                             </tr>
                         </thead>
@@ -71,14 +71,14 @@
 
                 <div class="flex justify-between text-sm">
                     <div class="flex gap-2 items-center mb-4">
-                        <p>Showing 1 to 10 of 13 entries</p>
+                        <p>Menampilkan 1 sampai 10 dari 13 entri</p>
                     </div>
                     <div class="flex items-center gap-4 my-7">
-                        <a href="" class="block">Previous</a>
+                        <a href="" class="block">Sebelumnya</a>
                         <ul>
                             <li class="w-7 h-7 flex justify-center items-center  rounded bg-orange">1</li>
                         </ul>
-                        <a href="" class="block">Next</a>
+                        <a href="" class="block">Berikutnya</a>
                     </div>
                 </div>
             </div>

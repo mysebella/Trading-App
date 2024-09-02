@@ -4,14 +4,14 @@
     @include('components.page-indicator', [
         'page' => 'Dashboard',
         'subpage' => 'Control Panel',
-        'path' => ['Home', 'Dashboard'],
+        'path' => ['Beranda', 'Dashboard'],
     ])
 
     <section class="my-6 w-full lg:w-2/4">
         <div class="flex">
             <input class="text-white/50 w-full border border-white/30 rounded-l p-3 bg-black"
                 value="{{ env('APP_URL') }}/refferal?reff={{ $user->username }}">
-            <button class="bg-orange w-52 lg:w-44 text-white rounded-r">Copy Reff URL</button>
+            <button class="bg-orange w-52 lg:w-44 text-white rounded-r">Salin Link Refferal</button>
         </div>
 
         <div class="w-full p-4 bg-black rounded-md border border-white/10 text-orange my-6 hover:scale-105 duration-300"
@@ -23,10 +23,10 @@
                     <polyline points="22 4 12 14.01 9 11.01"></polyline>
                 </svg>
                 <p class="text-white/80 text-xl">
-                    {{ $packageActive ? 'Package ' . $packageActive->package->name : 'No Packages' }}</p>
+                    {{ $packageActive ? 'Package ' . $packageActive->package->name : 'Tidak ada Paket' }}</p>
             </div>
             <div class="w-full mt-4 flex items-center justify-between">
-                <p class="text-white/80">Your Active Investment Package</p>
+                <p class="text-white/80">Paket aktif anda</p>
                 <a>Detail</a>
             </div>
         </div>
@@ -52,7 +52,7 @@
                         </div>
                     </div>
                     <div class="flex text-orange items-center justify-between mt-4">
-                        <p class="text-xl font-semibold">{{ $totalRefferal }} Member</p>
+                        <p class="text-xl font-semibold">{{ $totalRefferal }} Anggota</p>
                         <a href="">Detail</a>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
                         </div>
                     </div>
                     <div class="flex text-orange items-center justify-between mt-4">
-                        <p class="text-xl font-semibold">SGD 0.0</p>
+                        <p class="text-xl font-semibold">RP 0.0</p>
                         <a href="">Detail</a>
                     </div>
                 </div>
@@ -100,8 +100,8 @@
                             </path>
                         </svg>
                         <div class="text-white/70 tracking-wide">
-                            <p class="font-bold text-xl">Profits</p>
-                            <p>total profit</p>
+                            <p class="font-bold text-xl">Keuntungan</p>
+                            <p>total Keuntungan</p>
                         </div>
                     </div>
                     <div class="flex text-orange items-center justify-between mt-4">
@@ -129,8 +129,8 @@
                             </path>
                         </svg>
                         <div class="text-white/70 tracking-wide">
-                            <p class="font-bold text-xl">RM Wallet</p>
-                            <p>Your Balance</p>
+                            <p class="font-bold text-xl">RP Dompet</p>
+                            <p>Saldo Kamu</p>
                         </div>
                     </div>
                     <div class="flex text-orange items-center justify-between mt-4">
@@ -150,11 +150,11 @@
     <section class="w-full mt-6 overflow-hidden rounded-lg text-white/80">
         <div class="bg-black ">
             <div class="p-6 text-white border-b border-white/25">
-                <p>Welcome</p>
+                <p>Selamat Datang</p>
             </div>
             <div class="p-6 text-white">
-                <p>Welcome to HSB FOREX TRADE Member Panel</p>
-                <p class="my-4">Your Refferal Link:</p>
+                <p>Welcome Datang di HSB FOREX TRADE Panel Anggota</p>
+                <p class="my-4">Link refferal kamu:</p>
                 <p class="text-2xl font-semibold">{{ env('APP_URL') }}/refferal?reff={{ $user->username }}</p>
             </div>
         </div>
@@ -166,7 +166,7 @@
         <div class="w-full lg:w-2/4">
             <div class=" bg-black rounded-lg overflow-hidden">
                 <div class="p-6 text-white border-b border-white/25">
-                    <p>Latest News</p>
+                    <p>Berita Terbaru</p>
                 </div>
                 <div class="text-white">
                     <ul>
@@ -223,7 +223,7 @@
         <div class="w-full lg:w-2/4 overflow-hidden ">
             <div class="bg-black rounded-lg ">
                 <div class="p-6 text-white border-b border-white/25">
-                    <p>Latest Notification</p>
+                    <p>Notifikasi Terbaru</p>
                 </div>
                 <div class="text-white">
                     <ul>

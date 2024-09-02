@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Blade::directive('money', function ($amount) {
-            return "<?php echo 'SGD ' . number_format($amount, 2, '.', ','); ?>";
+            return "<?php echo 'RP ' . number_format($amount, 2, '.', ','); ?>";
         });
 
         View::share('user', User::with('profile')->find(Cookie::get('id')));

@@ -15,73 +15,55 @@ use Illuminate\Support\Facades\Cookie;
 
 class InvestmentController extends Controller
 {
-    /**
-     * Display the investment overview page.
-     *
-     * @return \Illuminate\View\View
-     */
     public function index()
     {
         $userId = Cookie::get('id');
         $packages = Package::all();
-        $investmentHistories = Investment::where('user_id', $userId)->get();
+        $riwayatInvestasi = Investment::where('user_id', $userId)->get();
 
         return view('user.investment.index', [
             'page' => 'investment.index',
             'packages' => $packages,
-            'histories' => $investmentHistories
+            'histories' => $riwayatInvestasi
         ]);
     }
 
-    /**
-     * Show the payment page for a package.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
-     */
     public function paid(Request $request)
     {
         $userId = Cookie::get('id');
-        $investmentHistories = Investment::with('package')->where('user_id', $userId)->get();
+        $riwayatInvestasi = Investment::with('package')->where('user_id', $userId)->get();
         $user = User::with('profile')->find($userId);
         $package = Package::findOrFail($request->query('package'));
 
         if ($_GET['amount'] <= $package->min) {
-            return back()->with('error', 'what you submitted does not meet the minimum purchase');
+            return back()->with('error', 'Jumlah yang Anda masukkan tidak memenuhi pembelian minimum');
         }
 
         if ($_GET['amount'] >= $package->max) {
-            return back()->with('error', 'the amount you submitted exceeds the maximum purchase');
+            return back()->with('error', 'Jumlah yang Anda masukkan melebihi pembelian maksimum');
         }
 
         if ($user->status == 'noactived') {
-            return back()->with('error', 'Please activate your account to invest.');
+            return back()->with('error', 'Silakan aktifkan akun Anda untuk berinvestasi.');
         }
 
-        if ($investmentHistories->contains(fn($history) => !$history->isPaid)) {
-            return back()->with('error', 'You have a package to pay.');
+        if ($riwayatInvestasi->contains(fn($history) => !$history->isPaid)) {
+            return back()->with('error', 'Anda memiliki paket yang harus dibayar.');
         }
 
-        if ($investmentHistories->contains(fn($history) => $history->status === 'active')) {
-            return back()->with('error', 'You have an active package.');
+        if ($riwayatInvestasi->contains(fn($history) => $history->status === 'active')) {
+            return back()->with('error', 'Anda memiliki paket yang aktif.');
         }
-
 
         $package->amount = $request->query('amount');
 
         return view('user.investment.paid', [
             'page' => 'investment',
             'package' => $package,
-            'histories' => $investmentHistories
+            'histories' => $riwayatInvestasi
         ]);
     }
 
-    /**
-     * Handle the payment submission.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function paidPost(Request $request)
     {
         $userId = Cookie::get('id');
@@ -95,17 +77,11 @@ class InvestmentController extends Controller
 
         $packageName = Package::findOrFail($investment->package_id)->name;
 
-        Notification::create("Add investment package $packageName", "You invested in package $packageName");
+        Notification::create("Menambahkan paket investasi $packageName", "Anda berinvestasi pada paket $packageName");
 
         return redirect()->route('investment.invoice', ['code' => $investment->code]);
     }
 
-    /**
-     * Show the invoice page for a specific investment.
-     *
-     * @param string $code
-     * @return \Illuminate\View\View
-     */
     public function invoice(string $code)
     {
         $userId = Cookie::get('id');
@@ -119,34 +95,21 @@ class InvestmentController extends Controller
         ]);
     }
 
-    /**
-     * Show the confirmation page for a specific investment.
-     *
-     * @param int $id
-     * @return \Illuminate\View\View
-     */
     public function confirmation(int $id)
     {
         $userId = Cookie::get('id');
         $investment = Investment::where('user_id', $userId)->where('id', $id)->firstOrFail();
-        $investmentHistories = Investment::with('package')->where('user_id', $userId)->get();
+        $riwayatInvestasi = Investment::with('package')->where('user_id', $userId)->get();
         $banks = Bank::where('role', 'admin')->get();
 
         return view('user.investment.confirmation', [
             'page' => 'investment',
             'banks' => $banks,
-            'histories' => $investmentHistories,
+            'histories' => $riwayatInvestasi,
             'investment' => $investment
         ]);
     }
 
-    /**
-     * Handle the confirmation of payment for an investment.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function confirmationPut(Request $request, int $id)
     {
         $userId = Cookie::get('id');
@@ -155,9 +118,9 @@ class InvestmentController extends Controller
             ->where('id', $id)
             ->firstOrFail();
 
-        if ($request->paymentTo === "Balance Wallet") {
+        if ($request->paymentTo === "wallet") {
             if ($profile->balance <= $investment->amount) {
-                return back()->with('error', 'Your balance is not enough.');
+                return back()->with('error', 'Saldo Anda tidak mencukupi.');
             }
 
             $profile->balance -= $investment->amount;
@@ -167,12 +130,12 @@ class InvestmentController extends Controller
                 'note' => $request->note,
                 'isPaid' => true,
                 'proof' => "balance.jpg",
-                'paymentTo' => 'Balance Wallet'
+                'paymentTo' => 'Saldo Dompet'
             ]);
         } else {
             if ($request->hasFile('proof')) {
                 $file = $request->file('proof');
-                $filename = "proof-payment-invest-" . time() . '.' . $file->extension();
+                $filename = "bukti-pembayaran-invest-" . time() . '.' . $file->extension();
                 $file->storeAs('public/proof-payment/', $filename);
 
                 $investment->update([
@@ -182,10 +145,10 @@ class InvestmentController extends Controller
                     'paymentTo' => $request->paymentTo
                 ]);
             } else {
-                return back()->with('error', 'Please upload proof of payment.');
+                return back()->with('error', 'Silakan unggah bukti pembayaran.');
             }
         }
 
-        return redirect()->route('investment.index')->with('success', 'Package investment added.');
+        return redirect()->route('investment.index')->with('success', 'Paket investasi ditambahkan.');
     }
 }

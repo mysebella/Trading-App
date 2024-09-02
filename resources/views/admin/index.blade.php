@@ -2,9 +2,9 @@
 
 @section('content')
     @include('components.page-indicator', [
-        'page' => 'Dashboard Admin',
-        'subpage' => 'Control Panel',
-        'path' => ['Home', 'Dashboard Admin'],
+        'page' => 'Dasbor Admin',
+        'subpage' => 'Panel Kontrol',
+        'path' => ['Beranda', 'Dasbor Admin'],
     ])
 
     <section class="my-6 w-full flex flex-col lg:flex-row gap-4">
@@ -19,12 +19,12 @@
                             </path>
                         </svg>
                         <div class="text-white/70 tracking-wide">
-                            <p class="font-bold text-xl">New User</p>
-                            <p>total New User</p>
+                            <p class="font-bold text-xl">Pengguna Baru</p>
+                            <p>total Pengguna Baru</p>
                         </div>
                     </div>
                     <div class="flex text-orange items-center justify-between mt-4">
-                        <p class="text-xl font-semibold">{{ count(App\Models\User::get()) }} User</p>
+                        <p class="text-xl font-semibold">{{ count(App\Models\User::get()) }} Pengguna</p>
                         <a href="">Detail</a>
                     </div>
                 </div>
@@ -45,12 +45,12 @@
                             </path>
                         </svg>
                         <div class="text-white/70 tracking-wide">
-                            <p class="font-bold text-xl">Total User</p>
-                            <p>total User</p>
+                            <p class="font-bold text-xl">Total Pengguna</p>
+                            <p>total Pengguna</p>
                         </div>
                     </div>
                     <div class="flex text-orange items-center justify-between mt-4">
-                        <p class="text-xl font-semibold">{{ count(App\Models\User::get()) }} User</p>
+                        <p class="text-xl font-semibold">{{ count(App\Models\User::get()) }} Pengguna</p>
                         <a href="">Detail</a>
                     </div>
                 </div>
@@ -71,8 +71,8 @@
                             </path>
                         </svg>
                         <div class="text-white/70 tracking-wide">
-                            <p class="font-bold text-xl">Revenue</p>
-                            <p>total Revenue</p>
+                            <p class="font-bold text-xl">Pendapatan</p>
+                            <p>total Pendapatan</p>
                         </div>
                     </div>
                     <div class="flex text-orange items-center justify-between mt-4">
@@ -90,7 +90,7 @@
     <section class="w-full overflow-hidden rounded-lg text-white/80 mb-4">
         <div class="w-full rounded-lg overflow-hidden bg-black">
             <div class="p-6 text-white/70 border-b border-white/25">
-                <p>Request Balances</p>
+                <p>Permintaan Saldo</p>
             </div>
 
             <div class="p-4 lg:p-6 overflow-x-scroll">
@@ -98,14 +98,14 @@
                     <table class="w-full table-border">
                         <thead>
                             <tr class="table-border">
-                                <td class="table-border">Date</td>
+                                <td class="table-border">Tanggal</td>
                                 <td class="table-border">No</td>
-                                <td class="table-border">User</td>
+                                <td class="table-border">Pengguna</td>
                                 <td class="table-border">Bukti Pembayaran</td>
-                                <td class="table-border">Payment To</td>
-                                <td class="table-border">Amount</td>
-                                <td class="table-border">Note</td>
-                                <td class="table-border">Status Paid</td>
+                                <td class="table-border">Pembayaran Kepada</td>
+                                <td class="table-border">Jumlah</td>
+                                <td class="table-border">Catatan</td>
+                                <td class="table-border">Status Terbayar</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -127,9 +127,9 @@
                                     <td class="table-border">{{ $balance->note }}</td>
                                     <td class="table-border">
                                         @if ($balance->isPaid == 1)
-                                            <button class="bg-green rounded px-3 py-1">PAID</button>
+                                            <button class="bg-green rounded px-3 py-1">TERBAYAR</button>
                                         @else
-                                            <button class="bg-red-500 rounded px-3 py-1">UNPAID</button>
+                                            <button class="bg-red-500 rounded px-3 py-1">BELUM TERBAYAR</button>
                                         @endif
                                     </td>
                                     <td class="table-border">
@@ -147,7 +147,7 @@
                                                 @method('PUT')
                                                 <button
                                                     class="bg-green font-semibold h-10 px-3 rounded flex justify-center items-center">
-                                                    Approve
+                                                    Setujui
                                                 </button>
                                             </form>
                                         @endif
@@ -164,7 +164,7 @@
     <section class="w-full overflow-hidden rounded-lg text-white/80 mb-4">
         <div class="w-full rounded-lg overflow-hidden bg-black">
             <div class="p-6 text-white/70 border-b border-white/25">
-                <p>Request Withdrawal</p>
+                <p>Permintaan Penarikan</p>
             </div>
 
             <div class="p-4 lg:p-6 overflow-x-scroll">
@@ -173,12 +173,12 @@
                     <table class="w-full table-border">
                         <thead>
                             <tr class="table-border">
-                                <td class="table-border">Date</td>
-                                <td class="table-border">Amount</td>
-                                <td class="table-border">Withdraw to</td>
-                                <td class="table-border">Name</td>
+                                <td class="table-border">Tanggal</td>
+                                <td class="table-border">Jumlah</td>
+                                <td class="table-border">Penarikan ke</td>
+                                <td class="table-border">Nama</td>
                                 <td class="table-border">No Rekening</td>
-                                <td class="table-border">Note</td>
+                                <td class="table-border">Catatan</td>
                                 <td class="table-border">Status</td>
                             </tr>
                         </thead>
@@ -230,7 +230,7 @@
     <section class="w-full overflow-hidden rounded-lg text-white/80 mb-4">
         <div class="w-full rounded-lg overflow-hidden bg-black">
             <div class="p-6 text-white/70 border-b border-white/25">
-                <p>Request Testimoni</p>
+                <p>Permintaan Testimoni</p>
             </div>
 
             <div class="p-4 lg:p-6 overflow-x-scroll">
@@ -238,10 +238,10 @@
                     <table class="w-full table-border">
                         <thead>
                             <tr class="table-border">
-                                <td class="table-border">Photo</td>
-                                <td class="table-border">Title</td>
-                                <td class="table-border">Description</td>
-                                <td class="table-border">User</td>
+                                <td class="table-border">Foto</td>
+                                <td class="table-border">Judul</td>
+                                <td class="table-border">Deskripsi</td>
+                                <td class="table-border">Pengguna</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -262,14 +262,14 @@
                                                     method="post">
                                                     @csrf
                                                     @method('PUT')
-                                                    <button class="p-2 rounded bg-green">Approve</button>
+                                                    <button class="p-2 rounded bg-green">Setujui</button>
                                                 </form>
                                                 <form
                                                     action="{{ route('dashboard.testimonials.update', ['id' => $pendingTestimonial->id, 'method' => 'reject']) }}"
                                                     method="post">
                                                     @csrf
                                                     @method('PUT')
-                                                    <button class="p-2 rounded bg-red-500">Reject</button>
+                                                    <button class="p-2 rounded bg-red-500">Tolak</button>
                                                 </form>
                                             </div>
                                         </td>

@@ -26,7 +26,7 @@ class UserController extends Controller
         $user->status = $request->status;
         $user->save();
 
-        return back()->with('success', 'Successfully');
+        return back()->with('success', 'Berhasil');
     }
 
     public function requestUser()
@@ -37,9 +37,9 @@ class UserController extends Controller
 
     public function putBalance(Request $request, $id)
     {
-        $user = Profile::where('user_id', $id)->first();
-        $user->balance = $user->balance + $request->balance;
-        $user->save();
-        return back()->with('success', 'Add Balance Successfully');
+        $profile = Profile::where('user_id', $id)->first();
+        $profile->balance = $profile->balance + $request->balance;
+        $profile->save();
+        return back()->with('success', 'Saldo berhasil ditambahkan');
     }
 }

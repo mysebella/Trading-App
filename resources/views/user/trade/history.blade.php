@@ -2,14 +2,14 @@
 
 @section('content')
     @include('components.page-indicator', [
-        'page' => 'History',
-        'path' => ['Home', 'History'],
+        'page' => 'Riwayat',
+        'path' => ['Beranda', 'Riwayat'],
     ])
 
     <section class="w-full overflow-hidden rounded-lg text-white/80">
         <div class="w-full mt-6 rounded-lg overflow-hidden bg-black">
             <div class="p-6 text-white/70 border-b border-white/25">
-                <p>My Trade</p>
+                <p>Perdagangan Saya</p>
             </div>
 
             <div class="p-4 lg:p-6 overflow-x-scroll">
@@ -19,13 +19,13 @@
                     <table class="w-full table-bottom-border">
                         <thead>
                             <tr class="table-bottom-border">
-                                <td class="table-border w-[12%]">Date</td>
-                                <td class="table-border w-[12%]">Market</td>
+                                <td class="table-border w-[12%]">Tanggal</td>
+                                <td class="table-border w-[12%]">Pasar</td>
                                 <td class="table-border w-[12%]">Trx</td>
-                                <td class="table-border w-[12%]">Package</td>
-                                <td class="table-border w-[12%]">Amount</td>
-                                <td class="table-border w-[12%]">Rate Stake</td>
-                                <td class="table-border w-[12%]">Profit</td>
+                                <td class="table-border w-[12%]">Paket</td>
+                                <td class="table-border w-[12%]">Jumlah</td>
+                                <td class="table-border w-[12%]">Tingkat Taruhan</td>
+                                <td class="table-border w-[12%]">Keuntungan</td>
                                 <td class="table-border w-[12%]">Status</td>
                             </tr>
                         </thead>
@@ -60,7 +60,7 @@
                                 @endforeach
                             @else
                                 <tr class="table-border">
-                                    <td class="p-4">No data available in table</td>
+                                    <td class="p-4">Tidak ada data yang tersedia di tabel</td>
                                 </tr>
                             @endif
                         </tbody>
@@ -69,14 +69,14 @@
 
                 <div class="flex justify-between text-sm">
                     <div class="flex gap-2 items-center mb-4">
-                        <p>Showing 1 to 10 of 13 entries</p>
+                        <p>Menampilkan 1 hingga 10 dari 13 entri</p>
                     </div>
                     <div class="flex items-center gap-4 my-7">
-                        <a href="" class="block">Previous</a>
+                        <a href="" class="block">Sebelumnya</a>
                         <ul>
                             <li class="w-7 h-7 flex justify-center items-center  rounded bg-orange">1</li>
                         </ul>
-                        <a href="" class="block">Next</a>
+                        <a href="" class="block">Berikutnya</a>
                     </div>
                 </div>
             </div>
